@@ -1,0 +1,113 @@
+progressbar "ffff00",.Wait;
+setrandomoption(.@part,0,getd(".RandOpt1_"+.@Type$+"["+.@Opt1+"]"),.@Opt1_V,0);
+setrandomoption(.@part,1,getd(".RandOpt2_"+.@Type$+"["+.@Opt2+"]"),.@Opt2_V,0);
+setrandomoption(.@part,2,getd(".RandOpt3_"+.@Type$+"["+.@Opt3+"]"),.@Opt3_V,0);
+setrandomoption(.@part,3,getd(".RandOpt4_"+.@Type$+"["+.@Opt4+"]"),.@Opt4_V,0);
+setrandomoption(.@part,4,getd(".RandOpt5_"+.@Type$+"["+.@Opt5+"]"),.@Opt5_V,0);
+next;
+mes "Random bonus properties have been applied on your \""+getitemname(getequipid(.@part))+"\" successfully.";
+end;
+}
+
+OnInit:
+set .n$,"[^FF6600Seiken^000000]";
+// ========= Random Option Slot 1 ========= 
+// - Physical
+setarray .RandOpt2_P[0],
+// ========= Random Option Slot 1 ========= 
+// - Physical
+setarray .RandOpt1_P[0],
+					    RDMOPT_DAMAGE_PROPERTY_NOTHING_TARGET,	 	// Damage to Neutral Element
+					    RDMOPT_DAMAGE_PROPERTY_GROUND_TARGET,	 	// Damage to Earth Element
+					    RDMOPT_DAMAGE_PROPERTY_FIRE_TARGET,		 	// Damage to Fire Element
+					    RDMOPT_DAMAGE_PROPERTY_WATER_TARGET,	 	// Damage to Water Element
+					    RDMOPT_DAMAGE_PROPERTY_WIND_TARGET,		 	// Damage to Wind Element
+					    RDMOPT_DAMAGE_PROPERTY_POISON_TARGET,	 	// Damage to Poison Element
+					    RDMOPT_DAMAGE_PROPERTY_SAINT_TARGET,	 	// Damage to Holy Element
+					    RDMOPT_DAMAGE_PROPERTY_DARKNESS_TARGET,	 	// Damage to Dark Element
+					    RDMOPT_DAMAGE_PROPERTY_TELEKINESIS_TARGET,	// Damage to Ghost Element
+					    RDMOPT_DAMAGE_PROPERTY_UNDEAD_TARGET,		// Damage to Undead Element
+					    RDMOPT_VAR_ATTPOWER, 						// Attack
+					    RDMOPT_VAR_ATKPERCENT, 						// Attack %
+					    RDMOPT_VAR_HITSUCCESSVALUE,					// HIT
+						RDMOPT_VAR_CRITICALSUCCESSVALUE; 			// CRITRATE
+					    // ToDo: // Recover 1000 of Damage lost from size penalties
+						
+
+// - Values
+// Note: When MinV and MaxV are the same, rand() will not be used!
+setarray .RandOpt1_P_MinV[0],10,10,10,10,10,10,10,10,10,10,20,3,10,5;
+setarray .RandOpt1_P_MaxV[0],50,50,50,50,50,50,50,50,50,50,60,15,40,20;
+
+setarray .RandOpt2_P[0],
+					    RDMOPT_VAR_PLUSASPD,	 					// ASPD
+					    RDMOPT_VAR_PLUSASPDPERCENT,	 				// ASPD%
+					    RDMOPT_VAR_AVOIDSUCCESSVALUE,			 	// FLEE
+					    RDMOPT_DAMAGE_SIZE_SMALL_TARGET,		 	// SMALL
+					    RDMOPT_DAMAGE_SIZE_MIDIUM_TARGET,		 	// MIDIUM
+					    RDMOPT_DAMAGE_SIZE_LARGE_TARGET,	 		// LARGE
+					    RDMOPT_DAMAGE_CRI_TARGET,				 	// CRIT DMG
+					    RDMOPT_RANGE_ATTACK_DAMAGE_TARGET;	 		// Range attack
+					    // ToDo: // Recover 1000 of Damage lost from size penalties
+						
+
+// - Values
+// Note: When MinV and MaxV are the same, rand() will not be used!
+setarray .RandOpt2_P_MinV[0],1,5,10,5,5,5,5,5;
+setarray .RandOpt2_P_MaxV[0],3,20,40,35,35,35,35,20;
+
+setarray .RandOpt3_P[0],
+					    RDMOPT_RACE_DAMAGE_NOTHING,					// FORMLESS
+					    RDMOPT_RACE_DAMAGE_UNDEAD,	 				// UNDEAD
+					    RDMOPT_RACE_DAMAGE_ANIMAL,				 	// ANIMAL
+					    RDMOPT_RACE_DAMAGE_PLANT,				 	// SMALL
+					    RDMOPT_RACE_DAMAGE_INSECT,				 	// INSECT
+					    RDMOPT_RACE_DAMAGE_FISHS,			 		// FISH
+					    RDMOPT_RACE_DAMAGE_DEVIL,				 	// DEMON
+					    RDMOPT_RACE_DAMAGE_HUMAN,			 		// DEMI HUMAN
+						RDMOPT_RACE_DAMAGE_ANGEL,					// ANGEL
+						RDMOPT_RACE_DAMAGE_DRAGON;					// DRAGON
+					    // ToDo: // Recover 1000 of Damage lost from size penalties
+						
+
+// - Values
+// Note: When MinV and MaxV are the same, rand() will not be used!
+setarray .RandOpt3_P_MinV[0],10,10,10,10,10,10,10,10,10,10;
+setarray .RandOpt3_P_MaxV[0],50,50,50,50,50,50,50,50,50,50;
+
+setarray .RandOpt4_P[0],
+					    RDMOPT_RACE_IGNORE_DEF_PERCENT_NOTHING,					// FORMLESS
+					    RDMOPT_RACE_IGNORE_DEF_PERCENT_UNDEAD,	 				// UNDEAD
+					    RDMOPT_RACE_IGNORE_DEF_PERCENT_ANIMAL,				 	// ANIMAL
+					    RDMOPT_RACE_IGNORE_DEF_PERCENT_PLANT,				 	// SMALL
+					    RDMOPT_RACE_IGNORE_DEF_PERCENT_INSECT,				 	// INSECT
+					    RDMOPT_RACE_IGNORE_DEF_PERCENT_FISHS,			 		// FISH
+					    RDMOPT_RACE_IGNORE_DEF_PERCENT_DEVIL,				 	// DEMON
+					    RDMOPT_RACE_IGNORE_DEF_PERCENT_HUMAN,			 		// DEMI HUMAN
+						RDMOPT_RACE_IGNORE_DEF_PERCENT_ANGEL,					// ANGEL
+						RDMOPT_RACE_IGNORE_DEF_PERCENT_DRAGON;					// DRAGON
+					    // ToDo: // Recover 1000 of IGNORE_DEF_PERCENT lost from size penalties
+				
+// - Values
+// Note: When MinV and MaxV are the same, rand() will not be used!
+setarray .RandOpt4_P_MinV[0],5,5,5,5,5,5,5,5,5,5;
+setarray .RandOpt4_P_MaxV[0],25,25,25,25,25,25,25,25,25,25;
+
+
+setarray .RandOpt5_P[0],
+					    RDMOPT_VAR_ATTPOWER, 						// Attack
+					    RDMOPT_VAR_ATKPERCENT, 						// Attack %
+					    RDMOPT_CLASS_DAMAGE_NORMAL_TARGET,			// NORMAL
+						RDMOPT_CLASS_DAMAGE_BOSS_TARGET,			// BOSS
+						RDMOPT_CLASS_IGNORE_DEF_PERCENT_NORMAL,		// NORMAL
+						RDMOPT_CLASS_IGNORE_DEF_PERCENT_BOSS,		// BOSS
+					    RDMOPT_VAR_HITSUCCESSVALUE,					// HIT
+						RDMOPT_VAR_CRITICALSUCCESSVALUE,			// CRITRATE
+						RDMOPT_VAR_AVOIDSUCCESSVALUE;			 	// FLEE
+					    // ToDo: // Recover 1000 of Damage lost from size penalties
+						
+
+// - Values
+// Note: When MinV and MaxV are the same, rand() will not be used!
+setarray .RandOpt5_P_MinV[0],10,1,10,10,5,5,10,3,5;
+setarray .RandOpt5_P_MaxV[0],30,10,45,45,25,25,20,10,20;

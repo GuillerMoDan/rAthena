@@ -1,0 +1,52 @@
+prontera,147,173,5	script	Cashy	4_F_KAFRA4,{
+	mes "[Cashy]";
+	mes "Welcome welcome. I can trade your zeny into cash point !";
+	mes "The rate is 1000 per 10 cash !";
+	mes "Wanna trade?";
+	next;
+	switch(select("Trade Zeny to cash:Cancel")) {
+		case 1:
+			mes "[Cashy]";
+			mes "How many do you wish to trade ?";
+			next;
+			while(1) {
+				input .@input;
+				if (.@input == 0) {
+					mes "[Cashy]";
+					mes "Uuh okay";
+					mes "Take care.";
+					close;
+				}
+				else if ((.@input < 0) || (.@input > 500)) {
+					mes "[Cashy]";
+					mes "Uuh , my hands are full";
+					mes "please ask for 500 or less at a time";
+					next;
+				}
+				else {
+					break;
+				}
+			}
+			.@sell = .@input * 1000;
+			if (Zeny < .@sell) {
+				mes "[Cashy]";
+				mes "I'm sorry , you don't have enough money.";
+				close;
+			}
+			@cash = .@input * 10;
+			#CASHPOINTS += @cash; //
+			Zeny = Zeny-.@sell;
+			mes "[Cashy]";
+			mes "Thank you , come again soon !.";
+			close;
+	case 2:
+		mes "[Cashy]";
+		mes "Feel free to come anytime , I'll be here.";
+		close;
+}
+}
+
+// Center
+//prontera,155,175,4	duplicate(Duplicate Test Script)	Duplicate Test2	909
+//prontera,160,175,4	duplicate(Duplicate Test Script)	Duplicate Test3	909
+			

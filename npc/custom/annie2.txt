@@ -1,0 +1,139 @@
+//===== rAthena Script =======================================
+//= Vicious Mind Weapon Random Option Enchanter
+//===== By ===================================================
+//= llchrisll
+//===== Version ==============================================
+//= 1.0 - Initial Version
+//===== Tested With ==========================================
+//= rAthena 03/26/2018 Revision
+//= GIT Hash: 333f0dddc8353663eacba0423751988c9bc38e34
+//===== Description ==========================================
+//= This script handles the random options for the Vicious Mind Weapons
+//  until rAthena changes the way the Random Option Database is handled.
+//= Instead of defining every possible random option for each option slot
+//  this enchanter will be used.
+//===== Comments =============================================
+//= ...
+//===== Credits ==============================================
+//= NovaRo for their Information regarding the possible Options.
+//============================================================
+prontera,158,179,4	script	Vicious Mind Enchanter	101,{
+
+mes .n$;
+mes "Hello, "+strcharinfo(0)+"!";
+mes "What can I do for you?";
+if(select("- Enchant Weapon:- Nevermind") - 1) close;
+next;
+mes .n$;
+mes "To apply an random properity to an Vicious Weapon, you need to have it equipped in your right hand.";
+mes "Also be warned, that what you get and with which value is completely random!";
+next;
+mes .n$;
+mes "First, let's see what you have equipped...:";
+next;
+set .@part,EQI_HAND_R; // Save equip location
+mes .n$;
+if(!getequipid(.@part)) {
+	mes "You don't have anything equipped!";
+	close;
+}
+switch(getequipid(.@part)) {
+	case 1201: // Knife
+	case 1204: // Cutter
+	case 1207: // Main Gauche
+	case 1210: // Dirk
+	case 1213: // Dagger
+	case 1216: // Stiletto
+	case 1219: // Gladius
+	case 1222: // Damascus
+	case 28107: // Two-Handed Axe
+	case 28706: // Dagger
+	set .@Type$,"P";
+	break;
+	
+	case 1600: // Rod
+	case 2026: // Two-Handed Staff
+	case 28605: // Book
+	set .@Type$,"M";
+	break;
+	
+	case 1900: // Violin
+	case 1996: // Wire
+	case 13128: // Revolver
+	case 13328: // Huuma Shuriken
+	set .@Type$,"R";
+	break;
+	
+	default:
+	mes "This is not an Vicious Weapon, please be sure to equip one and come back again.";
+	close;
+}
+mes "Equipped Weapon: "+getitemname(getequipid(.@part));
+set .@ropt1,getequiprandomoption(.@part,0,ROA_ID);
+set .@ropt2,getequiprandomoption(.@part,1,ROA_ID);
+set .@ropt3,getequiprandomoption(.@part,2,ROA_ID);
+if(.@ropt1 || .@ropt2 || .@ropt2) {
+	mes " ";
+	mes "I'm sorry, but this weapon already has bonus properities applied.";
+	mes "Please choose a different one.";
+	close;
+}
+next;
+// Randomize each Option Slot:
+// Random Option 1
+set .@Opt1,rand(getarraysize(getd(".RandOpt1_"+.@Type$)));
+if(getd(".RandOpt1_"+.@Type$+"_MinV["+.@Opt1+"]") != getd(".RandOpt1_"+.@Type$+"_MaxV["+.@Opt1+"]"))
+	set .@Opt1_V,rand(getd(".RandOpt1_"+.@Type$+"_MinV["+.@Opt1+"]"),getd(".RandOpt1_"+.@Type$+"_MaxV["+.@Opt1+"]"));
+else 
+	set .@Opt1_V,getd(".RandOpt1_"+.@Type$+"_MaxV["+.@Opt1+"]");
+	
+// Random Option 2
+set .@Opt2,rand(getarraysize(getd(".RandOpt2_"+.@Type$)));
+if(getd(".RandOpt2_"+.@Type$+"_MinV["+.@Opt2+"]") != getd(".RandOpt2_"+.@Type$+"_MaxV["+.@Opt2+"]"))
+	set .@Opt2_V,rand(getd(".RandOpt2_"+.@Type$+"_MinV["+.@Opt2+"]"),getd(".RandOpt2_"+.@Type$+"_MaxV["+.@Opt2+"]"));
+else 
+	set .@Opt2_V,getd(".RandOpt2_"+.@Type$+"_MaxV["+.@Opt2+"]");
+	
+// Random Option 3
+set .@Opt3,rand(getarraysize(getd(".RandOpt3_"+.@Type$)));
+if(getd(".RandOpt3_"+.@Type$+"_MinV["+.@Opt3+"]") != getd(".RandOpt3_"+.@Type$+"_MaxV["+.@Opt3+"]"))
+	set .@Opt3_V,rand(getd(".RandOpt3_"+.@Type$+"_MinV["+.@Opt3+"]"),getd(".RandOpt3_"+.@Type$+"_MaxV["+.@Opt3+"]"));
+else 
+	set .@Opt3_V,getd(".RandOpt3_"+.@Type$+"_MaxV["+.@Opt3+"]");
+
+// Apply options to equipped weapon
+setrandomoption(.@part,0,getd(".RandOpt1_"+.@Type$+"["+.@Opt1+"]"),.@Opt1_V,0);
+setrandomoption(.@part,1,getd(".RandOpt2_"+.@Type$+"["+.@Opt2+"]"),.@Opt2_V,0);
+setrandomoption(.@part,2,getd(".RandOpt3_"+.@Type$+"["+.@Opt3+"]"),.@Opt3_V,0);
+mes .n$;
+mes "Random bonus properities have been applied on your \""+getitemname(getequipid(.@part))+"\" successfully.";
+end;
+
+OnInit:
+set .n$,"[Vicious Enchanter]";
+// ========= Random Option Slot 1 ========= 
+// - Physical
+setarray .RandOpt1_P[0],
+					    RDMOPT_DAMAGE_PROPERTY_NOTHING_TARGET,	 	// Damage to Neutral Element
+					    RDMOPT_DAMAGE_PROPERTY_GROUND_TARGET,	 	// Damage to Earth Element
+					    RDMOPT_DAMAGE_PROPERTY_FIRE_TARGET,		 	// Damage to Fire Element
+					    RDMOPT_DAMAGE_PROPERTY_WATER_TARGET,	 	// Damage to Water Element
+					    RDMOPT_DAMAGE_PROPERTY_WIND_TARGET,		 	// Damage to Wind Element
+					    RDMOPT_DAMAGE_PROPERTY_POISON_TARGET,	 	// Damage to Poison Element
+					    RDMOPT_DAMAGE_PROPERTY_SAINT_TARGET,	 	// Damage to Holy Element
+					    RDMOPT_DAMAGE_PROPERTY_DARKNESS_TARGET,	 	// Damage to Dark Element
+					    RDMOPT_DAMAGE_PROPERTY_TELEKINESIS_TARGET,	// Damage to Ghost Element
+					    RDMOPT_DAMAGE_PROPERTY_UNDEAD_TARGET,		// Damage to Undead Element
+					    RDMOPT_VAR_ATKPERCENT, 						// Attack %
+					    RDMOPT_VAR_ATTPOWER, 						// Attack
+					    RDMOPT_VAR_HITSUCCESSVALUE,					// HIT
+						RDMOPT_VAR_CRITICALSUCCESSVALUE; 			// CRITRATE
+					    // ToDo: // Recover 1000 of Damage lost from size penalties
+						
+
+// - Values
+// Note: When MinV and MaxV are the same, rand() will not be used!
+setarray .RandOpt1_P_MinV[0],10,10,10,10,10,10,10,10,10,10,20,3,10,5;
+setarray .RandOpt1_P_MaxV[0],50,50,50,50,50,50,50,50,50,50,60,15,40,20;
+end;
+}

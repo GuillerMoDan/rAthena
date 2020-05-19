@@ -1,0 +1,55 @@
+//===== rAthena Script =======================================
+//= Shop Street
+//===== By: ==================================================
+//= Masao(Shopstreet) - Original Mall Script
+//= Virtue(All in 1 Mall NPC)
+//===== Current Version: =====================================
+//= 1.0 [Masao]
+//===== Compatible With: =====================================
+//= rAthena SVN
+//= Judas SVN
+//===== Description: =========================================
+// Street Mall in One NPC
+// Change "Your Server Name" to your Server Name or whhat ever you desire"
+//============================================================
+prontera,147,169,5	script	Hugel Equip Trader	10242,{
+	mes "[Hugel Cat]";
+	mes "Welcome to ^000088Hugel Mall^000000.";
+	mes "Hello there ^FF0000" + strcharinfo(0) + "^000000.";
+	mes "Please select what you want";
+	next;
+	switch(select("Armor:Dagger:1H-Sword:2H-Sword:Spear:Axe:Mace:Staff:Book:Katar:Knuckle:Bow:Whip:Instrument:Exit")) {
+	close2;
+	case 1: callshop "MArmor", 1; end;
+	case 2: callshop "MDagger", 1; end;
+	case 3: callshop "M1H-Sword", 1; end;
+	case 4: callshop "M2H-Sword", 1; end;
+	case 5: callshop "MSpear", 1; end;
+	case 6: callshop "MAxe", 1; end;
+	case 7: callshop "MMace", 1; end;
+	case 8: callshop "MStaff", 1; end;
+	case 9: callshop "MBook", 1; end;
+	case 10: callshop "MKatar", 1; end;
+	case 11: callshop "MKnuckle", 1; end;
+	case 12: callshop "MBow", 1; end;
+	case 13: callshop "MWhip", 1; end;
+	case 14: callshop "MInstrument", 1; end;
+	case 15: close2; end;
+	}
+
+}
+//shops
+-	shop	MArmor	-1,2319:5000000,2349:10000000,2351:10000000,2345:10000000,2347:10000000
+-	shop	MDagger	-1,1232:15000000,1235:15000000,1231:15000000,1228:15000000,1241:15000000,1242:15000000,13001:15000000,1233:15000000,1223:15000000,13002:15000000,1237:15000000,1230:15000000,1229:15000000,1225:15000000,1234:15000000,1236:15000000,1224:15000000,1227:15000000
+-	shop	M1H-Sword	-1,1140:15000000,1134:15000000,1135:15000000,1132:15000000,1137:15000000,1133:15000000,1131:15000000,1141:15000000,1138:15000000,1130:15000000,1136:15000000,1148:15000000,1139:15000000
+-	shop	M2H-Sword	-1,1166:15000000,1169:15000000,1170:15000000,1165:15000000,1164:15000000,1167:15000000,1168:15000000
+-	shop	MSpear	-1,1467:15000000,1470:15000000,1415:15000000,1466:15000000,1474:15000000,1414:15000000,1413:15000000,1471:15000000,1469:15000000,1416:15000000,1468:15000000
+-	shop	MAxe	-1,1363:15000000,1305:15000000,1364:15000000,1369:15000000,1366:15000000,1365:15000000,1368:15000000
+-	shop	MMace	-1,1524:15000000,1528:15000000,1525:15000000,1527:15000000,1526:15000000,1523:15000000
+-	shop	MStaff	-1,1616:15000000,1473:15000000
+-	shop	MBook	-1,1557:15000000,1558:15000000,1561:15000000,1559:15000000
+-	shop	MKatar	-1,1265:15000000,1261:15000000,1263:15000000
+-	shop	MKnuckle	-1,1814:15000000,1815:15000000,1813:15000000
+-	shop	MBow	-1,1722:15000000,1724:15000000,1719:15000000,1720:15000000
+-	shop	MWhip	-1,1969:15000000,1964:15000000,1962:15000000,1970:15000000,1963:15000000
+-	shop	MInstrument	-1,1913:15000000

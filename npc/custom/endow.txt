@@ -1,0 +1,88 @@
+// [This script is brought to you by Pang]
+// This NPC will give your players the selected elemental endowments normally given by sages. The NPC will also
+// sell elemental Scrolls. The prices and whether elemental stones are required can be configured after the
+// OnInit label at the end.
+// V1.0 - Released - 5-Jul-2018
+
+prontera,139,286,4	script	Great Sage	742,{
+	mes "[Great Sage]","Greetings! Do you want your weapon to be endowed?";
+	if(@End_Ele) .@Last_Ele$ = "Last Element - "+.Element$[@End_Ele]+":"; else .@Last_Ele$ = ":";
+	select(.@Last_Ele$+.Element$[1]+":"+.Element$[2]+":"+.Element$[3]+":"+.Element$[4]+":No thanks");
+	if(@menu == 6) {mes "[Great Sage]","Okay then"; end; }
+	if(@menu != 1) .@Choice = @menu-1; else .@Choice = @End_Ele;
+	if(.ReqType) .@Req_Item$ = " and a ^0055FF" + getitemname(.StoneReq[.@Choice]) + "^000000";
+	clear;
+	mes "[Great Sage]","So you would like a ^0055FF" + .Element$[.@Choice] + "^000000 endowment? You will require ^0055FF" + .Price + "^000000 zeny" + .@Req_Item$ + ".","Do you accept?";
+	if(select("Yes:No") == 1) {
+		if( .ReqType ) {
+			if(countitem(.StoneReq[.@Choice]) == 0 || Zeny < .Price) {
+				clear;
+				mes "[Great Sage]","You do not have the required money or items. Please come back when you do.";
+				close;
+			}
+		}
+		else if( Zeny < .Price ) {
+			clear;
+			mes "[Great Sage]","You do not have the required money or items. Please come back when you do.";
+			close;
+		}
+		clear;
+		mes "[Great Sage]","Thank you for your custom. Here we go!";
+		close2;
+		@End_Ele = .@Choice;
+		sc_start .EndowSC[@End_Ele],.Ticks,0;
+		Zeny = Zeny - .Price;
+		if (.ReqType) delitem .StoneReq[.@Choice],1;
+		end;
+	}
+	else {
+		clear;
+		mes "[Great Sage]","Too bad! Let me know if you need me.";
+		close;
+	}
+
+OnInit:
+	.Price = 3000;			// Price for endowment.
+	.Ticks = 1800000;		// Time in ticks for duration of buff.
+	.ReqType = 1;			// Requirements. 0 = None | 1 = Elemental Stones | 2 = Greater Elemental Stones
+	.ConvPrice = 5000;		// Price for Elemental Scrolls
+	for (.@ConvID = 0;.@ConvID <= 0;.@ConvID++) {
+		npcshopadditem "conv_shop",.@ConvID,.ConvPrice;
+	}
+	npcshopdelitem "conv_shop",909;
+	setarray .Element$[1],"Water","Wind","Fire","Earth";
+	setarray .EndowSC[1],SC_WATERWEAPON,SC_WINDWEAPON,SC_FIREWEAPON,SC_EARTHWEAPON;
+	switch (.ReqType) {
+		case 1: setarray .StoneReq[1],991,992,990,993; end;
+		case 2: setarray .StoneReq[1],995,996,994,997; end;
+	}
+}
+
+-	shop	conv_shop	-1,909:-1,12215:2000,12216:2000,12114:5000,12115:5000,12116:5000,12117:5000
+
+prontera,146,84,5	duplicate(Great Sage)	Great Sage Prontera#prt	743
+izlude,125,148,4	duplicate(Great Sage)	Great Sage Izlude#prt	743
+alberta,105,61,4	duplicate(Great Sage)	Great Sage Alberta#prt	743
+aldebaran,146,114,4	duplicate(Great Sage)	Great Sage Aldebaran#prt	743
+amatsu,105,141,4	duplicate(Great Sage)	Great Sage Amatsu#prt	743
+ayothaya,212,174,4	duplicate(Great Sage)	Great Sage Ayothaya#prt	743
+brasilis,119,226,4	duplicate(Great Sage)	Great Sage Brasilis#prt	743
+comodo,199,148,4	duplicate(Great Sage)	Great Sage Comodo#prt	743
+dewata,206,184,4	duplicate(Great Sage)	Great Sage Dewata#prt	743
+einbroch,240,209,4	duplicate(Great Sage)	Great Sage Einbroch#prt	743
+geffen,128,63,4	duplicate(Great Sage)	Great Sage Geffen#prt	743
+gonryun,153,127,4	duplicate(Great Sage)	Great Sage Gonryun#prt	743
+hugel,84,168,4	duplicate(Great Sage)	Great Sage Hugel#prt	743
+lighthalzen,163,110,4	duplicate(Great Sage)	Great Sage Lighthalzen#prt	743
+louyang,224,112,4	duplicate(Great Sage)	Great Sage Louyang#prt	743
+malangdo,191,135,4	duplicate(Great Sage)	Great Sage Malangdo#prt	743
+malaya,229,204,4	duplicate(Great Sage)	Great Sage Malaya#prt	743
+mora,40,128,4	duplicate(Great Sage)	Great Sage Mora#prt	743
+morocc,151,83,4	duplicate(Great Sage)	Great Sage Morocc#prt	743
+moscovia,220,191,4	duplicate(Great Sage)	Great Sage Moscovia#prt	743
+payon,177,117,4	duplicate(Great Sage)	Great Sage Payon#prt	743
+rachel,102,138,4	duplicate(Great Sage)	Great Sage Rachel#prt	743
+umbala,84,163,4	duplicate(Great Sage)	Great Sage Umbala#prt	743
+veins,210,133,4	duplicate(Great Sage)	Great Sage Veins#prt	743
+xmas,143,135,4	duplicate(Great Sage)	Great Sage Xmas#prt	743
+yuno,148,187,4	duplicate(Great Sage)	Great Sage Yuno#prt	743

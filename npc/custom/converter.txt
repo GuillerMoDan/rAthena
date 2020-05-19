@@ -1,0 +1,143 @@
+prontera,139,289,4	script	^FF6600Convert Sage^000000	501,{
+	mes "[^FF6600Convert Sage^000000]","Psst kid";
+	mes	"Wanna Make Converters ?";
+	next;
+	switch( select( "Yes.:Scroll Shop:No thanks." ) ) {
+	case 1:
+	mes "[^FF6600Convert Sage^000000]";
+	mes	"Which one then ?";
+	next;
+	switch( select( "Fire.:Water.:Earth.:Wind.:No." ) ) {
+	case 1 :
+	mes "[^FF6600Convert Sage^000000]";
+	mes "To make 10 fire converter, i need 30 ^FF6600Scorpion Tail^000000 and 10 ^FF6600Blank Scroll^000000";
+	mes "And 10000 Zeny, Is it okay ?";
+	next;
+	switch( select( "Yes.:No." ) ) {
+	case 1:
+	if ( countitem( 904	) <30 && countitem( 5013 ) <10 || Zeny < 100000 ){
+	mes "[^FF6600Convert Sage^000000]","You do not have the required money or items. Please come back when you do.";
+	close; }
+	else {
+	mes "[^FF6600Convert Sage^000000]","Here it is.";
+	delitem 904,30;
+	delitem 5013,10;
+	getitem 12114,10;
+	zeny = zeny -10000;
+	close;
+	}
+	case 2:
+	mes "[^FF6600Convert Sage^000000]";
+	mes "Too bad then";
+	close;
+	}
+	case 2 :
+	mes "[^FF6600Convert Sage^000000]";
+	mes "To make 10 water converter, i need 30 ^FF6600Snail Shell^000000 and 10 ^FF6600Blank Scroll^000000";
+	mes "And 10000 Zeny, Is it okay ?";
+	next;
+	switch( select( "Yes.:No." ) ) {
+	case 1:
+	if ( countitem( 946 ) <30 && countitem( 5013 )<10 || Zeny < 100000 ) {
+	mes "[^FF6600Convert Sage^000000]","You do not have the required money or items. Please come back when you do.";
+	close; }
+	else {
+	mes "[^FF6600Convert Sage^000000]","Here it is.";
+	delitem 946,30;
+	delitem 5013,10;
+	getitem 12115,10;
+	zeny = zeny -10000;
+	close;
+	}
+	case 2:
+	mes "[^FF6600Convert Sage^000000]";
+	mes "Too bad then";
+	close;
+	}
+	case 3 :
+	mes "[^FF6600Convert Sage^000000]";
+	mes "To make 10 earth converter, i need 30 ^FF6600947Horn^000000 and 10 ^FF6600Blank Scroll^000000";
+	mes "And 10000 Zeny, Is it okay ?";
+	next;
+	switch( select( "Yes.:No." ) ) {
+	case 1:
+	if ( countitem( 947 ) <30 && countitem( 5013 )<10 || Zeny < 100000 ) {
+	mes "[^FF6600Convert Sage^000000]","You do not have the required money or items. Please come back when you do.";
+	close; }
+	else {
+	mes "[^FF6600Convert Sage^000000]","Here it is.";
+	delitem 947,30;
+	delitem 5013,10;
+	getitem 12116,10;
+	zeny = zeny -10000;
+	close;
+	}
+	case 2:
+	mes "[^FF6600Convert Sage^000000]";
+	mes "Too bad then";
+	close;
+	}	
+	case 4 :
+	mes "[^FF6600Convert Sage^000000]";
+	mes "To make 10 wind converter, i need 30 ^FF6600947Rainbow Shell^000000 and 10 ^FF6600Blank Scroll^000000";
+	mes "And 10000 Zeny, Is it okay ?";
+	next;
+	switch( select( "Yes.:No." ) ) {
+	case 1:
+	if ( countitem( 1013 ) <30 && countitem( 5013 ) <10 || Zeny < 100000 ) {
+	mes "[^FF6600Convert Sage^000000]","You do not have the required money or items. Please come back when you do.";
+	close; }
+	else {
+	mes "[^FF6600Convert Sage^000000]","Here it is.";
+	delitem 1013,30;
+	delitem 5013,10;
+	getitem 12117,10;
+	zeny = zeny -10000;
+	close;
+	}
+	case 2:
+	mes "[^FF6600Convert Sage^000000]";
+	mes "Too bad then";
+	close;
+	}
+	case 5: 
+	mes "[^FF6600Convert Sage^000000]";
+	mes "Too bad then";
+	close;
+	}
+	case 2: {callshop "scroll_shop",1; end;}
+	case 3: {
+		mes "[^FF6600Convert Sage^000000]","Too bad! Let me know if you need me.";
+		close;
+	}
+}
+
+}
+-	shop	scroll_shop	-1,7433:4000,12114:7000,12115:7000,12116:7000,12117:7000
+
+prontera,143,84,5	duplicate(^FF6600Convert Sage^000000)	^FF6600Convert Sage^000000 Prontera#prt	501
+izlude,122,150,4	duplicate(^FF6600Convert Sage^000000)	^FF6600Convert Sage^000000 Izlude#prt	501
+alberta,105,65,4	duplicate(^FF6600Convert Sage^000000)	^FF6600Convert Sage^000000 Alberta#prt	501
+aldebaran,146,112,4	duplicate(^FF6600Convert Sage^000000)	^FF6600Convert Sage^000000 Aldebaran#prt	501
+amatsu,105,137,4	duplicate(^FF6600Convert Sage^000000)	^FF6600Convert Sage^000000 Amatsu#prt	501
+ayothaya,212,178,4	duplicate(^FF6600Convert Sage^000000)	^FF6600Convert Sage^000000 Ayothaya#prt	501
+brasilis,119,231,4	duplicate(^FF6600Convert Sage^000000)	^FF6600Convert Sage^000000 Brasilis#prt	501
+comodo,202,145,4	duplicate(^FF6600Convert Sage^000000)	^FF6600Convert Sage^000000 Comodo#prt	501
+dewata,210,184,4	duplicate(^FF6600Convert Sage^000000)	^FF6600Convert Sage^000000 Dewata#prt	501
+einbroch,244,209,4	duplicate(^FF6600Convert Sage^000000)	^FF6600Convert Sage^000000 Einbroch#prt	501
+geffen,126,63,4	duplicate(^FF6600Convert Sage^000000)	^FF6600Convert Sage^000000 Geffen#prt	501
+gonryun,153,131,4	duplicate(^FF6600Convert Sage^000000)	^FF6600Convert Sage^000000 Gonryun#prt	501
+hugel,81,168,4	duplicate(^FF6600Convert Sage^000000)	^FF6600Convert Sage^000000 Hugel#prt	501
+lighthalzen,154,110,4	duplicate(^FF6600Convert Sage^000000)	^FF6600Convert Sage^000000 Lighthalzen#prt	501
+louyang,224,116,4	duplicate(^FF6600Convert Sage^000000)	^FF6600Convert Sage^000000 Louyang#prt	501
+malangdo,194,135,4	duplicate(^FF6600Convert Sage^000000)	^FF6600Convert Sage^000000 Malangdo#prt	501
+malaya,228,195,4	duplicate(^FF6600Convert Sage^000000)	^FF6600Convert Sage^000000 Malaya#prt	501
+mora,38,131,4	duplicate(^FF6600Convert Sage^000000)	^FF6600Convert Sage^000000 Mora#prt	501
+morocc,154,80,4	duplicate(^FF6600Convert Sage^000000)	^FF6600Convert Sage^000000 Morocc#prt	501
+moscovia,217,191,4	duplicate(^FF6600Convert Sage^000000)	^FF6600Convert Sage^000000 Moscovia#prt	501
+payon,180,117,4	duplicate(^FF6600Convert Sage^000000)	^FF6600Convert Sage^000000 Payon#prt	501
+rachel,100,136,4	duplicate(^FF6600Convert Sage^000000)	^FF6600Convert Sage^000000 Rachel#prt	501
+umbala,85,167,4	duplicate(^FF6600Convert Sage^000000)	^FF6600Convert Sage^000000 Umbala#prt	501
+veins,202,133,4	duplicate(^FF6600Convert Sage^000000)	^FF6600Convert Sage^000000 Veins#prt	501
+xmas,138,135,4	duplicate(^FF6600Convert Sage^000000)	^FF6600Convert Sage^000000 Xmas#prt	501
+yuno,141,187,4	duplicate(^FF6600Convert Sage^000000)	^FF6600Convert Sage^000000 Yuno#prt	501

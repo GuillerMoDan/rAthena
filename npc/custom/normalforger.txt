@@ -1,0 +1,1204 @@
+//===== eAthena/rAthena Script =======================================
+//= Weapon Forger
+//===== Template by: =========================================
+//= Pang Cake
+//===== Modified by: =========================================
+//= Mysterious
+//===== Current Version: =====================================
+//= 1.2
+//===== Compatible With: =====================================
+//= eAthena / rAthena SVN
+//===== Description: =========================================
+//= This NPC forges NAMELESS weapons, and can incorporate element stones and star crumbs.
+//= The forge chance is adjustable by changing the formula below.
+//===== Additional Comments: ========================================
+//= v1.0 - Initial release [Pang Cake]
+//= v1.1 - Fixed a couple of things [Mysterious]
+//= v1.2 - Proper disclaimer [Mysterious]
+//============================================================
+prontera,164,167,3	script	Seiken	953,{
+
+// ============= Configuration Settings ==================
+// Based on following forge success-rate formula:
+// ( 5 * Skill Level ) + ( Job Level / 5 ) + ( DEX / 10 ) + ( LUK / 10 ) + 50.
+	set .ForgeSkLvl, 3; // Level of Forge Skill ( Forge Sword, Forge Mace, etc ). Recommended: 3 max.
+	set .JLvl, 70; // Job level of Seiken NPC.Recommended: 70 max.
+	set .ForDex, 99; // The dexterity stat of the Forge NPC. Recommended: 99 max.
+	set .ForLuk, 99; // The luck stat of the Forge NPC.Recommended: 99 max.
+	set .AnvMod, 10; // Anvil chance mods, e.g. 0 = Normal Anvil, 3 = Oridecon Anvil, 5 = Golden Anvil, 10 = Emperium Anvil. Recommended: 10 max.
+	set .bonus, 10; // bonus buff-like chance.
+	set .forgeprice, 500000; //
+	
+// Forge formula - don't fiddle with this one unless you want to change the formula.
+	
+	set .ForgeChance, ((( .ForgeSkLvl * 5 ) + ( .JLvl / 5 ) + ( .ForDex / 10 ) + ( .ForLuk / 10 ) + .AnvMod + 50) + .bonus );
+	set .IronChance, ( 65 + ( .JLvl / 5 ) + ( .ForDex /10 ) + ( .ForLuk /10 + .bonus ));
+	set .SteelChance, ( 55 + ( .JLvl / 5 ) + ( .ForDex /10 ) + ( .ForLuk /10 + .bonus ));
+	set .StoneChance, ( 35 + ( .JLvl / 5 ) + ( .ForDex /10 ) + ( .ForLuk /10 + .bonus ));
+
+// Misc. Configuration.
+	
+	set .GMBypassLv, 50; // Minimum GM level for ignoring item requirements.
+	set .NameSet, 1; // Weapons will be forged with: 0 = Nameless, 1 = Invoking PC's name.
+	set .PerfectChance, 0; // Set to 1 to enable 100% forge chance.
+	
+// Enchant
+	set .Wait,3;		// Progress bar delay in seconds	
+// ============== End Configurations ================	
+if (checkweight(21016,1) == 0) {
+	mes "[^FF6600Seiken^000000]";
+    mes "You're carrying too much stuffs , make some space and come back to me later";
+        close;	
+	}
+if ( countitem( 989 ) <=0) {
+	mes "[^FF6600Seiken^000000]";
+    mes "Hi,you wanna buy ^993300Emperium Anvil^000000 ? ";
+	mes "It's only ^33CC00600.000^000000 Zeny";
+    mes "If you have the ^99330EEmperium Anvil^000000";
+	mes "I can forge things for you";
+	next;
+	mes "[^FF6600Seiken^000000]";
+    mes "How's it ? ";
+	mes "Interested ?";	
+	next;
+	switch( select( "Yes I'll buy it.:Cancel." ) ) {
+	case 1:
+	.@sell = 600000;
+			if (Zeny < .@sell) {
+				mes "[^FF6600Seiken^000000]";
+				mes "Ye don't have enough money..";
+				mes "Come back to me when you have enough";
+				close;
+			}
+			getitem 989,1; // Emperium Anvil
+			Zeny = Zeny-.@sell;
+			mes "[^FF6600Seiken^000000]";
+			mes "Thank you for buying the anvil !.";
+			mes "Next time you come here, i'll forge for you !.";
+			close;			
+	case 2:
+			mes "[^FF6600Seiken^000000]";
+			mes "Too bad then";
+			mes "Come back to me if you've changed your mind";
+				close;
+	}	
+}	
+if( countitem( 989 )) >=1 {
+	mes "[^FF6600Seiken^000000]";
+	mes "I see that you have emperium anvil.";
+	mes "Would you like me to forge you a weapon?";
+	next;
+	switch( select( "Forge.:Forge Information.:Craft Material.:Enchant Forged Weapons.:Cancel." ) ) {
+		case 1: // Forge
+			break;
+		case 2: // Forge Information
+			next;
+			mes "[^FF6600Seiken^000000]";
+			mes "What weapons would you like to know about?";
+			next;
+			switch( select( "Daggers.:1H Swords.:2H Swords.:Maces.:Spears.:Knuckles.:Axes.:Nothing." ) ) {
+				case 1:
+					mes "DAGGERS";
+					mes "Gladius - ^FF00004x Oridecon, 40x Steel, 1x Sapphire^000000.";
+					mes "Damascus - ^FF00004x Oridecon, 60x Steel, 1x Zircon^000000.";
+					close;
+				case 2:
+					mes "1H SWORDS.";
+					mes "Saber - ^FF00008x Oridecon, 5x Steel, 1x Opal^000000.";
+					mes "Haedongum - ^FF00008x Oridecon, 10x Steel, 1x Topaz^000000.";
+					mes "Tsurugi - ^FF00008x Oridecon, 15x Steel, 1x Garnet^000000.";
+					mes "Flamberge - ^FF000016x Oridecon, 1x Cursed Ruby^000000.";
+					close;
+				case 3:
+					mes "2H SWORDS.";
+					mes "Two-Handed Sword - ^FF000012x Oridecon, 10x Steel^000000.";
+					mes "Broad Sword - ^FF000012x Oridecon, 10x Steel^000000.";
+					mes "Claymore - ^FF000016x Oridecon, 20x Steel, 1x Cracked Diamond^000000.";
+					close;
+				case 4:
+					mes "MACES.";
+					mes "Morning Star - ^FF000085x Steel, 1x 1 Carat Diamond^000000.";
+					mes "Sword Mace - ^FF0000100x Steel, 20x Sharp Scale^000000.";
+					mes "Stunner - ^FF0000120x Steel, 1x Heroic Emblem^000000.";
+					close;
+				case 5:
+					mes "SPEARS.";
+					mes "Trident - ^FF00008x Oridecon, 10x Steel, 1x Aquamarine^000000.";
+					mes "Halberd - ^FF000012x Oridecon, 10x Steel^000000.";
+					mes "Lance - ^FF000012x Oridecon, 3x Ruby, 2x Evil Horn^000000.";
+					close;
+				case 6:
+					mes "KNUCKLES.";
+					mes "Fist - ^FF00004x Oridecon, 10x Ruby^000000.";
+					mes "Claw - ^FF00008x Oridecon, 10x Topaz^000000.";
+					mes "Finger - ^FF00004x Oridecon, 10x Opal^000000.";
+					close;
+				case 7:
+					mes "AXES.";
+					mes "Buster - ^FF00004x Oridecon, 20x Steel, 30x Orcish Fang^000000.";
+					mes "Two-Handed Axe - ^FF00008x Oridecon, 10x Steel, 1x Amethyst^000000.";
+					close;
+				case 8:
+				mes "Come back when you would like to forge.";
+				close;
+			}
+		case 3: // Craft Material
+				mes "[^FF6600Seiken^000000]";
+				mes "Oh you wanna craft some materials eh ?";
+				mes "Which one ?";
+				next;
+				switch( select( "Iron (10).:Steel.:Forging Stone.:Cancel." ) ) {
+						case 1:
+						if( countitem( 1002 ) < 10 ) {
+						mes "[^FF6600Seiken^000000]";
+						mes "Bring me 10 Iron Ore.";
+						mes "I'll be waiting.";
+						close;
+						}
+						mes "[^FF6600Seiken^000000]";
+						mes "This will cost you 10 iron ore";
+						mes "With ^FF0000" + .IronChance + "^000000% chance.";
+						mes "Would you like me to craft it for you ?";
+						next;
+						switch( select( "Yes.:Cancel." ) ) {
+							case 1:
+							delitem 1002,10;
+							progressbar "ffff00",.Wait;
+							if( .IronChance >= rand( 100 ) ) {	
+							getitem 998,10;
+							mes "[^FF6600Seiken^000000]";
+							mes "Here you Go.";
+							close;
+							}
+								else {
+								specialeffect 155;
+								next;
+								mes "[^FF6600Seiken^000000]";
+								mes "I am very sorry, item creation has ^FF0000failed^000000. Better luck next time.";
+								close;
+							}
+							case 2:
+							mes "[^FF6600Seiken^000000]";
+							mes "Oh, Come back here if you've changed your mind";
+							close;
+							}
+						case 2:
+						if( countitem( 998 ) < 5 && countitem(1003) < 1 ) {
+						mes "[^FF6600Seiken^000000]";
+						mes "Bring me 5 Iron and 1 Coal.";
+						mes "I'll be waiting.";
+						close;
+						}
+						mes "[^FF6600Seiken^000000]";
+						mes "This will cost you 5 Iron and 1 Coal";
+						mes "With ^FF0000" + .SteelChance + "^000000% chance.";
+						mes "Would you like me to craft it for you ?";
+						next;
+						switch( select( "Yes.:Cancel." ) ) {
+							case 1:
+							delitem 998,5;
+							delitem 1003,1;
+							progressbar "ffff00",.Wait;
+							if( .SteelChance >= rand( 100 ) ) {
+							getitem 999,10;
+							mes "[^FF6600Seiken^000000]";
+							mes "Here you Go.";
+							close;
+							}
+							else {
+							specialeffect 155;
+							next;
+							mes "[^FF6600Seiken^000000]";
+							mes "I am very sorry, item creation has ^FF0000failed^000000. Better luck next time.";
+							close;
+							}
+							case 2:
+							mes "[^FF6600Seiken^000000]";
+							mes "Oh, Come back here if you've changed your mind";
+							close;
+							}
+						case 3:	
+						mes "[^FF6600Seiken^000000]";
+						mes "Forging Stone eh ?";
+						mes "Which one ?";
+						next;
+						switch( select( "Flame Heart.:Mystic Frozen.:Rough Wind.:Great Nature.:Star Crumb.:Cancel." ) ) {
+							case 1:
+								if( countitem( 990 ) < 10 ) {
+								mes "[^FF6600Seiken^000000]";
+								mes "Bring me 10 Red Blood.";
+								mes "I'll be waiting.";
+								close;
+								}
+								mes "[^FF6600Seiken^000000]";
+								mes "This will cost you 10 Red Blood";
+								mes "With ^FF0000" + .StoneChance + "^000000% chance.";
+								mes "Would you like me to craft it for you ?";
+								next;
+								switch( select( "Yes.:Cancel." ) ) {
+									case 1:
+										delitem 1002,10;
+										progressbar "ffff00",.Wait;
+										if( .StoneChance >= rand( 100 ) ) {	
+										getitem 998,1;
+										mes "[^FF6600Seiken^000000]";
+										mes "Here you Go.";
+										close;
+										}
+									else {
+										specialeffect 155;
+										next;
+										mes "[^FF6600Seiken^000000]";
+										mes "I am very sorry, item creation has ^FF0000failed^000000. Better luck next time.";
+										close;
+										}
+									case 2:
+										mes "[^FF6600Seiken^000000]";
+										mes "Oh, Come back here if you've changed your mind";
+										close;
+										}
+							case 2:
+								if( countitem( 991 ) < 10 ) {
+								mes "[^FF6600Seiken^000000]";
+								mes "Bring me 10 Crystal Blue.";
+								mes "I'll be waiting.";
+								close;
+								}
+								mes "[^FF6600Seiken^000000]";
+								mes "This will cost you 10 Crystal Blue";
+								mes "With ^FF0000" + .StoneChance + "^000000% chance.";
+								mes "Would you like me to craft it for you ?";
+								next;
+								switch( select( "Yes.:Cancel." ) ) {
+									case 1:
+										delitem 991,10;
+										progressbar "ffff00",.Wait;
+										if( .StoneChance >= rand( 100 ) ) {											
+										getitem 995,1;
+										mes "[^FF6600Seiken^000000]";
+										mes "Here you Go.";
+										close;
+										}
+										else {
+										specialeffect 155;
+										next;
+										mes "[^FF6600Seiken^000000]";
+										mes "I am very sorry, item creation has ^FF0000failed^000000. Better luck next time.";
+										close;
+										}
+									case 2:
+										mes "[^FF6600Seiken^000000]";
+										mes "Oh, Come back here if you've changed your mind";
+										close;
+										}	
+							case 3:
+								if( countitem( 992 ) < 10 ) {
+								mes "[^FF6600Seiken^000000]";
+								mes "Bring me 10 Wind of Verdure.";
+								mes "I'll be waiting.";
+								close;
+								}
+								mes "[^FF6600Seiken^000000]";
+								mes "This will cost you 10 Wind of Verdure";
+								mes "With ^FF0000" + .StoneChance + "^000000% chance.";
+								mes "Would you like me to craft it for you ?";
+								next;
+								switch( select( "Yes.:Cancel." ) ) {
+									case 1:
+										delitem 992,10;
+										progressbar "ffff00",.Wait;
+										if( .StoneChance >= rand( 100 ) ) {	
+										getitem 996,1;
+										mes "[^FF6600Seiken^000000]";
+										mes "Here you Go.";
+										close;
+										}
+										else {
+										specialeffect 155;
+										next;
+										mes "[^FF6600Seiken^000000]";
+										mes "I am very sorry, item creation has ^FF0000failed^000000. Better luck next time.";
+										close;
+										}
+									case 2:
+										mes "[^FF6600Seiken^000000]";
+										mes "Oh, Come back here if you've changed your mind";
+										close;
+										}
+							case 4:
+								if( countitem( 993 ) < 10 ) {
+								mes "[^FF6600Seiken^000000]";
+								mes "Bring me 10 Green Live.";
+								mes "I'll be waiting.";
+								close;
+								}
+								mes "[^FF6600Seiken^000000]";
+								mes "This will cost you 10 Green Live";
+								mes "With ^FF0000" + .StoneChance + "^000000% chance.";
+								mes "Would you like me to craft it for you ?";
+								next;
+								switch( select( "Yes.:Cancel." ) ) {
+									case 1:
+										progressbar "ffff00",.Wait;
+										delitem 993,10;										
+										if( .StoneChance >= rand( 100 ) ) {	
+										getitem 997,1;
+										mes "[^FF6600Seiken^000000]";
+										mes "Here you Go.";
+										close;
+										}
+										else {
+										specialeffect 155;
+										next;
+										mes "[^FF6600Seiken^000000]";
+										mes "I am very sorry, item creation has ^FF0000failed^000000. Better luck next time.";
+										close;
+										}
+									case 2:
+										mes "[^FF6600Seiken^000000]";
+										mes "Oh, Come back here if you've changed your mind";
+										close;
+										}
+							case 5:
+								if( countitem( 1001 ) < 10 ) {
+								mes "[^FF6600Seiken^000000]";
+								mes "Bring me 10 Star Dust.";
+								mes "I'll be waiting.";
+								close;
+								}
+								mes "[^FF6600Seiken^000000]";
+								mes "This will cost you 10 Star Dust";
+								mes "With ^FF0000" + .StoneChance + "^000000% chance.";
+								mes "Would you like me to craft it for you ?";
+								next;
+								switch( select( "Yes.:Cancel." ) ) {
+									case 1:
+										delitem 1001,10;
+										progressbar "ffff00",.Wait;
+										if( .StoneChance >= rand( 100 ) ) {											
+										getitem 1000,1;
+										mes "[^FF6600Seiken^000000]";
+										mes "Here you Go.";
+										close;
+										}
+										else {
+										specialeffect 155;
+										next;
+										mes "[^FF6600Seiken^000000]";
+										mes "I am very sorry, item creation has ^FF0000failed^000000. Better luck next time.";
+										close;
+										}
+									case 2:
+										mes "[^FF6600Seiken^000000]";
+										mes "Oh, Come back here if you've changed your mind";
+										close;
+										}
+							case 6:
+								mes "[^FF6600Seiken^000000]";
+								mes "Oh, Come back here if you've changed your mind";
+								close;
+								}									
+						}			
+		case 4: // Enchant Forged Weapon
+			mes .n$;
+			mes "To apply an random property to a weapon, you need to have it equipped in your right hand.";
+			mes "Also be warned, that what you get and with which value is completely random!";
+			next;
+			mes "[^FF6600Seiken^000000]";
+			mes "First, let's see what you have equipped...:";
+			next;
+			set .@part,EQI_HAND_R; // Save equip location
+			mes "[^FF6600Seiken^000000]";
+			if(!getequipid(.@part)) {
+				mes "You don't have anything equipped!";
+				close;
+			}
+switch(getequipid(.@part)) {
+	case 1219: // Gladius
+	case 1222: // Damascus
+	set .@Type$,"P";
+	break;
+	
+	default:
+	mes "This is not forged by me.";
+	mes	"please be sure to equip one in your right hand and come back again.";
+	close;
+}
+mes "Equipped Weapon: "+getitemname(getequipid(.@part));
+set .@ropt1,getequiprandomoption(.@part,0,ROA_ID);
+set .@ropt2,getequiprandomoption(.@part,1,ROA_ID);
+set .@ropt3,getequiprandomoption(.@part,2,ROA_ID);
+if(.@ropt1 || .@ropt2 || .@ropt2) {
+	mes " ";
+	mes "I'm sorry, but this weapon already has bonus properties applied.";
+	mes "Please choose a different one.";
+	close;
+}
+	for(set .@i,0; .@i<4; set .@i,.@i+1)
+		set .@slot[.@i], getequipcardid(.@part,.@i);
+	if (.@slot[0]==255 || .@slot[0]==254 || .@slot[0]<0) {
+		next;
+	}
+else {
+	mes " ";
+	mes "I'm sorry, but this weapon isn't forged by a blacksmith.";
+	mes "Please choose a different one.";
+	close;
+	}
+// Randomize each Option Slot:
+// Random Option 1
+set .@Opt1,rand(getarraysize(getd(".RandOpt1_"+.@Type$)));
+if(getd(".RandOpt1_"+.@Type$+"_MinV["+.@Opt1+"]") != getd(".RandOpt1_"+.@Type$+"_MaxV["+.@Opt1+"]"))
+	set .@Opt1_V,rand(getd(".RandOpt1_"+.@Type$+"_MinV["+.@Opt1+"]"),getd(".RandOpt1_"+.@Type$+"_MaxV["+.@Opt1+"]"));
+else 
+	set .@Opt1_V,getd(".RandOpt1_"+.@Type$+"_MaxV["+.@Opt1+"]");
+	
+// Random Option 2
+set .@Opt2,rand(getarraysize(getd(".RandOpt2_"+.@Type$)));
+if(getd(".RandOpt2_"+.@Type$+"_MinV["+.@Opt2+"]") != getd(".RandOpt2_"+.@Type$+"_MaxV["+.@Opt2+"]"))
+	set .@Opt2_V,rand(getd(".RandOpt2_"+.@Type$+"_MinV["+.@Opt2+"]"),getd(".RandOpt2_"+.@Type$+"_MaxV["+.@Opt2+"]"));
+else 
+	set .@Opt2_V,getd(".RandOpt2_"+.@Type$+"_MaxV["+.@Opt2+"]");
+	
+// Random Option 3
+set .@Opt3,rand(getarraysize(getd(".RandOpt3_"+.@Type$)));
+if(getd(".RandOpt3_"+.@Type$+"_MinV["+.@Opt3+"]") != getd(".RandOpt3_"+.@Type$+"_MaxV["+.@Opt3+"]"))
+	set .@Opt3_V,rand(getd(".RandOpt3_"+.@Type$+"_MinV["+.@Opt3+"]"),getd(".RandOpt3_"+.@Type$+"_MaxV["+.@Opt3+"]"));
+else 
+	set .@Opt3_V,getd(".RandOpt3_"+.@Type$+"_MaxV["+.@Opt3+"]");
+
+// Random Option 4
+set .@Opt4,rand(getarraysize(getd(".RandOpt4_"+.@Type$)));
+if(getd(".RandOpt4_"+.@Type$+"_MinV["+.@Opt4+"]") != getd(".RandOpt4_"+.@Type$+"_MaxV["+.@Opt4+"]"))
+	set .@Opt4_V,rand(getd(".RandOpt4_"+.@Type$+"_MinV["+.@Opt4+"]"),getd(".RandOpt4_"+.@Type$+"_MaxV["+.@Opt4+"]"));
+else 
+	set .@Opt4_V,getd(".RandOpt4_"+.@Type$+"_MaxV["+.@Opt4+"]");
+
+// Random Option 5
+set .@Opt5,rand(getarraysize(getd(".RandOpt5_"+.@Type$)));
+if(getd(".RandOpt5_"+.@Type$+"_MinV["+.@Opt5+"]") != getd(".RandOpt5_"+.@Type$+"_MaxV["+.@Opt5+"]"))
+	set .@Opt5_V,rand(getd(".RandOpt5_"+.@Type$+"_MinV["+.@Opt5+"]"),getd(".RandOpt5_"+.@Type$+"_MaxV["+.@Opt5+"]"));
+else 
+	set .@Opt5_V,getd(".RandOpt5_"+.@Type$+"_MaxV["+.@Opt5+"]");
+
+// Apply options to equipped weapon
+mes "[^FF6600Seiken^000000]";
+mes " \""+getitemname(getequipid(.@part))+"\" , Is this the right weapon ?";
+next;
+switch( select( "Yes:Cancel." ) ) {
+case 2:
+mes "[^FF6600Seiken^000000]";
+mes "Oh, Okay,.";
+mes "Come back here when you hold the right weapon";
+close;
+
+case 1:
+	mes "[^FF6600Seiken^000000]";
+	mes "Okay! I'll enchant this one.";
+	next;
+	mes "[^FF6600Seiken^000000]";
+	mes "Give me a second ..";
+	progressbar "ffff00",.Wait;
+setrandomoption(.@part,0,getd(".RandOpt1_"+.@Type$+"["+.@Opt1+"]"),.@Opt1_V,0);
+setrandomoption(.@part,1,getd(".RandOpt2_"+.@Type$+"["+.@Opt2+"]"),.@Opt2_V,0);
+setrandomoption(.@part,2,getd(".RandOpt3_"+.@Type$+"["+.@Opt3+"]"),.@Opt3_V,0);
+setrandomoption(.@part,3,getd(".RandOpt4_"+.@Type$+"["+.@Opt4+"]"),.@Opt4_V,0);
+setrandomoption(.@part,4,getd(".RandOpt5_"+.@Type$+"["+.@Opt5+"]"),.@Opt5_V,0);
+next;
+mes "[^FF6600Seiken^000000]";
+mes "Random bonus properties have been applied on your \""+getitemname(getequipid(.@part))+"\" successfully.";
+end;
+}
+
+OnInit:
+set .n$,"[^FF6600Seiken^000000]";
+// ========= Random Option Slot 1 ========= 
+// - Physical
+setarray .RandOpt1_P[0],
+					    RDMOPT_VAR_STRAMOUNT,	 					// Str
+					    RDMOPT_VAR_AGIAMOUNT,	 					// Agi
+					    RDMOPT_VAR_VITAMOUNT,		 				// Vit
+					    RDMOPT_VAR_DEXAMOUNT,	 					// Dex
+					    RDMOPT_VAR_LUKAMOUNT,		 				// Luk
+					    RDMOPT_VAR_MAXHPAMOUNT,	 					// HP
+					    RDMOPT_VAR_MAXSPAMOUNT,						// SP
+						RDMOPT_VAR_ATTPOWER,						// Attack
+					    RDMOPT_VAR_ATKPERCENT,	 					// Atk%
+					    RDMOPT_VAR_PLUSASPD,						// ASPD
+					    RDMOPT_VAR_PLUSASPDPERCENT,					// ASPD %
+					    RDMOPT_VAR_HITSUCCESSVALUE,					// HIT
+					    RDMOPT_VAR_AVOIDSUCCESSVALUE,				// FLEE
+					    RDMOPT_VAR_CRITICALSUCCESSVALUE,			// CRIT RATE
+						RDMOPT_DAMAGE_CRI_TARGET,					// CRIT DAMAGE
+						RDMOPT_HEAL_MODIFY_PERCENT,					// HEAL	
+						RDMOPT_DAMAGE_SIZE_SMALL_TARGET,			// DMG SMALL
+						RDMOPT_DAMAGE_SIZE_MIDIUM_TARGET,			// DMG MEDIUM
+						RDMOPT_DAMAGE_SIZE_LARGE_TARGET;			// DMG LARGE
+					    // ToDo: // Recover 1000 of Damage lost from size penalties
+						
+
+// - Values
+// Note: When MinV and MaxV are the same, rand() will not be used!
+setarray .RandOpt1_P_MinV[0],1,1,1,1,1,100,20,20,5,1,7,10,10,5,10,10,10,10,10,10;
+setarray .RandOpt1_P_MaxV[0],5,5,5,5,5,300,60,50,10,2,15,30,30,10,20,20,20,20,20,20;
+end;
+					
+		case 6:
+			mes "Alright, come back when you'd like me to forge.";
+			close;
+
+	}
+	
+	next;
+	mes "[^FF6600Seiken^000000]";
+	mes "What weapons would you like to forge?";
+	switch( select( "Daggers.:1H Swords.:2H Swords.:Maces.:Spears.:Knuckles.:Axes.:Nothing." ) ) {
+		case 1:
+			mes "Which ^FF0099DAGGER^000000 would you like me to produce?";
+			switch( select( "Gladius (dmg 105):Damascus (dmg 118)" ) ) {
+				case 1:
+					mes "You have selected ^FF0000GLADIUS^000000.";
+					set .ForgeID, 1219;
+					break;
+				case 2:
+					mes "You have selected ^FF0000DAMASCUS^000000.";
+					set .ForgeID, 1222;
+					break;
+			}
+			break;
+		case 2:
+			mes "Which ^FF00991H SWORD^000000 would you like me to produce?";
+			switch( select( "Saber (dmg 115):Haedongum (dmg 120):Tsurugi (dmg 130):Flamberge (dmg 150)" ) ) {;
+				case 1:
+					mes "You have selected ^FF0000SABER^000000.";
+					set .ForgeID, 1126;
+					break;
+				case 2:
+					mes "You have selected ^FF0000HAEDONGUM^000000.";
+					set .ForgeID, 1123;
+					break;
+				case 3:
+					mes "You have selected ^FF0000TSURUGI^000000.";
+					set .ForgeID, 1119;
+					break;
+				case 4:
+					mes "You have selected ^FF0000FLAMBERGE^000000.";
+					set .ForgeID, 1129;
+					break;
+			}
+			break;
+		case 3:
+			mes "Which ^FF00992H SWORD^000000 would you like me to produce?";
+			switch( select( "Two-Handed Sword (dmg 160):Broad Sword (dmg 140):Claymore (dmg 180)" ) ) {
+				case 1:
+					mes "You have selected ^FF0000TWO-HANDED SWORD^000000.";
+					set .ForgeID, 1157;
+					break;
+				case 2:
+					mes "You have selected ^FF0000BROAD SWORD^000000.";
+					set .ForgeID, 1160;
+					break;
+				case 3:
+					mes "You have selected ^FF0000CLAYMORE^000000.";
+					set .ForgeID, 1163;
+					break;
+			}
+			break;
+		case 4:
+			mes "Which ^FF0099MACE^000000 would you like me to produce?";
+			switch( select( "Morning Star (dmg 110):Sword Mace (dmg 130):Stunner (dmg 140)" ) ) {
+				case 1:
+					mes "You have selected ^FF0000MORNING STAR^000000.";
+					set .ForgeID, 1513;
+					break;
+				case 2:
+					mes "You have selected ^FF0000SWORD MACE^000000.";
+					set .ForgeID, 1516;
+					break;
+				case 3:
+					mes "You have selected ^FF0000STUNNER^000000.";
+					set .ForgeID, 1522;
+					break;
+			}
+			break;
+		case 5:
+			mes "Which ^FF0099SPEAR^000000 would you like me to produce?";
+			switch( select( "Trident (dmg 150):Halberd (dmg 165):Lance (dmg 185)" ) ) {
+				case 1:
+					mes "You have selected ^FF0000TRIDENT^000000.";
+					set .ForgeID, 1460;
+					break;
+				case 2:
+					mes "You have selected ^FF0000HALBERD^000000.";
+					set .ForgeID, 1463;
+					break;
+				case 3:
+					mes "You have selected ^FF0000LANCE^000000.";
+					set .ForgeID, 1410;
+					break;
+			}
+			break;
+		case 6:
+			mes "Which ^FF0099KNUCKLE^000000 would you like me to produce?";
+			switch( select( "Fist (dmg 115):Claw (dmg 86):Finger (dmg 97)" ) ) {
+				case 1:
+					mes "You have selected ^FF0000FIST^000000.";
+					set .ForgeID, 1807;
+					break;
+				case 2:
+					mes "You have selected ^FF0000CLAW^000000.";
+					set .ForgeID, 1809;
+					break;
+				case 3:
+					mes "You have selected ^FF0000FINGER^000000.";
+					set .ForgeID, 1811;
+					break;
+			}
+			break;
+		case 7:
+			mes "Which ^FF0099AXE^000000 would you like me to produce?";
+			switch( select( "Buster (dmg 115):Two-Handed Axe (dmg 185)" ) ) {
+				case 1:
+					mes "You have selected ^FF0000BUSTER^000000.";
+					set .ForgeID, 1357;
+					break;
+				case 2:
+					mes "You have selected ^FF0000TWO-HANDED AXE^000000.";
+					set .ForgeID, 1360;
+					break;
+			}
+			break;
+		case 8:
+		mes "Okay, see you next time.";
+		close;
+	}
+	
+	if( getiteminfo( .ForgeID , 13 ) > 1 ) {
+		set .ForgeChance, .ForgeChance - ( getiteminfo( .ForgeID , 13 ) * 10 );
+	}
+	
+	next;
+	mes "[^FF6600Seiken^000000]";
+	mes "How many ^FF0099Star Crumbs^000000 would you like to put in your weapon?";
+	switch( select( "1.:2.:3.:None." ) ) {
+	case 1:
+		mes "You wish to forge a ^FF0000VERY STRONG^000000 weapon.";
+		set .SCFor, 1;
+		set .ForgeChance, .ForgeChance - 15;
+		break;
+	case 2:
+		mes "You wish to forge a ^FF0000VERY VERY STRONG^000000 weapon.";
+		set .SCFor, 2;
+		set .ForgeChance, .ForgeChance - 30;
+		break;
+	case 3:
+		mes "You wish to forge a ^FF0000VERY VERY VERY STRONG^000000 weapon.";
+		set .SCFor, 3;
+		set .ForgeChance, .ForgeChance - 45;
+		break;
+	case 4:
+		mes "You do not wish to put ^FF0099Star Crumbs^000000 in this weapon.";
+		set .SCFor, 0;
+		break;
+	}
+	
+	if( .SCFor < 3 ) {
+		next;
+		mes "[^FF6600Seiken^000000]";
+		mes "What ^FF0099element^000000 would you like to put into your weapon?";
+		switch( select( "^0000FFICE^000000.:^993300EARTH^000000.:^FF0000FIRE^000000.:^33CC00WIND^000000.:None." ) ) {
+			case 1:
+				mes "You wish to forge with ^0000FFMYSTIC FROZEN^000000.";
+				set .EleFor, 1;
+				set .ForgeChance, .ForgeChance - 20;
+				break;
+			case 2:
+				mes "You wish to forge with ^993300GREAT NATURE^000000.";
+				set .EleFor, 2;
+				set .ForgeChance, .ForgeChance - 20;
+				break;
+			case 3:
+				mes "You wish to forge with ^FF0000FLAME HEART^000000.";
+				set .EleFor, 3;
+				set .ForgeChance, .ForgeChance - 20;
+				break;
+			case 4:
+				mes "You wish to forge with ^33CC00ROUGH WIND^000000.";
+				set .EleFor, 4;
+				set .ForgeChance, .ForgeChance - 20;
+				break;
+			case 5:
+				mes "You do not wish to insert an element into your weapon.";
+				set .EleFor, 0;
+				break;
+		}
+	}
+	if ( getgmlevel() < .GMBypassLv ) {
+		callfunc ( "LOL_ChkSCEle", .EleFor );
+		setd ".ForgeItem", .ForgeID;
+		set .forgeable, callfunc ( "LOL_Chk" + .ForgeItem + "i", .SCFor );
+		if ( .forgeable == 0 ) {
+			mes "You do not have all the required materials. Please come back when you do.";
+			close;
+		}
+	}
+	if( .SCFor == 1 ) {
+		setd ".StarCrumb$", "Very Strong ";
+	}
+	if( .SCFor == 2 ) {
+		setd ".StarCrumb$", "Very Very Strong ";
+	}
+	if( .SCFor == 3 ) {
+		setd ".StarCrumb$", "Very Very Very Strong ";
+	}
+	if( .EleFor == 1 ) {
+		setd ".Element$", "Ice ";
+	}
+	if( .EleFor == 2 ) {
+		setd ".Element$", "Earth ";
+	}
+	if( .EleFor == 3 ) {
+		setd ".Element$", "Fire ";
+	}
+	if( .EleFor == 4 ) {
+		setd ".Element$", "Wind ";
+	}
+	next;
+	if( .PerfectChance == 1 ) {
+		set .ForgeChance, 100;
+	}
+		if( Zeny < .forgeprice ) {
+			clear;
+			mes "[^FF6600Katanakaji^000000]","You do not have the required money. Please come back when you do.";
+			close;
+			}	
+	mes "[^FF6600Seiken^000000]";
+	mes "We are now ready to forge your ^FF0000" + .StarCrumb$ + .Element$ + getitemname( .ForgeID ) + "^000000, at a ^FF0000" + .ForgeChance + "^000000% chance.";
+	mes "Cost = ^0055FF 500.000 ^000000 zeny.";
+	mes "^009900ALL ITEMS WILL BE CONSUMED UPON EITHER FAILURE OR SUCCESS^000000. Continue?";
+	next;
+	switch( select( "Yes.:Cancel." ) ) {
+		case 1:
+		Zeny = Zeny - .forgeprice;	
+		mes "[^FF6600Seiken^000000]";
+		mes "Give me a second ..";		
+		progressbar "ffff00",.Wait;
+			if( getgmlevel() < .GMBypassLv ) {
+				callfunc ( "LOL_DelSCEle", .SCFor, .EleFor );
+				callfunc "LOL_Del" + .ForgeItem + "i";
+			}
+			if( .ForgeChance >= rand( 100 ) ) {			
+				if( .NameSet == 1 ) {
+					set .name3, getcharid( 0 ) & 65535;
+					set .name4, getcharid( 0 ) >> 16;
+				}
+				set .lolface, .EleFor + ( ( .SCFor * 5 ) << 8 );
+				getitem2 .ForgeID, 1, 1, 0, 0, 255, .lolface, .name3, .name4;
+				specialeffect 154;
+				next;
+				mes "There you go.! Enjoy your new weapon!";
+				mes "Don't forget to enchant your new weapon!";
+				close;
+			}
+			else {
+				specialeffect 155;
+				next;
+				mes "[^FF6600Seiken^000000]";
+				mes "I am very sorry, item creation has ^FF0000failed^000000. Better luck next time.";
+				close;
+			}
+		case 2:
+			mes "[^FF6600Seiken^000000]";
+			mes "Well alright, come back if you change your mind.";
+			close;
+		
+			}
+		}
+	}
+
+
+//Item-Check and Delete Functions!
+
+//STAR CRUMBS AND ELE.
+function	script	LOL_ChkSCEle	{
+	if( getarg( 0 ) == 1 && countitem( 995 ) < 1 ) {
+		mes "You do not have the required ^0000FFMystic Frozen^000000. Come back when you do.";
+		close;
+	}
+	if( getarg( 0 ) == 2 && countitem( 997 ) < 1 ) {
+		mes "You do not have the required ^993300Great Nature^000000. Come back when you do.";
+		close;
+	}
+	if( getarg( 0 ) == 3 && countitem( 994 ) < 1 ) {
+		mes "You do not have the required ^FF0000Flame Heart^000000. Come back when you do.";
+		close;
+	}
+	if( getarg( 0 ) == 4 && countitem( 996 ) < 1 ) {
+		mes "You do not have the required ^33CC00Rough Wind^000000. Come back when you do.";
+		close;
+	}
+	return;
+}
+function	script	LOL_DelSCEle	{
+	if( getarg( 0 ) != 0 ) {
+		delitem 1000,getarg( 0 );
+	}
+	if( getarg( 1 ) == 1 ) {
+		delitem 995,1;
+	}
+	if( getarg( 1 ) == 2 ) {
+		delitem 997,1;
+	}
+	if( getarg( 1 ) == 3 ) {
+		delitem 994,1;
+	}
+	if( getarg( 1 ) == 4 ) {
+		delitem 996,1;
+	}
+	return;
+	}
+
+//DAGGERS:
+// -gladius
+function	script	LOL_Chk1219i	{
+	if( countitem( 1000 ) >= getarg( 0 ) && countitem( 999 ) >= 40 && countitem( 984 ) >= 4 && countitem( 726 ) >= 1 && countitem( 615 ) >= 1   ) {
+		return 1;
+	}
+	else {
+		return 0;
+	}
+}
+function	script	LOL_Del1219i	{
+	delitem 984,4;	 delitem 615,1;
+	delitem 999,40;
+	delitem 726,1;
+	return;
+}
+// -damascus
+function	script	LOL_Chk1222i	{
+	if( countitem( 1000 ) >= getarg( 0 ) && countitem( 999 ) >= 60 && countitem( 984 ) >= 4 && countitem( 729 ) && countitem( 615 ) >= 1   >= 1 ) {
+		return 1;
+	}
+	else {
+		return 0;
+	}
+}
+function	script	LOL_Del1222i	{
+	delitem 984,4;	 delitem 615,1;
+	delitem 999,60;
+	delitem 729,1;
+	return;
+}
+
+//ONE-HANDED SWORDS:
+// -saber
+function	script	LOL_Chk1126i	{
+	if( countitem( 1000 ) >= getarg( 0 ) && countitem( 999 ) >= 5 && countitem( 984 ) >= 8 && countitem( 727 ) >= 1 && countitem( 615 ) >= 1   ) {
+		return 1;
+	}
+	else {
+		return 0;
+	}
+}
+function	script	LOL_Del1126i	{
+	delitem 984,8;	 delitem 615,1;
+	delitem 999,5;
+	delitem 727,1;
+	return;
+}
+// -haedongum
+function	script	LOL_Chk1123i	{
+	if( countitem( 1000 ) >= getarg( 0 ) && countitem( 999 ) >= 10 && countitem( 984 ) >= 8 && countitem( 728 ) >= 1 && countitem( 615 ) >= 1   ) {
+		return 1;
+	}
+	else {
+		return 0;
+	}
+}
+function	script	LOL_Del1123i	{
+	delitem 984,8;	 delitem 615,1;
+	delitem 999,10;
+	delitem 728,1;
+	return;
+}
+// -tsurugi
+function	script	LOL_Chk1119i	{
+	if( countitem( 1000 ) >= getarg( 0 ) && countitem( 999 ) >= 15 && countitem( 984 ) >= 8 && countitem( 718 ) >= 1 && countitem( 615 ) >= 1   ) {
+		return 1;
+	}
+	else {
+		return 0;
+	}
+}
+function	script	LOL_Del1119i	{
+	delitem 984,8;	 delitem 615,1;
+	delitem 999,15;
+	delitem 718,1;
+	return;
+}
+// -flamberge
+function	script	LOL_Chk1129i	{
+	if( countitem( 1000 ) >= getarg( 0 ) && countitem( 984 ) >= 16 && countitem( 724 ) >= 1 && countitem( 615 ) >= 1   ) {
+		return 1;
+	}
+	else {
+		return 0;
+	}
+}
+function	script	LOL_Del1129i	{
+	delitem 984,16;	 delitem 615,1;
+	delitem 724,1;
+	return;
+}
+
+//TWO-HANDED SWORDS:
+// -katana
+function	script	LOL_Chk1116i	{
+	if( countitem( 1000 ) >= getarg( 0 ) && countitem( 998 ) >= 35 && countitem( 958 ) >= 15 && countitem( 613 ) >= 1   ) {
+		return 1;
+	}
+	else {
+		return 0;
+	}
+}
+function	script	LOL_Del1116i	{
+	delitem 998,35;	 delitem 613,1;
+	delitem 958,15;
+	return;
+}
+// -slayer
+function	script	LOL_Chk1151i	{
+	if( countitem( 1000 ) >= getarg( 0 ) && countitem( 999 ) >= 25 && countitem( 957 ) >= 20 && countitem( 614 ) >= 1   ) {
+		return 1;
+	}
+	else {
+		return 0;
+	}
+}
+function	script	LOL_Del1151i	{
+	delitem 999,25;	 delitem 614,1;
+	delitem 957,20;
+	return;
+}
+// -bastard sword
+function	script	LOL_Chk1154i	{
+	if( countitem( 1000 ) >= getarg( 0 ) && countitem( 999 ) >= 45 && countitem( 614 ) >= 1   ) {
+		return 1;
+	}
+	else {
+		return 0;
+	}
+}
+function	script	LOL_Del1154i	{
+	delitem 999,45;	 delitem 614,1;
+	return;
+}
+// -two-handed sword
+function	script	LOL_Chk1157i	{
+	if( countitem( 1000 ) >= getarg( 0 ) && countitem( 999 ) >= 10 && countitem( 984 ) >= 12 && countitem( 615 ) >= 1   ) {
+		return 1;
+	}
+	else {
+		return 0;
+	}
+}
+function	script	LOL_Del1157i	{
+	delitem 984,12;	 delitem 615,1;
+	delitem 999,10;
+	return;
+}
+// -broad sword
+function	script	LOL_Chk1160i	{
+	if( countitem( 1000 ) >= getarg( 0 ) && countitem( 999 ) >= 20 && countitem( 984 ) >= 12 && countitem( 615 ) >= 1   ) {
+		return 1;
+	}
+	else {
+		return 0;
+	}
+}
+function	script	LOL_Del1160i	{
+	delitem 984,12;	 delitem 615,1;
+	delitem 999,20;
+	return;
+}
+// -claymore
+function	script	LOL_Chk1163i	{
+	if( countitem( 1000 ) >= getarg( 0 ) && countitem( 999 ) >= 20 && countitem( 984 ) >= 16 && countitem( 733 ) >= 1 && countitem( 615 ) >= 1   ) {
+		return 1;
+	}
+	else {
+		return 0;
+	}
+}
+function	script	LOL_Del1163i	{
+	delitem 999,20;	 delitem 615,1;
+	delitem 984,16;
+	delitem 733,1;
+	return;
+}
+
+//MACES:
+// -morning star
+function	script	LOL_Chk1513i	{
+	if( countitem( 1000 ) >= getarg( 0 ) && countitem( 999 ) >= 85 && countitem( 730 ) >= 1 && countitem( 615 ) >= 1   ) {
+		return 1;
+	}
+	else {
+		return 0;
+	}
+}
+function	script	LOL_Del1513i	{
+	delitem 999,85;	 delitem 615,1;
+	delitem 730,1;
+	return;
+}
+// -sword mace
+function	script	LOL_Chk1516i	{
+	if( countitem( 1000 ) >= getarg( 0 ) && countitem( 999 ) >= 100 && countitem( 963 ) >= 20 && countitem( 615 ) >= 1   ) {
+		return 1;
+	}
+	else {
+		return 0;
+	}
+}
+function	script	LOL_Del1516i	{
+	delitem 999,100;	delitem 615,1;
+	delitem 963,20;
+	return;
+}
+// -stunner
+function	script	LOL_Chk1522i	{
+	if( countitem( 1000 ) >= getarg( 0 ) && countitem( 999 ) >= 120 && countitem( 968 ) >= 1 && countitem( 615 ) >= 1   ) {
+		return 1;
+	}
+	else {
+		return 0;
+	}
+}
+function	script	LOL_Del1522i	{
+	delitem 999,120;	delitem 615,1;
+	delitem 968,1;
+	return;
+}
+
+//SPEARS:
+// -trident
+function	script	LOL_Chk1460i	{
+	if( countitem( 1000 ) >= getarg( 0 ) && countitem( 999 ) >= 10 && countitem( 984 ) >= 8 && countitem( 720 ) >= 5 && countitem( 615 ) >= 1   ) {
+		return 1;
+	}
+	else {
+		return 0;
+	}
+}
+function	script	LOL_Del1460i	{
+	delitem 984,8;	 delitem 615,1;
+	delitem 999,10;
+	delitem 720,5;
+	return;
+}
+// -halberd
+function	script	LOL_Chk1463i	{
+	if( countitem( 1000 ) >= getarg( 0 ) && countitem( 999 ) >= 10 && countitem( 984 ) >= 12 && countitem( 615 ) >= 1   ) {
+		return 1;
+	}
+	else {
+		return 0;
+	}
+}
+function	script	LOL_Del1463i	{
+	delitem 984,12;	 delitem 615,1;
+	delitem 999,10;
+	return;
+}
+// -lance
+function	script	LOL_Chk1410i	{
+	if( countitem( 1000 ) >= getarg( 0 ) && countitem( 984 ) >= 12 && countitem( 723 ) >= 3 && countitem( 923 ) >= 2 && countitem( 615 ) >= 1   ) {
+		return 1;
+	}
+	else {
+		return 0;
+	}
+}
+function	script	LOL_Del1410i	{
+	delitem 984,12;	 delitem 615,1;
+	delitem 723,3;
+	delitem 923,2;
+	return;
+}
+
+//KNUCKLES:
+// -fist
+function	script	LOL_Chk1807i	{
+	if( countitem( 1000 ) >= getarg( 0 ) && countitem( 984 ) >= 4 && countitem( 723 ) >= 10 && countitem( 615 ) >= 1   ) {
+		return 1;
+	}
+	else {
+		return 0;
+	}
+}
+function	script	LOL_Del1807i	{
+	delitem 984,4;	 delitem 615,1;
+	delitem 723,10;
+	return;
+}
+// -claw
+function	script	LOL_Chk1809i	{
+	if( countitem( 1000 ) >= getarg( 0 ) && countitem( 984 ) >= 8 && countitem( 728 ) >= 10  && countitem ( 615 ) >= 1   ) {
+		return 1;
+	}
+	else {
+		return 0;
+	}
+}
+function	script	LOL_Del1809i	{
+	delitem 984,8;	 delitem 615,1;
+	delitem 728,10;
+	return;
+}
+// -finger
+function	script	LOL_Chk1811i	{
+	if( countitem( 1000 ) >= getarg( 0 ) && countitem( 984 ) >= 4 && countitem( 727 ) >= 10 && countitem( 615 ) >= 1   ) {
+		return 1;
+	}
+	else {
+		return 0;
+	}
+}
+function	script	LOL_Del1811i	{
+	delitem 984,4;	 delitem 615,1;
+	delitem 727,10;
+	return;
+}
+
+//AXES:
+// -buster
+function	script	LOL_Chk1357i	{
+	if( countitem( 1000 ) >= getarg( 0 ) && countitem( 999 ) >= 20 && countitem( 984 ) >= 4 && countitem( 922 ) >= 30 && countitem( 615 ) >= 1   ) {
+		return 1;
+	}
+	else {
+		return 0;
+	}
+}
+function	script	LOL_Del1357i	{
+	delitem 984,4;	 delitem 615,1;
+	delitem 999,20;
+	delitem 922,30;
+	return;
+}
+// -two-handed axe
+function	script	LOL_Chk1360i	{
+	if( countitem( 1000 ) >= getarg( 0 ) && countitem( 999 ) >= 10 && countitem( 984 ) >= 8 && countitem( 719 ) >= 1 && countitem( 615 ) >= 1   ) {
+		return 1;
+	}
+	else {
+		return 0;
+	}
+}
+function	script	LOL_Del1360i	{
+	delitem 999,10;	 delitem 615,1;
+	delitem 984,8;
+	delitem 719,1;
+	return;
+}
