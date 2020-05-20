@@ -26,7 +26,7 @@ prontera,164,167,3	script	Seiken	953,{
 	set .ForDex, 99; // The dexterity stat of the Forge NPC. Recommended: 99 max.
 	set .ForLuk, 99; // The luck stat of the Forge NPC.Recommended: 99 max.
 	set .AnvMod, 10; // Anvil chance mods, e.g. 0 = Normal Anvil, 3 = Oridecon Anvil, 5 = Golden Anvil, 10 = Emperium Anvil. Recommended: 10 max.
-	set .bonus, 10; // bonus buff-like chance.
+	set .bonus, 0; // bonus buff-like chance.
 	set .forgeprice, 500000; //
 	
 // Forge formula - don't fiddle with this one unless you want to change the formula.
@@ -529,8 +529,7 @@ setarray .RandOpt1_P[0],
 					    RDMOPT_VAR_HITSUCCESSVALUE,					// HIT
 					    RDMOPT_VAR_AVOIDSUCCESSVALUE,				// FLEE
 					    RDMOPT_VAR_CRITICALSUCCESSVALUE,			// CRIT RATE
-						RDMOPT_DAMAGE_CRI_TARGET,					// CRIT DAMAGE
-						RDMOPT_HEAL_MODIFY_PERCENT,					// HEAL	
+						RDMOPT_DAMAGE_CRI_TARGET,					// CRIT DAMAGE	
 						RDMOPT_DAMAGE_SIZE_SMALL_TARGET,			// DMG SMALL
 						RDMOPT_DAMAGE_SIZE_MIDIUM_TARGET,			// DMG MEDIUM
 						RDMOPT_DAMAGE_SIZE_LARGE_TARGET;			// DMG LARGE
@@ -539,8 +538,8 @@ setarray .RandOpt1_P[0],
 
 // - Values
 // Note: When MinV and MaxV are the same, rand() will not be used!
-setarray .RandOpt1_P_MinV[0],1,1,1,1,1,100,20,20,5,1,7,10,10,5,10,10,10,10,10,10;
-setarray .RandOpt1_P_MaxV[0],5,5,5,5,5,300,60,50,10,2,15,30,30,10,20,20,20,20,20,20;
+setarray .RandOpt1_P_MinV[0],1,1,1,1,1,100,20,20,5,1,7,10,10,5,10,10,10,10,10;
+setarray .RandOpt1_P_MaxV[0],5,5,5,5,5,300,60,50,10,2,15,30,30,10,20,20,20,20,20;
 end;
 					
 		case 6:

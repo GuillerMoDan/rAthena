@@ -1,249 +1,173 @@
-prontera,173,183,6	script	Christopher#C	731,{
-	mes "[^FF6600Christopher^000000]";
-	mes "Welcome to Christopher's Workshop. Ye can get all yer stuff for refining here. What business";
+prontera,173,183,6	script	^FF6600Flamering^000000#C	10270,{
+	mes "[^FF6600Flamering^000000]";
+	mes "Welcome to ^FF6600Flamering^000000's Workshop. Ye can get all yer stuff for refining here. What business";
 	mes "brings ye to me?";
 	next;
-	switch(select("Purchase High Metal:Cancel")) {
+	switch(select("Purchase High Metal.:Craft Metal.:Cancel.")) {
 	case 1:
-		mes "[^FF6600Christopher^000000]";
+		mes "[^FF6600Flamering^000000]";
 		mes "I prepare every Metal, and only the highest quality ones o'course. Now then, which one do ye need?";
 		next;
-		switch(select("Oridecon - 20000z.:Elunium - 20000z.:HD-Oridecon - 1000000z.:HD-Elunium - 1000000z.:EN-Oridecon - 1000000z.:EN-Elunium - 1000000z:Cancel.")) {
-		case 1:
-			mes "[^FF6600Christopher^000000]";
-			mes "So, How many do ye wish to buy? If ye dont want anything, just type the number as '0.'";
-			next;
-			while(1) {
-				input .@input;
-				if (.@input == 0) {
-					mes "[^FF6600Christopher^000000]";
-					mes "Deal has";
-					mes "been canceled.";
-					mes "Fare ye well.";
+		switch(select("Oridecon - 20000z.:Elunium - 20000z.:Cancel.")) {
+			case 1:
+				mes "[^FF6600Flamering^000000]";
+				mes "So, How many do ye wish to buy? If ye dont want anything, just type the number as '0.'";
+				next;
+				while(1) {
+					input .@input;
+					if (.@input == 0) {
+						mes "[^FF6600Flamering^000000]";
+						mes "Deal has";
+						mes "been canceled.";
+						mes "Fare ye well.";
+						close;
+					}
+					else if ((.@input < 0) || (.@input > 500)) {
+						mes "[^FF6600Flamering^000000]";
+						mes "Ye can buy 500, er less.";
+						next;
+					}
+					else {
+						break;
+					}
+				}
+				.@sellx = .@input * 20000;
+				if (Zeny < .@sellx) {
+					mes "[^FF6600Flamering^000000]";
+					mes "Ye don't have enough money. Ye know I can't sell this at a lower price... You know how the wifey nags about Zeny.";
 					close;
 				}
-				else if ((.@input < 0) || (.@input > 500)) {
-					mes "[^FF6600Christopher^000000]";
-					mes "Ye can buy 500, er less.";
-					next;
+				if (checkweight(984,.@input) == 0) {
+					mes "[^FF6600Flamering^000000]";
+					mes "Ye look like you don't have the room to carry anythin' new. Why don't ye put some things into Kafra Storage n' come back.";
+					close;
 				}
-				else {
-					break;
+				getitem 984,.@input; // Oridecon
+				Zeny = Zeny-.@sellx;
+				mes "[^FF6600Flamering^000000]";
+				mes "Thank ye fer shopping at me workshop. Feel free to come anytime, whenever ye need.";
+				close;
+			case 2:
+				mes "[^FF6600Flamering^000000]";
+				mes "So, how many do ye wish to buy? If ye dont want anything at all, just type the number as '0.'";
+				next;
+				while(1) {
+					input .@input;
+					if (.@input == 0) {
+						mes "[^FF6600Flamering^000000]";
+						mes "Deal has";
+						mes "been canceled.";
+						mes "Fare ye well.";
+						close;
+					}
+					else if ((.@input < 0) || (.@input > 500)) {
+						mes "[^FF6600Flamering^000000]";
+						mes "Ye can buy 500, er less.";
+						next;
+					}
+					else {
+						break;
+					}
 				}
-			}
-			.@sellx = .@input * 20000;
-			if (Zeny < .@sellx) {
-				mes "[^FF6600Christopher^000000]";
-				mes "Ye don't have enough money. Ye know I can't sell this at a lower price... You know how the wifey nags about Zeny.";
+				.@sellx = .@input * 25000;
+				if (Zeny < .@sellx) {
+					mes "[^FF6600Flamering^000000]";
+					mes "I don't think I can let ye have this with the zeny ye have. I can't lose me money because of ye.";
+					close;
+				}
+				if (checkweight(984,.@input) == 0) {
+					mes "[^FF6600Flamering^000000]";
+					mes "Me friend... Seems to me ye don't have Inventory space. Why doncha put some things into Kafra Storage first?";
+					close;
+				}
+				getitem 984,.@input; // Elunium
+				Zeny = Zeny-.@sellx;
+				mes "[^FF6600Flamering^000000]";
+				mes "Thank ye fer shopping at me workshop. Feel free to come anytime, whenever ye need, whenever ye want.";
+				close;
+				}
+	case 2:
+		mes "[^FF6600Flamering^000000]";
+		mes "You wanna craft aye ? Which ?";
+		next;
+		switch(select("Normal to Enriched.:Enriched to HD.:Cancel.")) {
+			case 1:
+			mes "[^FF6600Flamering^000000]";
+			mes "If you bring me 5";
+			mes "Oridecon or Elunium";
+			mes "I can exchange them for";
+			mes "Enriched Oridecon or Enriched Elunium.";
+			mes "Just give me 250,000z.";
+			next;
+			switch(select("Oridecon to Enriched Oridecon.:Elunium to Enriched Elunium.:No thanks.")) {
+			case 1:
+				setarray .@i[0],984,5,7620;  //Oridecon -> Enriched Oridecon
+				break;
+			case 2:
+				setarray .@i[0],985,5,7619;  //Elunium -> Enriched Elunium
+				break;
+			case 3:
+				mes "[^FF6600Flamering^000000]";
+				mes "Hmm...";
 				close;
 			}
-			if (checkweight(984,.@input) == 0) {
-				mes "[^FF6600Christopher^000000]";
-				mes "Ye look like you don't have the room to carry anythin' new. Why don't ye put some things into Kafra Storage n' come back.";
+			if (countitem(.@i[0]) >= .@i[1] && Zeny >= 250000) {
+				delitem .@i[0],.@i[1];
+				Zeny = Zeny - 250000;
+				getitem .@i[2],1;
+				mes "[^FF6600Flamering^000000]";
+				mes "Ok! Here's your "+getitemname(.@i[2])+".";
+				mes "Take it and use it well.";
 				close;
 			}
-			getitem 984,.@input; // Oridecon
-			Zeny = Zeny-.@sellx;
-			mes "[^FF6600Christopher^000000]";
-			mes "Thank ye fer shopping at me workshop. Feel free to come anytime, whenever ye need.";
+			mes "[^FF6600Flamering^000000]";
+			mes "You better not be trying";
+			mes "to cheat me because you";
+			mes "don't have enough money";
+			mes "or "+getitemname(.@i[0])+".";
 			close;
 		case 2:
-			mes "[^FF6600Christopher^000000]";
-			mes "So, how many do ye wish to buy? If ye dont want anything at all, just type the number as '0.'";
+			mes "[^FF6600Flamering^000000]";
+			mes "If you bring me 2";
+			mes "Enriched Oridecon or Enriched Elunium";
+			mes "I can exchange them for";
+			mes "HD Oridecon or HD Elunium.";
+			mes "Just give me 750,000z.";
 			next;
-			while(1) {
-				input .@input;
-				if (.@input == 0) {
-					mes "[^FF6600Christopher^000000]";
-					mes "Deal has";
-					mes "been canceled.";
-					mes "Fare ye well.";
-					close;
-				}
-				else if ((.@input < 0) || (.@input > 500)) {
-					mes "[^FF6600Christopher^000000]";
-					mes "Ye can buy 500, er less.";
-					next;
-				}
-				else {
-					break;
-				}
-			}
-			.@sellx = .@input * 25000;
-			if (Zeny < .@sellx) {
-				mes "[^FF6600Christopher^000000]";
-				mes "I don't think I can let ye have this with the zeny ye have. I can't lose me money because of ye.";
+			switch(select("Enriched Oridecon to HD Oridecon.:Enriched Elunium to HD Elunium.:No thanks.")) {
+			case 1:
+				setarray .@i[0],7620,2,6240;  //Enriched Oridecon -> HD Oridecon
+				break;
+			case 2:
+				setarray .@i[0],7619,2,6241;  //Enriched Elunium -> HD Elunium
+				break;
+			case 3:
+				mes "[^FF6600Flamering^000000]";
+				mes "Hmm...";
 				close;
 			}
-			if (checkweight(984,.@input) == 0) {
-				mes "[^FF6600Christopher^000000]";
-				mes "Me friend... Seems to me ye don't have Inventory space. Why doncha put some things into Kafra Storage first?";
+			if (countitem(.@i[0]) >= .@i[1] && Zeny >= 250000) {
+				delitem .@i[0],.@i[1];
+				Zeny = Zeny - 250000;
+				getitem .@i[2],1;
+				mes "[^FF6600Flamering^000000]";
+				mes "Ok! Here's your "+getitemname(.@i[2])+".";
+				mes "Take it and use it well.";
 				close;
 			}
-			getitem 984,.@input; // Elunium
-			Zeny = Zeny-.@sellx;
-			mes "[^FF6600Christopher^000000]";
-			mes "Thank ye fer shopping at me workshop. Feel free to come anytime, whenever ye need, whenever ye want.";
-			close;
+			mes "[^FF6600Flamering^000000]";
+			mes "You better not be trying";
+			mes "to cheat me because you";
+			mes "don't have enough money";
+			mes "or "+getitemname(.@i[0])+".";
+			close;		
 		case 3:
-			mes "[^FF6600Christopher^000000]";
-			mes "So, How many do ye wish to buy? If ye dont want anything, just type the number as '0.'";
-			next;
-			while(1) {
-				input .@input;
-				if (.@input == 0) {
-					mes "[^FF6600Christopher^000000]";
-					mes "Deal has";
-					mes "been canceled.";
-					mes "Fare ye well.";
-					close;
-				}
-				else if ((.@input < 0) || (.@input > 500)) {
-					mes "[^FF6600Christopher^000000]";
-					mes "Ye can buy 500, er less.";
-					next;
-				}
-				else {
-					break;
-				}
-			}
-			.@selly = .@input * 1000000;
-			if (Zeny < .@selly) {
-				mes "[^FF6600Christopher^000000]";
-				mes "Ye don't have enough money. Ye know I can't sell this at a lower price... You know how the wifey nags about Zeny.";
-				close;
-			}
-			if (checkweight(6240,.@input) == 0) {
-				mes "[^FF6600Christopher^000000]";
-				mes "Ye look like you don't have the room to carry anythin' new. Why don't ye put some things into Kafra Storage n' come back.";
-				close;
-			}
-			getitem 6240,.@input; // HD Oridecon
-			Zeny = Zeny-.@selly;
-			mes "[^FF6600Christopher^000000]";
-			mes "Thank ye fer shopping at me workshop. Feel free to come anytime, whenever ye need.";
-			close;
-		case 4:
-			mes "[^FF6600Christopher^000000]";
-			mes "So, how many do ye wish to buy? If ye dont want anything at all, just type the number as '0.'";
-			next;
-			while(1) {
-				input .@input;
-				if (.@input == 0) {
-					mes "[^FF6600Christopher^000000]";
-					mes "Deal has";
-					mes "been canceled.";
-					mes "Fare ye well.";
-					close;
-				}
-				else if ((.@input < 0) || (.@input > 500)) {
-					mes "[^FF6600Christopher^000000]";
-					mes "Ye can buy 500, er less.";
-					next;
-				}
-				else {
-					break;
-				}
-			}
-			.@selly = .@input * 1000000;
-			if (Zeny < .@selly) {
-				mes "[^FF6600Christopher^000000]";
-				mes "I don't think I can let ye have this with the zeny ye have. I can't lose me money because of ye.";
-				close;
-			}
-			if (checkweight(6241,.@input) == 0) {
-				mes "[^FF6600Christopher^000000]";
-				mes "Me friend... Seems to me ye don't have Inventory space. Why doncha put some things into Kafra Storage first?";
-				close;
-			}
-			getitem 984,.@input; // HD Elunium
-			Zeny = Zeny-.@selly;
-			mes "[^FF6600Christopher^000000]";
-			mes "Thank ye fer shopping at me workshop. Feel free to come anytime, whenever ye need, whenever ye want.";
-			close;
-		case 5:
-			mes "[^FF6600Christopher^000000]";
-			mes "So, How many do ye wish to buy? If ye dont want anything, just type the number as '0.'";
-			next;
-			while(1) {
-				input .@input;
-				if (.@input == 0) {
-					mes "[^FF6600Christopher^000000]";
-					mes "Deal has";
-					mes "been canceled.";
-					mes "Fare ye well.";
-					close;
-				}
-				else if ((.@input < 0) || (.@input > 500)) {
-					mes "[^FF6600Christopher^000000]";
-					mes "Ye can buy 500, er less.";
-					next;
-				}
-				else {
-					break;
-				}
-			}
-			.@selly = .@input * 1000000;
-			if (Zeny < .@selly) {
-				mes "[^FF6600Christopher^000000]";
-				mes "Ye don't have enough money. Ye know I can't sell this at a lower price... You know how the wifey nags about Zeny.";
-				close;
-			}
-			if (checkweight(7619,.@input) == 0) {
-				mes "[^FF6600Christopher^000000]";
-				mes "Ye look like you don't have the room to carry anythin' new. Why don't ye put some things into Kafra Storage n' come back.";
-				close;
-			}
-			getitem 7619,.@input; // Enriched Oridecon
-			Zeny = Zeny-.@selly;
-			mes "[^FF6600Christopher^000000]";
-			mes "Thank ye fer shopping at me workshop. Feel free to come anytime, whenever ye need.";
-			close;
-		case 6:
-			mes "[^FF6600Christopher^000000]";
-			mes "So, how many do ye wish to buy? If ye dont want anything at all, just type the number as '0.'";
-			next;
-			while(1) {
-				input .@input;
-				if (.@input == 0) {
-					mes "[^FF6600Christopher^000000]";
-					mes "Deal has";
-					mes "been canceled.";
-					mes "Fare ye well.";
-					close;
-				}
-				else if ((.@input < 0) || (.@input > 500)) {
-					mes "[^FF6600Christopher^000000]";
-					mes "Ye can buy 500, er less.";
-					next;
-				}
-				else {
-					break;
-				}
-			}
-			.@selly = .@input * 1000000;
-			if (Zeny < .@selly) {
-				mes "[^FF6600Christopher^000000]";
-				mes "I don't think I can let ye have this with the zeny ye have. I can't lose me money because of ye.";
-				close;
-			}
-			if (checkweight(7619,.@input) == 0) {
-				mes "[^FF6600Christopher^000000]";
-				mes "Me friend... Seems to me ye don't have Inventory space. Why doncha put some things into Kafra Storage first?";
-				close;
-			}
-			getitem 7619,.@input; // Enriched Elunium
-			Zeny = Zeny-.@selly;
-			mes "[^FF6600Christopher^000000]";
-			mes "Thank ye fer shopping at me workshop. Feel free to come anytime, whenever ye need, whenever ye want.";
-			close;			
-		case 7:
-			mes "[^FF6600Christopher^000000]";
+			mes "[^FF6600Flamering^000000]";
 			mes "Feel free to come anytime, whenever ye need. Fare ye well.";
 			close;
 		}		
 	case 3:
-		mes "[^FF6600Christopher^000000]";
+		mes "[^FF6600Flamering^000000]";
 		mes "Feel free to come anytime, whenever ye need and whenever ye want. Fare ye well.";
 		close;
 	}
