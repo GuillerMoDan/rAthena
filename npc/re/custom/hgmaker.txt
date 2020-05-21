@@ -159,7 +159,7 @@ OnInit:
 // Note: Do NOT use a reward item more than once!
 
 	Add(1,5305,1,1000000,0,2266,1,4073,1); // Pirate Dagger > Iron Cain , Pirate Skeleton Card
-	Add(1,18642,1,1000000,0,2262,1,4208,1); // Paperhand Str > Clown nose , Tarou Card
+	Add(1,18642,1,1000000,0,2262,1,4028,1); // Paperhand Str > Clown nose , Tarou Card
 	Add(1,18643,1,1000000,0,2262,1,4009,1); // Paperhand Agi > Clown nose , Chonchon card
 	Add(1,18644,1,1000000,0,2262,1,4001,1); // Paperhand Luk > Clown nose , Poring card
 	Add(1,18677,1,1000000,0,2269,1,4068,1); // Cherry Twig in Mouth > Romantic Flower , Scorpion Card

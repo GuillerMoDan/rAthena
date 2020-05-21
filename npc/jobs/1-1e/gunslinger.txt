@@ -183,11 +183,45 @@ que_ng,152,167,3	script	Master Miller	901,{
 			callfunc "Job_Change",Job_Gunslinger;
 			set GUNS_Q,6;
 			completequest 6024;
-			if (rand(1,2) == 1) {
-				getitem 13100,1; // Six_Shooter
-			} else {
-				getitem 13150,1; // Branch
-			}
+				getitem 13101,1; // Six_Shooter
+				getitem 13200,1; // Bullet
+			next;
+			mes "So, Which Town do you want to start at?";
+			mes "Remember, only izlude and alberta shops";
+			mes "that selling bullets";
+			next;
+			set .@select, select("Prontera:Morocc:Geffen:Payon:Alberta:Izlude");
+			mes "[Master Miller]";
+			mes "I see.";
+			mes "Go ahead and grow stronger! Look toward a brighter future ahead of you.";
+			callfunc "F_NvErase";
+			close2;
+			switch(.@select) {
+			case 1:
+				savepoint "prontera",273,354,1,1;
+				warp "prontera",273,354;
+				break;
+			case 2:
+				savepoint "morocc",160,94,1,1;
+				warp "morocc",160,94;
+				break;
+			case 3:
+				savepoint "geffen",120,100,1,1;
+				warp "geffen",120,100;
+				break;
+			case 4:
+				savepoint "payon",70,100,1,1;
+				warp "payon",70,100;
+				break;
+			case 5:
+				savepoint "alberta",116,57,1,1;
+				warp "alberta",116,57;
+				break;
+			case 6: // Old coordinates: (94,103)
+				savepoint "izlude",128,98,1,1;
+				warp "izlude",128,98;
+				break;
+			}	
 			close;
 		}
 	} else {
