@@ -115,61 +115,61 @@ prontera,147,166,5	script	Consumable Cat	10242,{
 
 //============================================================
 
-prontera,147,163,5	script	Battleground Cat	10242,{
-	mes "[^FF6600Battleground Cat^000000]";
-	mes "Welcome to ^000088BG Mall^000000.";
-	mes "Hello there ^FF0000" + strcharinfo(0) + "^000000.";
-	mes	"I'm selling many Weaponry and stuffs from battleground !";
-	mes "Please select what you want.";
-	next;
-	switch(select("Weaponry:Armory:Ration:Exit")) {
-	case 1:	switch(select("Dagger:1H-Sword:2H-Sword:Spear:Axe:Mace:Staff:Book:Katar:Knuckle:Bow:Whip:Instrument:Shuriken:Guns:Exit")) {
-	case 1: callshop "BDagger", 1; end;
-	case 2: callshop "B1H-Sword", 1; end;
-	case 3: callshop "B2H-Sword", 1; end;
-	case 4: callshop "BSpear", 1; end;
-	case 5: callshop "BAxe", 1; end;
-	case 6: callshop "BMace", 1; end;
-	case 7: callshop "BStaff", 1; end;
-	case 8: callshop "BBook", 1; end;
-	case 9: callshop "BKatar", 1; end;
-	case 10: callshop "BKnuckle", 1; end;
-	case 11: callshop "BBow", 1; end;
-	case 12: callshop "BWhip", 1; end;
-	case 13: callshop "BInstrument", 1; end;
-	case 14: callshop "BShuriken", 1; end;
-	case 15: callshop "BGuns", 1; end;
-	case 16: end;
-	}	
-	case 2: switch(select("Armor:Garment:Boots:Accesories:Exit")) {
-	case 1: callshop "BArmor", 1; end;
-	case 2: callshop "BGarment", 1; end;
-	case 3: callshop "BBoots", 1; end;
-	case 4: callshop "BAccesories", 1; end;
-	case 5: end;
-	}
-	case 3:  callshop "BRation", 1; end;
-	case 4:	end;
-	}
-}
-//shops
--	shop	BArmor	-1,2376:3200000:2377:3200000,2378:3200000,2379:3200000,2380:3200000,2381:3200000,2382:3200000,2396:1500000,2395:12000000,2394:84000000
--	shop	BGarment	-1,2538:3200000,2539:3200000,2540:3200000,2549:63000000
--	shop	BBoots	-1,2435:3200000,2436:3200000,2437:3200000,2446:1000000,2445:7000000,2444:83000000
--	shop	BAccesories	-1,2733:20000000,2720:20000000,2721:20000000,2722:20000000,2723:20000000,2724:20000000,2725:20000000,2774:3000000,2773:20000000,2772:120000000
--	shop	BDagger	-1,13036:5000000,13037:5000000,13042:200000000
--	shop	B1H-Sword	-1,13411:5000000,13410:5000000,13417:200000000,13418:200000000,13416:200000000
--	shop	B2H-Sword	-1,1183:5000000,1184:5000000,1187:200000000
--	shop	BSpear	-1,1425:5000000,1482:5000000,1486:200000000,1426:200000000
--	shop	BAxe	-1,1380:5000000,1379:5000000,1382:200000000,1310:200000000
--	shop	BMace	-1,1543:5000000,1542:5000000,1546:200000000
--	shop	BStaff	-1,1632:5000000,1633:5000000,1634:5000000,1635:5000000,1641:200000000,1640:200000000,2002:200000000
--	shop	BBook	-1,1574:5000000,1575:5000000,1577:200000000,1576:200000000
--	shop	BKatar	-1,1279:5000000,1280:5000000,1282:200000000,1281:200000000
--	shop	BKnuckle	-1,1824:5000000,1823:50000000,1827:200000000,1826:200000000
--	shop	BBow	-1,1739:5000000,1738:5000000,1743:200000000
--	shop	BWhip	-1,1978:5000000,1977:5000000,1981:200000000
--	shop	BInstrument	-1,1924:5000000,1923:5000000,1927:200000000
--	shop	BShuriken	-1,13305:5000000,13306:5000000,13307:200000000
--	shop	BGuns	-1,13108:5000000,13171:5000000,13172:5000000,13173:5000000,13174:5000000,13110:200000000,13176:200000000,13177:200000000,13178:200000000,13179:200000000
--	shop	BRation	-1,12269:25000,12270:25000,12271:25000,12272:25000,12273:25000
+//prontera,147,163,5	script	Battleground Cat	10242,{
+//	mes "[^FF6600Battleground Cat^000000]";
+//	mes "Welcome to ^000088BG Mall^000000.";
+//	mes "Hello there ^FF0000" + strcharinfo(0) + "^000000.";
+//	mes	"I'm selling many Weaponry and stuffs from battleground !";
+//	mes "Please select what you want.";
+//	next;
+//	switch(select("Weaponry:Armory:Ration:Exit")) {
+//	case 1:	switch(select("Dagger:1H-Sword:2H-Sword:Spear:Axe:Mace:Staff:Book:Katar:Knuckle:Bow:Whip:Instrument:Shuriken:Guns:Exit")) {
+//	case 1: callshop "BDagger", 1; end;
+//	case 2: callshop "B1H-Sword", 1; end;
+//	case 3: callshop "B2H-Sword", 1; end;
+//	case 4: callshop "BSpear", 1; end;
+//	case 5: callshop "BAxe", 1; end;
+//	case 6: callshop "BMace", 1; end;
+//	case 7: callshop "BStaff", 1; end;
+//	case 8: callshop "BBook", 1; end;
+//	case 9: callshop "BKatar", 1; end;
+//	case 10: callshop "BKnuckle", 1; end;
+//	case 11: callshop "BBow", 1; end;
+//	case 12: callshop "BWhip", 1; end;
+//	case 13: callshop "BInstrument", 1; end;
+//	case 14: callshop "BShuriken", 1; end;
+//	case 15: callshop "BGuns", 1; end;
+//	case 16: end;
+//	}	
+//	case 2: switch(select("Armor:Garment:Boots:Accesories:Exit")) {
+//	case 1: callshop "BArmor", 1; end;
+//	case 2: callshop "BGarment", 1; end;
+//	case 3: callshop "BBoots", 1; end;
+//	case 4: callshop "BAccesories", 1; end;
+//	case 5: end;
+//	}
+//	case 3:  callshop "BRation", 1; end;
+//	case 4:	end;
+//	}
+//}
+////shops
+//-	shop	BArmor	-1,2376:3200000:2377:3200000,2378:3200000,2379:3200000,2380:3200000,2381:3200000,2382:3200000,2396:1500000,2395:12000000,2394:84000000
+//-	shop	BGarment	-1,2538:3200000,2539:3200000,2540:3200000,2549:63000000
+//-	shop	BBoots	-1,2435:3200000,2436:3200000,2437:3200000,2446:1000000,2445:7000000,2444:83000000
+//-	shop	BAccesories	//-1,2733:20000000,2720:20000000,2721:20000000,2722:20000000,2723:20000000,2724:20000000,2725:20000000,2774:3000000,2773:20000000,2772:120000000
+//-	shop	BDagger	//-1,13036:5000000,13037:5000000,13042:200000000
+//-	shop	B1H//-Sword	//-1,13411:5000000,13410:5000000,13417:200000000,13418:200000000,13416:200000000
+//-	shop	B2H//-Sword	//-1,1183:5000000,1184:5000000,1187:200000000
+//-	shop	BSpear	//-1,1425:5000000,1482:5000000,1486:200000000,1426:200000000
+//-	shop	BAxe	//-1,1380:5000000,1379:5000000,1382:200000000,1310:200000000
+//-	shop	BMace	//-1,1543:5000000,1542:5000000,1546:200000000
+//-	shop	BStaff	//-1,1632:5000000,1633:5000000,1634:5000000,1635:5000000,1641:200000000,1640:200000000,2002:200000000
+//-	shop	BBook	//-1,1574:5000000,1575:5000000,1577:200000000,1576:200000000
+//-	shop	BKatar	//-1,1279:5000000,1280:5000000,1282:200000000,1281:200000000
+//-	shop	BKnuckle	//-1,1824:5000000,1823:50000000,1827:200000000,1826:200000000
+//-	shop	BBow	//-1,1739:5000000,1738:5000000,1743:200000000
+//-	shop	BWhip	//-1,1978:5000000,1977:5000000,1981:200000000
+//-	shop	BInstrument	//-1,1924:5000000,1923:5000000,1927:200000000
+//-	shop	BShuriken	//-1,13305:5000000,13306:5000000,13307:200000000
+//-	shop	BGuns	//-1,13108:5000000,13171:5000000,13172:5000000,13173:5000000,13174:5000000,13110:200000000,13176:200000000,13177:200000000,13178:200000000,13179:200000000
+//-	shop	BRation	//-1,12269:25000,12270:25000,12271:25000,12272:25000,12273:25000

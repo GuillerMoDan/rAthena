@@ -342,37 +342,19 @@ que_ng,30,65,3	script	Kuuga Gai#nq	730,{
 			next;
 			mes "So, Which Town do you want to start at?";
 			next;
-			set .@select, select("Prontera:Morocc:Geffen:Payon:Alberta:Izlude");
+			mes "Do you want to me to warp you to izlude ?";
+			next;
+			set .@select, select("Warp me to izlude.:No i'm fine here.");
 			mes "[Kuuga Gai]";
 			mes "I see.";
 			mes "Go ahead and grow stronger! Look toward a brighter future ahead of you.";
-			callfunc "F_NvErase";
 			close2;
 			switch(.@select) {
-			case 1:
-				savepoint "prontera",273,354,1,1;
-				warp "prontera",273,354;
-				break;
-			case 2:
-				savepoint "morocc",160,94,1,1;
-				warp "morocc",160,94;
-				break;
-			case 3:
-				savepoint "geffen",120,100,1,1;
-				warp "geffen",120,100;
-				break;
-			case 4:
-				savepoint "payon",70,100,1,1;
-				warp "payon",70,100;
-				break;
-			case 5:
-				savepoint "alberta",116,57,1,1;
-				warp "alberta",116,57;
-				break;
-			case 6: // Old coordinates: (94,103)
+			case 1: // Old coordinates: (94,103)
 				savepoint "izlude",128,98,1,1;
 				warp "izlude",128,98;
 				break;
+			case 2: close;
 			}				
 			close;
 		}

@@ -2,7 +2,7 @@
 //= Euphy's Quest Shop
 //===== By: ==================================================
 //= Euphy
-//===== Update UPG Creator By: ==================================================
+//===== Update HG-Upgrader By: ==================================================
 //= Boy
 //===== Current Version: =====================================
 //= 1.4a
@@ -14,25 +14,26 @@
 //= Item Preview script by ToastOfDoom.
 //============================================================
 					
-prontera,181,215,3	script	UPG Creator	900,{
+prontera,146,232,5	script	HG-Upgrader	763,{
 function Add; function Chk; function Slot; function A_An;
 if (checkweight(21016,1) == 0) {
-	mes "[^FF6600Saladin^000000]";
+	mes "[^FF6600Reno^000000]";
     mes "You're carrying too much stuffs , make some space and come back to me later";
         close;	
 	}
-	mes "[^FF6600Saladin^000000]";
-	mes "Psst, kid.";
-	mes "Do you want me to forge you an UPG weaponry/armory.?";
+	mes "[^FF6600Reno^000000]";
+	mes "Hello, I am Reno.";
+	mes "I can upgrade famous gears from 2012 for you.";
+	mes "Do you want to see the list ?";
 	next;
 	switch( select( "Yes.:No." ) ) {
 case 1: 		
-	mes "[^FF6600Saladin^000000]";
-	mes "Remember, i only use slotted equipment as material.";
+	mes "[^FF6600Reno^000000]";
+	mes "Here's the list.";
 	break; 
 case 2: 	
-	mes "[^FF6600Saladin^000000]";
-    mes "K dude.";
+	mes "[^FF6600Reno^000000]";
+    mes "Okay, see you again.";
    	close;
 }
 	if(.Shops$ != "") set .@i,1;
@@ -42,8 +43,8 @@ case 2:
 			set .@menu$, .@menu$+.Shops$[.@i]+":";
 		set .@i, select(.@menu$); }
 		mes "^0055FFSelect one item at a time.^000000";
-	callshop "hatmaker"+.@i,1;
-	npcshopattach "hatmaker"+.@i;
+	callshop "hgupgrader"+.@i,1;
+	npcshopattach "hgupgrader"+.@i;
 	end;
 
 function Add {
@@ -55,7 +56,7 @@ function Add {
 			debugmes "Quest requirement #"+getarg(.@n)+" invalid (skipped) on Quest ItemID "+ getarg(1) +"."; return; } }
 	for(set .@i,2; .@i<.@n; set .@i,.@i+1)
 		set getd(".q_"+getarg(1)+"["+(.@i-2)+"]"), getarg(.@i);
-	npcshopadditem "hatmaker"+getarg(0),getarg(1),((.ShowZeny)?getarg(3):0);
+	npcshopadditem "hgupgrader"+getarg(0),getarg(1),((.ShowZeny)?getarg(3):0);
 	return; }
 function Chk {
 	if (getarg(0)<getarg(1)) { set @qe0,1; return "^FF0000"; }
@@ -77,7 +78,7 @@ OnBuyItem:
 	set .@q[0],@bought_nameid;
 	copyarray .@q[1],getd(".q_"+@bought_nameid+"[0]"),getarraysize(getd(".q_"+@bought_nameid+"[0]"));
 	if (!.@q[1]) { message strcharinfo(0),"An error has occurred."; end; }
-	mes "[^FF6600Saladin^000000]";
+	mes "[^FF6600Reno^000000]";
 	mes "Your Choice: ^0055FF"+((.@q[1]>1)?.@q[1]+"x ":"")+Slot(.@q[0])+"^000000";
 	mes	"Estimated chance: ^FF660010%^000000 ";
 	mes "Requirements:";
@@ -89,14 +90,14 @@ OnBuyItem:
 	set @qe1, getiteminfo(.@q[0],5); set @qe2, getiteminfo(.@q[0],11);
 	addtimer 1000, strnpcinfo(1)+"::OnEnd";
 	while(1){
-		switch(select(" ~ Purchase ^0055FF"+getitemname(.@q[0])+"^000000:"+((((@qe1&1) || (@qe1&256) || (@qe1&512)) && @qe2>0 && !@qe6)?" ~ Preview...":"")+": ~ ^777777Cancel^000000")) {
+		switch(select(" ~ Purchase ^0055FF"+getitemname(.@q[0])+"^000000:"+((((@qe1&1) || (@qe1&256) || (@qe1&512) || (@qe1&1024) || (@qe1&2048) || (@qe1&4096)) && @qe2>0 && !@qe6)?" ~ Preview...":"")+": ~ ^777777Cancel^000000")) {
 			case 1:
 				if (@qe0) { 
-					mes "[^FF6600Saladin^000000]";
+					mes "[^FF6600Reno^000000]";
 					mes "You're missing one or more quest requirements.";
 					close; }
 				if (!checkweight(.@q[0],.@q[1])) {
-					mes "[^FF6600Saladin^000000]";
+					mes "[^FF6600Reno^000000]";
 					mes "^FF0000You need "+(((.@q[1]*getiteminfo(.@q[0],6))+Weight-MaxWeight)/10)+" additional weight capacity to complete this trade.^000000";
 					close; }
 				if (.@q[2]) set Zeny, Zeny-.@q[2];
@@ -107,22 +108,28 @@ OnBuyItem:
 				if (.Announce) announce strcharinfo(0)+" has created "+A_An(getitemname(.@q[0]))+"!",0;
 				getitem .@q[0],.@q[1];
 				specialeffect2 699;
-					mes "[^FF6600Saladin^000000]";
+					mes "[^FF6600Reno^000000]";
 					mes "Woah, you did it.";
 					mes "Congratulation !.";
 					close;				
 			} 
 			else {
 					specialeffect EF_SUI_EXPLOSION;
-					mes "[^FF6600Saladin^000000]";
-					mes "Holy shit, it's exploded LOL.";
-					mes "RIP money brah.";
+					mes "[^FF6600Reno^000000]";
+					mes "Woah, exploded like a firecracker.";
+					mes "hahahahahaha.";
 					close; 
 			}			
 			case 2:
-					mes "[^FF6600Saladin^000000]";
-					mes "I'm the gear maker.";
-					close; 
+				set @qe3, getlook(3); set @qe4, getlook(4); set @qe5, getlook(5);
+				if (@qe1&1) atcommand "@changelook 3 "+@qe2;
+				if (@qe1&256) atcommand "@changelook 1 "+@qe2;
+				if (@qe1&512) atcommand "@changelook 2 "+@qe2;
+				if (@qe1&1024) atcommand "@changelook 1 "+@qe2;
+				if (@qe1&2048) atcommand "@changelook 1 "+@qe2;
+				if (@qe1&4096) atcommand "@changelook 1 "+@qe2;
+				set @qe6,1;
+				break; 
 			case 3:
 				close; } }
 OnEnd:
@@ -143,7 +150,7 @@ OnInit:
 // Duplicate dummy data for any additional shops (bottom of script).
 // If no categories, use the second line instead (remove //).
 
-	setarray .Shops$[1],"Preview UPG armor";
+	setarray .Shops$[1],"Headgear Preview";
 	// set .Shops$,"n/a";
 
 // Add(<shop number>,<reward ID>,<reward amount>,<Zeny cost>,<point cost>,
@@ -151,29 +158,38 @@ OnInit:
 // Shop number corresponds with order above (default is 1).
 // Note: Do NOT use a reward item more than once!
 
-	Add(1,15015,1,500000,0,2306,1,969,1,984,10,985,10);
-	Add(1,15016,1,500000,0,2310,1,969,1,984,10,985,10);
-	Add(1,15020,1,500000,0,2315,1,969,1,984,10,985,10);
-	Add(1,15017,1,500000,0,2326,1,969,1,984,10,985,10);
-	Add(1,15019,1,500000,0,2336,1,969,1,984,10,985,10);
-	Add(1,15018,1,500000,0,2331,1,969,1,984,10,985,10);
-	Add(1,2561,1,500000,0,2502,1,969,1,984,10,985,10);
-	Add(1,2562,1,500000,0,2504,1,969,1,984,10,985,10);
-	Add(1,2563,1,500000,0,2506,1,969,1,984,10,985,10);
+	Add(1,18760,1,2000000,0,5027,1,985,3);
+	Add(1,18761,1,2000000,0,5045,1,985,3);
+	Add(1,18762,1,2000000,0,5069,1,985,3);
+	Add(1,18763,1,2000000,0,5003,1,985,3);
+	Add(1,18764,1,2000000,0,2214,1,985,3);
+	Add(1,18769,1,2000000,0,5167,1,985,3);
+	Add(1,18770,1,2000000,0,5168,1,985,3);
+	Add(1,18771,1,2000000,0,5043,1,985,3);
+	Add(1,18772,1,2500000,0,2296,1,985,4);
 	sleep 10;
-	Add(1,2150,1,500000,0,2104,1,969,1,984,10,985,10);
-	Add(1,2149,1,500000,0,2502,1,969,1,984,10,985,10);
-	Add(1,2459,1,500000,0,2404,1,969,1,984,10,985,10);
-	Add(1,2460,1,500000,0,2406,1,969,1,984,10,985,10);
-	Add(1,2461,1,500000,0,2412,1,969,1,984,10,985,10);
-	Add(1,2828,1,300000,0,2607,1,969,2,984,5,985,5);
-
+	Add(1,18773,1,2500000,0,5014,1,985,4);
+	Add(1,18774,1,2500000,0,5096,1,985,4);
+	Add(1,18775,1,2500000,0,2292,1,985,4);
+	Add(1,2956,1,2500000,0,2615,1,2621,1,2624,1,2622,1,2625,1,2623,1,2626,1,985,4);
+	Add(1,2183,1,3000000,0,2116,1,985,5);
+	Add(1,22015,1,3000000,0,2420,1,985,5);
+	Add(1,18776,1,3000000,0,5125,1,985,5);
+	Add(1,20710,1,3000000,0,2521,1,985,5);
+	Add(1,18765,1,3500000,0,5019,1,985,5);
+	sleep 10;
+	Add(1,18768,1,3500000,0,5162,1,985,5);
+	Add(1,18766,1,3500000,0,5025,1,985,5);
+	Add(1,18767,1,3500000,0,5022,1,985,5);
+	Add(1,22014,1,3500000,0,2423,1,985,5);
+	Add(1,2957,1,3500000,0,2678,1,985,5);
+	Add(1,2958,1,3500000,0,2679,1,985,5);
 
 // --------------------------------------------------
 	for(set .@i,1; .@i<=getarraysize(.Shops$); set .@i,.@i+1)
-		npcshopdelitem "hatmaker"+.@i,909;
+		npcshopdelitem "hgupgrader"+.@i,909;
 	end;
 }
 
 // -------- Dummy data (duplicate as needed) --------
--	shop	hatmaker1	-1,909:-1
+-	shop	hgupgrader1	-1,909:-1

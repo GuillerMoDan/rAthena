@@ -17,22 +17,22 @@
 prontera,143,229,5	script	HG-Maker	762,{
 function Add; function Chk; function Slot; function A_An;
 if (checkweight(21016,1) == 0) {
-	mes "[^FF6600HG-Maker^000000]";
+	mes "[^FF6600Sakata^000000]";
     mes "You're carrying too much stuffs , make some space and come back to me later";
         close;	
 	}
-	mes "[^FF6600HG-Maker^000000]";
+	mes "[^FF6600Sakata^000000]";
 	mes "Hello, I am Sakata.";
 	mes "I can make nice headgears for you.";
 	mes "Do you want to see the list ?";
 	next;
 	switch( select( "Yes.:No." ) ) {
 case 1: 		
-	mes "[^FF6600HG-Maker^000000]";
+	mes "[^FF6600Sakata^000000]";
 	mes "Here's the list.";
 	break; 
 case 2: 	
-	mes "[^FF6600HG-Maker^000000]";
+	mes "[^FF6600Sakata^000000]";
     mes "Okay, see you again.";
    	close;
 }
@@ -78,9 +78,9 @@ OnBuyItem:
 	set .@q[0],@bought_nameid;
 	copyarray .@q[1],getd(".q_"+@bought_nameid+"[0]"),getarraysize(getd(".q_"+@bought_nameid+"[0]"));
 	if (!.@q[1]) { message strcharinfo(0),"An error has occurred."; end; }
-	mes "[^FF6600HG-Maker^000000]";
+	mes "[^FF6600Sakata^000000]";
 	mes "Your Choice: ^0055FF"+((.@q[1]>1)?.@q[1]+"x ":"")+Slot(.@q[0])+"^000000";
-	mes	"Estimated chance: ^FF660010%^000000 ";
+	mes	"Estimated chance: ^FF660020%^000000 ";
 	mes "Requirements:";
 	if (.@q[2]) mes " > "+Chk(Zeny,.@q[2])+.@q[2]+" Zeny^000000";
 	if (.@q[3]) mes " > "+Chk(getd(.Points$[0]),.@q[3])+.@q[3]+" "+.Points$[1]+" ("+getd(.Points$[0])+"/"+.@q[3]+")^000000";
@@ -93,29 +93,29 @@ OnBuyItem:
 		switch(select(" ~ Purchase ^0055FF"+getitemname(.@q[0])+"^000000:"+((((@qe1&1) || (@qe1&256) || (@qe1&512) || (@qe1&1024) || (@qe1&2048) || (@qe1&4096)) && @qe2>0 && !@qe6)?" ~ Preview...":"")+": ~ ^777777Cancel^000000")) {
 			case 1:
 				if (@qe0) { 
-					mes "[^FF6600HG-Maker^000000]";
+					mes "[^FF6600Sakata^000000]";
 					mes "You're missing one or more quest requirements.";
 					close; }
 				if (!checkweight(.@q[0],.@q[1])) {
-					mes "[^FF6600HG-Maker^000000]";
+					mes "[^FF6600Sakata^000000]";
 					mes "^FF0000You need "+(((.@q[1]*getiteminfo(.@q[0],6))+Weight-MaxWeight)/10)+" additional weight capacity to complete this trade.^000000";
 					close; }
 				if (.@q[2]) set Zeny, Zeny-.@q[2];
 				if (.@q[3]) setd .Points$[0], getd(.Points$[0])-.@q[3];
 				if (.@q[4]) for(set .@i,4; .@i<getarraysize(.@q); set .@i,.@i+2)
 					delitem .@q[.@i],.@q[.@i+1];
-			if (rand(1,10) == 1) {
+			if (rand(1,5) == 1) {
 				if (.Announce) announce strcharinfo(0)+" has created "+A_An(getitemname(.@q[0]))+"!",0;
 				getitem .@q[0],.@q[1];
 				specialeffect2 699;
-					mes "[^FF6600HG-Maker^000000]";
+					mes "[^FF6600Sakata^000000]";
 					mes "Woah, you did it.";
 					mes "Congratulation !.";
 					close;				
 			} 
 			else {
 					specialeffect EF_SUI_EXPLOSION;
-					mes "[^FF6600HG-Maker^000000]";
+					mes "[^FF6600Sakata^000000]";
 					mes "Woah, exploded like a firecracker.";
 					mes "hahahahahaha.";
 					close; 
@@ -143,7 +143,7 @@ OnInit:
 
 	set .Announce,1;	// Announce quest completion? (1: yes / 0: no)
 	set .ShowSlot,2;	// Show item slots? (2: all equipment / 1: if slots > 0 / 0: never)
-	set .DisplayID,0;	// Show item IDs? (1: yes / 0: no)
+	set .DisplayID,1;	// Show item IDs? (1: yes / 0: no)
 	set .ShowZeny,1;	// Show Zeny cost, if any? (1: yes / 0: no)
 
 // Shop categories, if needed: "<Shop 1>","<Shop 2>"{,...};
