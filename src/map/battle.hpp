@@ -674,6 +674,7 @@ struct Battle_Config
 	int hom_idle_no_share;
 	int devotion_standup_fix;
 	int feature_bgqueue;
+	int bgqueue_nowarp_mapflag;
 	int homunculus_exp_gain;
 	int rental_item_novalue;
 
