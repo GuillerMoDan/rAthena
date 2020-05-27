@@ -2171,11 +2171,14 @@ iz_ac01,100,39,5	script	Academy Receptionist#1	4_F_01,{
 				mes "You can choose the course freely and each course has individual features.";
 				next;
 				mes "[Receptionist]";
-				mes "And this is the the potions for the educational course.";
+				mes "And this is the the potions and basic equipment for the educational course.";
 				mes "Please make a good use of it.";
 				mes "Be careful with it as it won't be provided again.";
 				setquest 4269;
 				completequest 4269;
+				getitem 2501,1; //Hood
+				getitem 2401,1; //Sandal
+				getitem 569,100; //Novice_Potion
 				getitem 6593,1;// Criatura_Hair_Coupon
 				getitem 569,500;// Novice_Potion
 				next;
