@@ -726,7 +726,7 @@ if( countitem( 988 )) >=1 {
 	next;
 	switch( select( "Yes.:No." ) ) {
 		case 1:
-		Zeny = Zeny - .forgeprice;
+		Zeny = Zeny - .forgeprice1;
 		mes "[^FF6600Katanakaji^000000]";
 		mes "Give me a second ..";		
 		progressbar "ffff00",.Wait;		

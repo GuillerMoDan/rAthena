@@ -166,7 +166,7 @@ moc_prydb1,42,133,2	script	Thief Guildsman#thief	118,{
 		mes "'For those who are ready, the moonlight shall open the way. Now you are fully ready, I now officially allow you to become a member of the Thief Guild.'";
 		callfunc "Job_Change",Job_Thief;
 		set q_job_thief,0;
-		getitem 1206,1;
+		getitem 13041,1;	// N_Main_Gauche
 		next;
 		mes "[Commander of Thief Guild]";
 		mes "'Congratulations on becoming a Thief.'";
@@ -181,21 +181,6 @@ moc_prydb1,42,133,2	script	Thief Guildsman#thief	118,{
 		next;
 		mes "[Brad]";
 		mes "Okay, I've done what I can do to you, so go on your way. I'm quite a busy man.";
-			next;
-			mes "Do you want to me to warp you to izlude ?";
-			next;
-			set .@select, select("Warp me to izlude.:No i'm fine here.");
-			mes "[Brad]";
-			mes "I see.";
-			mes "Go ahead and grow stronger! Look toward a brighter future ahead of you.";
-			close2;
-			switch(.@select) {
-			case 1: // Old coordinates: (94,103)
-				savepoint "izlude",128,98,1,1;
-				warp "izlude",128,98;
-				break;
-			case 2: close;
-			}					
 		mes "See you again.";
 		close;
 	}

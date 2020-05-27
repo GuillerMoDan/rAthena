@@ -87,25 +87,10 @@ prt_church,184,41,4	script	Cleric#aco	60,{
 			mes "[Father Mareusis]";
 			mes "Always remember to be thankful to God, who takes care of us all the time. In chaos and times of difficulty, face your hardships with unwavering faith.";
 			callfunc "Job_Change",Job_Acolyte;
-			getitem 1506,1;
+			getitem 1545,1;	// N_Mace
 			next;
 			mes "[Father Mareusis]";
 			mes "Lastly, I want to sincerely congratulate you on persevering through your trial of penance.";
-			next;
-			mes "Do you want to me to warp you to izlude ?";
-			next;
-			set .@select, select("Warp me to izlude.:No i'm fine here.");
-			mes "[Father Mareusis]";
-			mes "I see.";
-			mes "Go ahead and grow stronger! Look toward a brighter future ahead of you.";
-			close2;
-			switch(.@select) {
-			case 1: // Old coordinates: (94,103)
-				savepoint "izlude",128,98,1,1;
-				warp "izlude",128,98;
-				break;
-			case 2: close;
-			}			
 			close;
 		}
 	case 2:

@@ -16,13 +16,13 @@
 //= v1.1 - Fixed a couple of things [Mysterious]
 //= v1.2 - Proper disclaimer [Mysterious]
 //============================================================
-prontera,164,167,3	script	Seiken	953,{
+prontera,164,167,3	script	Zekken	953,{
 
 // ============= Configuration Settings ==================
 // Based on following forge success-rate formula:
 // ( 5 * Skill Level ) + ( Job Level / 5 ) + ( DEX / 10 ) + ( LUK / 10 ) + 50.
 	set .ForgeSkLvl, 3; // Level of Forge Skill ( Forge Sword, Forge Mace, etc ). Recommended: 3 max.
-	set .JLvl, 70; // Job level of Seiken NPC.Recommended: 70 max.
+	set .JLvl, 70; // Job level of Zekken NPC.Recommended: 70 max.
 	set .ForDex, 99; // The dexterity stat of the Forge NPC. Recommended: 99 max.
 	set .ForLuk, 99; // The luck stat of the Forge NPC.Recommended: 99 max.
 	set .AnvMod, 10; // Anvil chance mods, e.g. 0 = Normal Anvil, 3 = Oridecon Anvil, 5 = Golden Anvil, 10 = Emperium Anvil. Recommended: 10 max.
@@ -46,45 +46,34 @@ prontera,164,167,3	script	Seiken	953,{
 	set .Wait,3;		// Progress bar delay in seconds	
 // ============== End Configurations ================	
 if (checkweight(21016,1) == 0) {
-	mes "[^FF6600Seiken^000000]";
+	mes "[^FF6600Zekken^000000]";
     mes "You're carrying too much stuffs , make some space and come back to me later";
         close;	
 	}
 if ( countitem( 989 ) <=0) {
-	mes "[^FF6600Seiken^000000]";
+	mes "[^FF6600Zekken^000000]";
     mes "Hi,you wanna buy ^993300Emperium Anvil^000000 ? ";
 	mes "It's only ^33CC00600.000^000000 Zeny";
     mes "If you have the ^99330EEmperium Anvil^000000";
 	mes "I can forge things for you";
 	next;
-	mes "[^FF6600Seiken^000000]";
+	mes "[^FF6600Zekken^000000]";
     mes "How's it ? ";
 	mes "Interested ?";	
 	next;
 	switch( select( "Yes I'll buy it.:Cancel." ) ) {
-	case 1:
-	.@sell = 600000;
-			if (Zeny < .@sell) {
-				mes "[^FF6600Seiken^000000]";
-				mes "Ye don't have enough money..";
-				mes "Come back to me when you have enough";
-				close;
-			}
-			getitem 989,1; // Emperium Anvil
-			Zeny = Zeny-.@sell;
-			mes "[^FF6600Seiken^000000]";
-			mes "Thank you for buying the anvil !.";
-			mes "Next time you come here, i'll forge for you !.";
-			close;			
+	case 1: 
+	callshop "Zekken1", 1; end;
+			
 	case 2:
-			mes "[^FF6600Seiken^000000]";
+			mes "[^FF6600Zekken^000000]";
 			mes "Too bad then";
 			mes "Come back to me if you've changed your mind";
 				close;
 	}	
 }	
 if( countitem( 989 )) >=1 {
-	mes "[^FF6600Seiken^000000]";
+	mes "[^FF6600Zekken^000000]";
 	mes "I see that you have emperium anvil.";
 	mes "Would you like me to forge you a weapon?";
 	next;
@@ -93,7 +82,7 @@ if( countitem( 989 )) >=1 {
 			break;
 		case 2: // Forge Information
 			next;
-			mes "[^FF6600Seiken^000000]";
+			mes "[^FF6600Zekken^000000]";
 			mes "What weapons would you like to know about?";
 			next;
 			switch( select( "Daggers.:1H Swords.:2H Swords.:Maces.:Spears.:Knuckles.:Axes.:Nothing." ) ) {
@@ -143,19 +132,19 @@ if( countitem( 989 )) >=1 {
 				close;
 			}
 		case 3: // Craft Material
-				mes "[^FF6600Seiken^000000]";
+				mes "[^FF6600Zekken^000000]";
 				mes "Oh you wanna craft some materials eh ?";
 				mes "Which one ?";
 				next;
 				switch( select( "Iron (10).:Steel.:Forging Stone.:Cancel." ) ) {
 						case 1:
 						if( countitem( 1002 ) < 10 ) {
-						mes "[^FF6600Seiken^000000]";
+						mes "[^FF6600Zekken^000000]";
 						mes "Bring me 10 Iron Ore.";
 						mes "I'll be waiting.";
 						close;
 						}
-						mes "[^FF6600Seiken^000000]";
+						mes "[^FF6600Zekken^000000]";
 						mes "This will cost you 10 iron ore";
 						mes "With ^FF0000" + .IronChance + "^000000% chance.";
 						mes "Would you like me to craft it for you ?";
@@ -166,30 +155,30 @@ if( countitem( 989 )) >=1 {
 							progressbar "ffff00",.Wait;
 							if( .IronChance >= rand( 100 ) ) {	
 							getitem 998,10;
-							mes "[^FF6600Seiken^000000]";
+							mes "[^FF6600Zekken^000000]";
 							mes "Here you Go.";
 							close;
 							}
 								else {
 								specialeffect 155;
 								next;
-								mes "[^FF6600Seiken^000000]";
+								mes "[^FF6600Zekken^000000]";
 								mes "I am very sorry, item creation has ^FF0000failed^000000. Better luck next time.";
 								close;
 							}
 							case 2:
-							mes "[^FF6600Seiken^000000]";
+							mes "[^FF6600Zekken^000000]";
 							mes "Oh, Come back here if you've changed your mind";
 							close;
 							}
 						case 2:
 						if( countitem( 998 ) < 5 && countitem(1003) < 1 ) {
-						mes "[^FF6600Seiken^000000]";
+						mes "[^FF6600Zekken^000000]";
 						mes "Bring me 5 Iron and 1 Coal.";
 						mes "I'll be waiting.";
 						close;
 						}
-						mes "[^FF6600Seiken^000000]";
+						mes "[^FF6600Zekken^000000]";
 						mes "This will cost you 5 Iron and 1 Coal";
 						mes "With ^FF0000" + .SteelChance + "^000000% chance.";
 						mes "Would you like me to craft it for you ?";
@@ -201,36 +190,36 @@ if( countitem( 989 )) >=1 {
 							progressbar "ffff00",.Wait;
 							if( .SteelChance >= rand( 100 ) ) {
 							getitem 999,10;
-							mes "[^FF6600Seiken^000000]";
+							mes "[^FF6600Zekken^000000]";
 							mes "Here you Go.";
 							close;
 							}
 							else {
 							specialeffect 155;
 							next;
-							mes "[^FF6600Seiken^000000]";
+							mes "[^FF6600Zekken^000000]";
 							mes "I am very sorry, item creation has ^FF0000failed^000000. Better luck next time.";
 							close;
 							}
 							case 2:
-							mes "[^FF6600Seiken^000000]";
+							mes "[^FF6600Zekken^000000]";
 							mes "Oh, Come back here if you've changed your mind";
 							close;
 							}
 						case 3:	
-						mes "[^FF6600Seiken^000000]";
+						mes "[^FF6600Zekken^000000]";
 						mes "Forging Stone eh ?";
 						mes "Which one ?";
 						next;
 						switch( select( "Flame Heart.:Mystic Frozen.:Rough Wind.:Great Nature.:Star Crumb.:Cancel." ) ) {
 							case 1:
 								if( countitem( 990 ) < 10 ) {
-								mes "[^FF6600Seiken^000000]";
+								mes "[^FF6600Zekken^000000]";
 								mes "Bring me 10 Red Blood.";
 								mes "I'll be waiting.";
 								close;
 								}
-								mes "[^FF6600Seiken^000000]";
+								mes "[^FF6600Zekken^000000]";
 								mes "This will cost you 10 Red Blood";
 								mes "With ^FF0000" + .StoneChance + "^000000% chance.";
 								mes "Would you like me to craft it for you ?";
@@ -241,30 +230,30 @@ if( countitem( 989 )) >=1 {
 										progressbar "ffff00",.Wait;
 										if( .StoneChance >= rand( 100 ) ) {	
 										getitem 998,1;
-										mes "[^FF6600Seiken^000000]";
+										mes "[^FF6600Zekken^000000]";
 										mes "Here you Go.";
 										close;
 										}
 									else {
 										specialeffect 155;
 										next;
-										mes "[^FF6600Seiken^000000]";
+										mes "[^FF6600Zekken^000000]";
 										mes "I am very sorry, item creation has ^FF0000failed^000000. Better luck next time.";
 										close;
 										}
 									case 2:
-										mes "[^FF6600Seiken^000000]";
+										mes "[^FF6600Zekken^000000]";
 										mes "Oh, Come back here if you've changed your mind";
 										close;
 										}
 							case 2:
 								if( countitem( 991 ) < 10 ) {
-								mes "[^FF6600Seiken^000000]";
+								mes "[^FF6600Zekken^000000]";
 								mes "Bring me 10 Crystal Blue.";
 								mes "I'll be waiting.";
 								close;
 								}
-								mes "[^FF6600Seiken^000000]";
+								mes "[^FF6600Zekken^000000]";
 								mes "This will cost you 10 Crystal Blue";
 								mes "With ^FF0000" + .StoneChance + "^000000% chance.";
 								mes "Would you like me to craft it for you ?";
@@ -275,30 +264,30 @@ if( countitem( 989 )) >=1 {
 										progressbar "ffff00",.Wait;
 										if( .StoneChance >= rand( 100 ) ) {											
 										getitem 995,1;
-										mes "[^FF6600Seiken^000000]";
+										mes "[^FF6600Zekken^000000]";
 										mes "Here you Go.";
 										close;
 										}
 										else {
 										specialeffect 155;
 										next;
-										mes "[^FF6600Seiken^000000]";
+										mes "[^FF6600Zekken^000000]";
 										mes "I am very sorry, item creation has ^FF0000failed^000000. Better luck next time.";
 										close;
 										}
 									case 2:
-										mes "[^FF6600Seiken^000000]";
+										mes "[^FF6600Zekken^000000]";
 										mes "Oh, Come back here if you've changed your mind";
 										close;
 										}	
 							case 3:
 								if( countitem( 992 ) < 10 ) {
-								mes "[^FF6600Seiken^000000]";
+								mes "[^FF6600Zekken^000000]";
 								mes "Bring me 10 Wind of Verdure.";
 								mes "I'll be waiting.";
 								close;
 								}
-								mes "[^FF6600Seiken^000000]";
+								mes "[^FF6600Zekken^000000]";
 								mes "This will cost you 10 Wind of Verdure";
 								mes "With ^FF0000" + .StoneChance + "^000000% chance.";
 								mes "Would you like me to craft it for you ?";
@@ -309,30 +298,30 @@ if( countitem( 989 )) >=1 {
 										progressbar "ffff00",.Wait;
 										if( .StoneChance >= rand( 100 ) ) {	
 										getitem 996,1;
-										mes "[^FF6600Seiken^000000]";
+										mes "[^FF6600Zekken^000000]";
 										mes "Here you Go.";
 										close;
 										}
 										else {
 										specialeffect 155;
 										next;
-										mes "[^FF6600Seiken^000000]";
+										mes "[^FF6600Zekken^000000]";
 										mes "I am very sorry, item creation has ^FF0000failed^000000. Better luck next time.";
 										close;
 										}
 									case 2:
-										mes "[^FF6600Seiken^000000]";
+										mes "[^FF6600Zekken^000000]";
 										mes "Oh, Come back here if you've changed your mind";
 										close;
 										}
 							case 4:
 								if( countitem( 993 ) < 10 ) {
-								mes "[^FF6600Seiken^000000]";
+								mes "[^FF6600Zekken^000000]";
 								mes "Bring me 10 Green Live.";
 								mes "I'll be waiting.";
 								close;
 								}
-								mes "[^FF6600Seiken^000000]";
+								mes "[^FF6600Zekken^000000]";
 								mes "This will cost you 10 Green Live";
 								mes "With ^FF0000" + .StoneChance + "^000000% chance.";
 								mes "Would you like me to craft it for you ?";
@@ -343,30 +332,30 @@ if( countitem( 989 )) >=1 {
 										delitem 993,10;										
 										if( .StoneChance >= rand( 100 ) ) {	
 										getitem 997,1;
-										mes "[^FF6600Seiken^000000]";
+										mes "[^FF6600Zekken^000000]";
 										mes "Here you Go.";
 										close;
 										}
 										else {
 										specialeffect 155;
 										next;
-										mes "[^FF6600Seiken^000000]";
+										mes "[^FF6600Zekken^000000]";
 										mes "I am very sorry, item creation has ^FF0000failed^000000. Better luck next time.";
 										close;
 										}
 									case 2:
-										mes "[^FF6600Seiken^000000]";
+										mes "[^FF6600Zekken^000000]";
 										mes "Oh, Come back here if you've changed your mind";
 										close;
 										}
 							case 5:
 								if( countitem( 1001 ) < 10 ) {
-								mes "[^FF6600Seiken^000000]";
+								mes "[^FF6600Zekken^000000]";
 								mes "Bring me 10 Star Dust.";
 								mes "I'll be waiting.";
 								close;
 								}
-								mes "[^FF6600Seiken^000000]";
+								mes "[^FF6600Zekken^000000]";
 								mes "This will cost you 10 Star Dust";
 								mes "With ^FF0000" + .StoneChance + "^000000% chance.";
 								mes "Would you like me to craft it for you ?";
@@ -377,24 +366,24 @@ if( countitem( 989 )) >=1 {
 										progressbar "ffff00",.Wait;
 										if( .StoneChance >= rand( 100 ) ) {											
 										getitem 1000,1;
-										mes "[^FF6600Seiken^000000]";
+										mes "[^FF6600Zekken^000000]";
 										mes "Here you Go.";
 										close;
 										}
 										else {
 										specialeffect 155;
 										next;
-										mes "[^FF6600Seiken^000000]";
+										mes "[^FF6600Zekken^000000]";
 										mes "I am very sorry, item creation has ^FF0000failed^000000. Better luck next time.";
 										close;
 										}
 									case 2:
-										mes "[^FF6600Seiken^000000]";
+										mes "[^FF6600Zekken^000000]";
 										mes "Oh, Come back here if you've changed your mind";
 										close;
 										}
 							case 6:
-								mes "[^FF6600Seiken^000000]";
+								mes "[^FF6600Zekken^000000]";
 								mes "Oh, Come back here if you've changed your mind";
 								close;
 								}									
@@ -404,11 +393,11 @@ if( countitem( 989 )) >=1 {
 			mes "To apply an random property to a weapon, you need to have it equipped in your right hand.";
 			mes "Also be warned, that what you get and with which value is completely random!";
 			next;
-			mes "[^FF6600Seiken^000000]";
+			mes "[^FF6600Zekken^000000]";
 			mes "First, let's see what you have equipped...:";
 			next;
 			set .@part,EQI_HAND_R; // Save equip location
-			mes "[^FF6600Seiken^000000]";
+			mes "[^FF6600Zekken^000000]";
 			if(!getequipid(.@part)) {
 				mes "You don't have anything equipped!";
 				close;
@@ -482,21 +471,21 @@ else
 	set .@Opt5_V,getd(".RandOpt5_"+.@Type$+"_MaxV["+.@Opt5+"]");
 
 // Apply options to equipped weapon
-mes "[^FF6600Seiken^000000]";
+mes "[^FF6600Zekken^000000]";
 mes " \""+getitemname(getequipid(.@part))+"\" , Is this the right weapon ?";
 next;
 switch( select( "Yes:Cancel." ) ) {
 case 2:
-mes "[^FF6600Seiken^000000]";
+mes "[^FF6600Zekken^000000]";
 mes "Oh, Okay,.";
 mes "Come back here when you hold the right weapon";
 close;
 
 case 1:
-	mes "[^FF6600Seiken^000000]";
+	mes "[^FF6600Zekken^000000]";
 	mes "Okay! I'll enchant this one.";
 	next;
-	mes "[^FF6600Seiken^000000]";
+	mes "[^FF6600Zekken^000000]";
 	mes "Give me a second ..";
 	progressbar "ffff00",.Wait;
 setrandomoption(.@part,0,getd(".RandOpt1_"+.@Type$+"["+.@Opt1+"]"),.@Opt1_V,0);
@@ -505,13 +494,13 @@ setrandomoption(.@part,2,getd(".RandOpt3_"+.@Type$+"["+.@Opt3+"]"),.@Opt3_V,0);
 setrandomoption(.@part,3,getd(".RandOpt4_"+.@Type$+"["+.@Opt4+"]"),.@Opt4_V,0);
 setrandomoption(.@part,4,getd(".RandOpt5_"+.@Type$+"["+.@Opt5+"]"),.@Opt5_V,0);
 next;
-mes "[^FF6600Seiken^000000]";
+mes "[^FF6600Zekken^000000]";
 mes "Random bonus properties have been applied on your \""+getitemname(getequipid(.@part))+"\" successfully.";
 end;
 }
 
 OnInit:
-set .n$,"[^FF6600Seiken^000000]";
+set .n$,"[^FF6600Zekken^000000]";
 // ========= Random Option Slot 1 ========= 
 // - Physical
 setarray .RandOpt1_P[0],
@@ -549,7 +538,7 @@ end;
 	}
 	
 	next;
-	mes "[^FF6600Seiken^000000]";
+	mes "[^FF6600Zekken^000000]";
 	mes "What weapons would you like to forge?";
 	switch( select( "Daggers.:1H Swords.:2H Swords.:Maces.:Spears.:Knuckles.:Axes.:Nothing." ) ) {
 		case 1:
@@ -677,7 +666,7 @@ end;
 	}
 	
 	next;
-	mes "[^FF6600Seiken^000000]";
+	mes "[^FF6600Zekken^000000]";
 	mes "How many ^FF0099Star Crumbs^000000 would you like to put in your weapon?";
 	switch( select( "1.:2.:3.:None." ) ) {
 	case 1:
@@ -703,7 +692,7 @@ end;
 	
 	if( .SCFor < 3 ) {
 		next;
-		mes "[^FF6600Seiken^000000]";
+		mes "[^FF6600Zekken^000000]";
 		mes "What ^FF0099element^000000 would you like to put into your weapon?";
 		switch( select( "^0000FFICE^000000.:^993300EARTH^000000.:^FF0000FIRE^000000.:^33CC00WIND^000000.:None." ) ) {
 			case 1:
@@ -771,7 +760,7 @@ end;
 			mes "[^FF6600Katanakaji^000000]","You do not have the required money. Please come back when you do.";
 			close;
 			}	
-	mes "[^FF6600Seiken^000000]";
+	mes "[^FF6600Zekken^000000]";
 	mes "We are now ready to forge your ^FF0000" + .StarCrumb$ + .Element$ + getitemname( .ForgeID ) + "^000000, at a ^FF0000" + .ForgeChance + "^000000% chance.";
 	mes "Cost = ^0055FF 500.000 ^000000 zeny.";
 	mes "^009900ALL ITEMS WILL BE CONSUMED UPON EITHER FAILURE OR SUCCESS^000000. Continue?";
@@ -779,7 +768,7 @@ end;
 	switch( select( "Yes.:Cancel." ) ) {
 		case 1:
 		Zeny = Zeny - .forgeprice;	
-		mes "[^FF6600Seiken^000000]";
+		mes "[^FF6600Zekken^000000]";
 		mes "Give me a second ..";		
 		progressbar "ffff00",.Wait;
 			if( getgmlevel() < .GMBypassLv ) {
@@ -802,12 +791,12 @@ end;
 			else {
 				specialeffect 155;
 				next;
-				mes "[^FF6600Seiken^000000]";
+				mes "[^FF6600Zekken^000000]";
 				mes "I am very sorry, item creation has ^FF0000failed^000000. Better luck next time.";
 				close;
 			}
 		case 2:
-			mes "[^FF6600Seiken^000000]";
+			mes "[^FF6600Zekken^000000]";
 			mes "Well alright, come back if you change your mind.";
 			close;
 		
@@ -1201,3 +1190,5 @@ function	script	LOL_Del1360i	{
 	delitem 719,1;
 	return;
 }
+
+-	shop	Zekken1	-1,999:4000,989:600000

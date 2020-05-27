@@ -167,23 +167,39 @@ new_5-1,53,114,3	duplicate(NvSprakkiA)	Sprakki#nv5a	90
 			mes "Ok, You want to start right away.";
 			mes "Which Town do you want to start at?";
 			next;
-			set .@select, select("Warp me to izlude");
-			mes "[Sprakki]";
-			mes "Do you want to me to warp you to izlude ?";
-			next;
-			set .@select, select("Yes.:No i'm fine here.");
+			set .@select, select("Prontera:Morocc:Geffen:Payon:Alberta:Izlude");
 			mes "[Sprakki]";
 			mes "I see.";
 			mes "Go ahead and grow stronger! Look toward a brighter future ahead of you.";
 			callfunc "F_NvErase";
 			close2;
 			switch(.@select) {
-			case 1: // Old coordinates: (94,103)
+			case 1:
+				savepoint "prontera",273,354,1,1;
+				warp "prontera",273,354;
+				break;
+			case 2:
+				savepoint "morocc",160,94,1,1;
+				warp "morocc",160,94;
+				break;
+			case 3:
+				savepoint "geffen",120,100,1,1;
+				warp "geffen",120,100;
+				break;
+			case 4:
+				savepoint "payon",70,100,1,1;
+				warp "payon",70,100;
+				break;
+			case 5:
+				savepoint "alberta",116,57,1,1;
+				warp "alberta",116,57;
+				break;
+			case 6: // Old coordinates: (94,103)
 				savepoint "izlude",128,98,1,1;
 				warp "izlude",128,98;
 				break;
-			case 2: close;
-			}			
+			}
+			end;
 		}
 	} else {
 		mes "[Sprakki]";
@@ -288,9 +304,13 @@ new_5-2,100,29,4	duplicate(NvSprakkiB)	Sprakki#nv5b	90
 			mes "Basic equipments and recovery potions.";
 		}
 		set job_novice_q,4;
-		getitem 2501,1; //Hood
-		getitem 2401,1; //Sandal
-		getitem 569,100; //Novice_Potion
+		getitem 2352,1; //Novice_Plate
+		getitem 2510,1; //Novice_Hood
+		getitem 2414,1; //Novice_Boots
+		getitem 5055,1; //Novice_Egg_Cap
+		getitem 1243,1; //Novice_Knife
+		getitem 2112,1; //Novice_Guard
+		getitem 569,300; //Novice_Potion
 		setquest 7119;
 		next;
 		mes "[Instructor Brade]";
@@ -332,9 +352,10 @@ new_5-2,100,29,4	duplicate(NvSprakkiB)	Sprakki#nv5b	90
 		cutin "",255;
 		end;
 	} else if (job_novice_q == 4) {
-		if (isequipped(2501) + isequipped(2401) < 2) {
+		if (isequipped(2414) + isequipped(2352) + isequipped(2510) + isequipped(2112) + isequipped(1243) < 4) {
 			mes "[Instructor Brade]";
-			mes "Try to put on those 2 of the equipments I gave you.";
+			mes "Try to put on at least 4 of the equipments I gave you.";
+			mes "Put those shoes on, wear those clothes, and arm yourself with that weapon you maggot.";
 			close;
 		}
 		mes "[Instructor Brade]";
@@ -364,7 +385,7 @@ new_5-2,100,29,4	duplicate(NvSprakkiB)	Sprakki#nv5b	90
 		next;
 		cutin "tutorial05",3;
 		mes "!- Info -!";
-		mes "You can register a skill or an item to the Hot Key Window by just dragging them onto the Hot Key Slot with F12.";
+		mes "You can register a skill or an item to the Hot Key Window by just dragging them onto the Hot Key Slot.";
 		next;
 		mes "!- Info -!";
 		mes "Registered Skills or Items can be used/equipped by just pressing the corresponding key.";
@@ -412,7 +433,7 @@ new_5-2,100,29,4	duplicate(NvSprakkiB)	Sprakki#nv5b	90
 		mes "You've come along fine this far.";
 		mes "This is not much, but take this as a reward.";
 		set job_novice_q,7;
-		getitem 569,100; //Novice_Potion
+		getitem 2393,1; //N_Adventurer's_Suit
 		completequest 7120;
 		close;
 	} else if (job_novice_q == 7) {
@@ -1166,7 +1187,7 @@ new_5-2,36,176,4	duplicate(NvGuide)	Guide#nv5	105
 				mes "You can see it is not so hard, huh?";
 				mes "Nice job.";
 				set job_novice_q,14;
-				getitem 569,100; //Novice_Potion
+				getitem 13040,1; //N_Cutter
 				getexp 3000,30;
 				completequest 7122;
 				next;
@@ -1220,6 +1241,11 @@ new_5-2,36,176,4	duplicate(NvGuide)	Guide#nv5	105
 			mes "[Brade]";
 			mes "It's ok to stay here and practice until you think you are ready.";
 			next;
+			mes "[Brade]";
+			mes "Try using the job manuals to find out the characteristics of each job's skills.";
+			mes "I will restore your HP and SP... Keep it up.";
+			npcskill "AL_HEAL",11,99,60;
+			percentheal 0,100;
 			close;
 		case 2:
 			mes "[Brade]";
@@ -1352,7 +1378,6 @@ new_5-3,96,30,4	duplicate(NvBradeB)	Brade#nv5b	733
 			next;
 			callfunc "F_NvErase";
 			getitem 2819,1; //Swordman_Manual
-			percentheal 0,100;
 			next;
 			mes "[Swordman Guildsman]";
 			mes "After equipping the Manual, open your Skill menu by pressing ALT+S.";
@@ -1418,13 +1443,13 @@ new_5-3,96,30,4	duplicate(NvBradeB)	Brade#nv5b	733
 				mes "I think that you're good enough to be a Swordman.";
 				mes "I'll give you some potions as a reward.";
 				completequest 7123;
-				getitem 569,100; //Novice_Potion
+				getitem 569,200; //Novice_Potion
 				getexp 5000,100;
 				close;
 			} else {
 				mes "[Swordman Guildsman]";
 				mes "Hunt two Picky monsters.";
-				mes "You can find them in the level 4 training grounds by talking to Trainer Brutus behind me.";
+				mes "You can find them in the more difficult training grounds by talking to Trainer Brutus.";
 				close;
 			}
 		} else if (.@quest == 2) {
@@ -1493,7 +1518,6 @@ new_5-3,97,41,3	duplicate(NvSwordman)	Swordman Guide#nv5	728
 			next;
 			callfunc "F_NvErase";
 			getitem 2821,1; //Acolyte_Manual
-			percentheal 0,100;
 			next;
 			mes "[Prontera Acolyte]";
 			mes "Make sure to equip the Skill Manual by double-clicking it in the Inventory Window.";
@@ -1588,7 +1612,6 @@ new_5-3,101,41,3	duplicate(NvAcolyte)	Acolyte Guide#nv5	95
 			next;
 			callfunc "F_NvErase";
 			getitem 2820,1; //Thief_Manual
-			percentheal 0,100;
 			next;
 			mes "[Thief Guild Member]";
 			mes "Make sure to equip the Skill Manual by double-clicking it in the Inventory Window.";
@@ -1649,7 +1672,7 @@ new_5-3,101,41,3	duplicate(NvAcolyte)	Acolyte Guide#nv5	95
 				mes "You are very strong.";
 				mes "These are not many but let me give you a reward for your effort.";
 				completequest 7127;
-				getitem 569,100; //N_Fly_Wing
+				getitem 12323,50; //N_Fly_Wing
 				getexp 5000,100;
 				close;
 			} else {
@@ -1727,7 +1750,6 @@ new_5-3,105,41,3	duplicate(NvThief)	Thief Guide#nv5	118
 			next;
 			callfunc "F_NvErase";
 			getitem 2823,1; //Merchant_Manual
-			percentheal 0,100;
 			next;
 			mes "[Merchant Guildsman]";
 			mes "Make sure to equip the Skill Manual by double-clicking it in the Inventory Window.";
@@ -1771,7 +1793,7 @@ new_5-3,105,41,3	duplicate(NvThief)	Thief Guide#nv5	118
 			mes "[Merchant Guildsman]";
 			mes "Huh? Quest??";
 			mes "Humm... What would be suited for you...?";
-			mes "Ok, then bring me ^5d5dff100 zeny^000000 by selling some of your items to the Potato Merchant.";
+			mes "Ok, then bring me ^5d5dff300 zeny^000000 by selling some of your items to the Potato Merchant.";
 			next;
 			mes "[Merchant Guildsman]";
 			mes "If you equipped the Merchant manual you have the ability to use the 'Overcharge' and 'Discount' skills.";
@@ -1782,7 +1804,7 @@ new_5-3,105,41,3	duplicate(NvThief)	Thief Guide#nv5	118
 			mes "Good luck!";
 			close;
 		} else if (.@quest == 0 || .@quest == 1) {
-			if (Zeny >= 100) {
+			if (Zeny >= 300) {
 				mes "[Merchant Guildsman]";
 				mes "Excellent!";
 				mes "Zeny is the currency of Midgard.";
@@ -1887,7 +1909,6 @@ new_5-3,109,41,3	duplicate(NvMerchant)	Merchant Guide#nv5	97
 			next;
 			callfunc "F_NvErase";
 			getitem 2822,1; //Archer_Manual
-			percentheal 0,100;
 			next;
 			mes "[Archer Guildsman]";
 			mes "Make sure to equip the Skill Manual by double-clicking it in the Inventory Window.";
@@ -1991,7 +2012,6 @@ new_5-3,113,41,3	duplicate(NvArcher)	Archer Guide#nv5	727
 			next;
 			callfunc "F_NvErase";
 			getitem 2824,1; //Mage_Manual
-			percentheal 0,100;
 			next;
 			mes "[Mage Guild Member]";
 			mes "After equipping the Manual, open your Skill menu by pressing ALT+S.";
@@ -2054,7 +2074,7 @@ new_5-3,113,41,3	duplicate(NvArcher)	Archer Guide#nv5	727
 				mes "Alright. I will give something...";
 				mes "Here are Novice Butterfly Wings, please take them.";
 				completequest 7124;
-				getitem 569,100; //N_Butterfly_Wing
+				getitem 12324,30; //N_Butterfly_Wing
 				getexp 5000,100;
 				close;
 			} else {
@@ -2586,6 +2606,8 @@ L_Supplies:
 	set nov_3_swordman,40;
 	getitem 7059,20; //Cargo_Free_Ticket
 	getitem 7060,30; //Warp_Free_Ticket
+	getitem 2393,1; //N_Adventurer's_Suit
+	getitem 13040,1; //N_Cutter
 	next;
 	mes "[Hanson]";
 	mes "You will now";

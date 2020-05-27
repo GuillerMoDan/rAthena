@@ -104,22 +104,7 @@ geffen_in,164,124,4	script	Mage Guildsman#mage	123,{
 			mes "'Welcome to the Mage Guild~'";
 			mes "Congratulations on becoming a member of the Mage Guild! Go for it!";
 			callfunc "Job_Change",Job_Mage;
-			getitem 1606,1;	// N_Rod
-			next;
-			mes "Do you want to me to warp you to izlude ?";
-			next;
-			set .@select, select("Warp me to izlude.:No i'm fine here.");
-			mes "[Mage Guildsman]";
-			mes "I see.";
-			mes "Go ahead and grow stronger! Look toward a brighter future ahead of you.";
-			close2;
-			switch(.@select) {
-			case 1: // Old coordinates: (94,103)
-				savepoint "izlude",128,98,1,1;
-				warp "izlude",128,98;
-				break;
-			case 2: close;
-			}					
+			getitem 1639,1;	// N_Rod
 			close;
 		case 2:
 			mes "[Mage Guildsman]";

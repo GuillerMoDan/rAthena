@@ -183,23 +183,11 @@ que_ng,152,167,3	script	Master Miller	901,{
 			callfunc "Job_Change",Job_Gunslinger;
 			set GUNS_Q,6;
 			completequest 6024;
-				getitem 13101,1; // Six_Shooter
-				getitem 13200,1; // Bullet
-			next;
-			mes "Do you want to me to warp you to izlude ?";
-			next;
-			set .@select, select("Warp me to izlude.:No i'm fine here.");
-			mes "[Master Miller]";
-			mes "I see.";
-			mes "Go ahead and grow stronger! Look toward a brighter future ahead of you.";
-			close2;
-			switch(.@select) {
-			case 1: // Old coordinates: (94,103)
-				savepoint "izlude",128,98,1,1;
-				warp "izlude",128,98;
-				break;
-			case 2: close;
-			}	
+			if (rand(1,2) == 1) {
+				getitem 13100,1; // Six_Shooter
+			} else {
+				getitem 13150,1; // Branch
+			}
 			close;
 		}
 	} else {

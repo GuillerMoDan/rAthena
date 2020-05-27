@@ -91,29 +91,17 @@ payon_in02,64,71,4	script	Archer Guildsman#archer	85,{
 			next;
 			mes "[Archer Guildsman]";
 			mes "Congratulations! You are now an Archer! Also, we hope that you actively participate in many programs for the revival of the Archer Guild.";
+			mes "Ah, items have arrived from the Production Department. Here, take these! These are all yours!";
 			callfunc "Job_Change",Job_Archer;
-			getitem 1706,1;
-			getitem 1750,1;
+			getitem 1742,1;	// N_Composite_Bow
+			getitem 12004,1;	// Arrow_Container
+			getitem 12009,1;	// Silver_Arrow_Container
+			getitem 12008,1;	// Fire_Arrow_Container
 			next;
 			mes "[Archer Guildsman]";
+			mes "Having a bow and arrows, now you became a real Archer.";
+			mes "If you open the arrow container, there are arrows in it and then you can equip them.";
 			mes "Well, I expect to hear better news from you. It's time to say goodbye.";
-			next;
-			mes "Which Town do you want to start at?";
-			next;
-			mes "Do you want to me to warp you to izlude ?";
-			next;
-			set .@select, select("Warp me to izlude.:No i'm fine here.");
-			mes "[Archer Guildsman]";
-			mes "I see.";
-			mes "Go ahead and grow stronger! Look toward a brighter future ahead of you.";
-			close2;
-			switch(.@select) {
-			case 1: // Old coordinates: (94,103)
-				savepoint "izlude",128,98,1,1;
-				warp "izlude",128,98;
-				break;
-			case 2: close;
-			}									
 			mes "Bye.";
 			close;
 		}

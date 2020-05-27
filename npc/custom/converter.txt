@@ -1,4 +1,4 @@
-prontera,139,289,4	script	^FF6600Convert Sage^000000	501,{
+prontera,139,289,4	script	Convert Sage	501,{
 	mes "[^FF6600Convert Sage^000000]","Psst kid";
 	mes	"Wanna Make Converters ?";
 	next;
@@ -115,29 +115,29 @@ prontera,139,289,4	script	^FF6600Convert Sage^000000	501,{
 }
 -	shop	scroll_shop	-1,7433:4000,12114:7000,12115:7000,12116:7000,12117:7000
 
-prontera,143,84,5	duplicate(^FF6600Convert Sage^000000)	^FF6600Convert Sage^000000 Prontera#prt	501
-izlude,122,150,4	duplicate(^FF6600Convert Sage^000000)	^FF6600Convert Sage^000000 Izlude#prt	501
-alberta,105,65,4	duplicate(^FF6600Convert Sage^000000)	^FF6600Convert Sage^000000 Alberta#prt	501
-aldebaran,146,112,4	duplicate(^FF6600Convert Sage^000000)	^FF6600Convert Sage^000000 Aldebaran#prt	501
-amatsu,105,137,4	duplicate(^FF6600Convert Sage^000000)	^FF6600Convert Sage^000000 Amatsu#prt	501
-ayothaya,212,178,4	duplicate(^FF6600Convert Sage^000000)	^FF6600Convert Sage^000000 Ayothaya#prt	501
-brasilis,119,231,4	duplicate(^FF6600Convert Sage^000000)	^FF6600Convert Sage^000000 Brasilis#prt	501
-comodo,202,145,4	duplicate(^FF6600Convert Sage^000000)	^FF6600Convert Sage^000000 Comodo#prt	501
-dewata,210,184,4	duplicate(^FF6600Convert Sage^000000)	^FF6600Convert Sage^000000 Dewata#prt	501
-einbroch,244,209,4	duplicate(^FF6600Convert Sage^000000)	^FF6600Convert Sage^000000 Einbroch#prt	501
-geffen,126,63,4	duplicate(^FF6600Convert Sage^000000)	^FF6600Convert Sage^000000 Geffen#prt	501
-gonryun,153,131,4	duplicate(^FF6600Convert Sage^000000)	^FF6600Convert Sage^000000 Gonryun#prt	501
-hugel,81,168,4	duplicate(^FF6600Convert Sage^000000)	^FF6600Convert Sage^000000 Hugel#prt	501
-lighthalzen,154,110,4	duplicate(^FF6600Convert Sage^000000)	^FF6600Convert Sage^000000 Lighthalzen#prt	501
-louyang,224,116,4	duplicate(^FF6600Convert Sage^000000)	^FF6600Convert Sage^000000 Louyang#prt	501
-malangdo,194,135,4	duplicate(^FF6600Convert Sage^000000)	^FF6600Convert Sage^000000 Malangdo#prt	501
-malaya,228,195,4	duplicate(^FF6600Convert Sage^000000)	^FF6600Convert Sage^000000 Malaya#prt	501
-mora,38,131,4	duplicate(^FF6600Convert Sage^000000)	^FF6600Convert Sage^000000 Mora#prt	501
-morocc,154,80,4	duplicate(^FF6600Convert Sage^000000)	^FF6600Convert Sage^000000 Morocc#prt	501
-moscovia,217,191,4	duplicate(^FF6600Convert Sage^000000)	^FF6600Convert Sage^000000 Moscovia#prt	501
-payon,180,117,4	duplicate(^FF6600Convert Sage^000000)	^FF6600Convert Sage^000000 Payon#prt	501
-rachel,100,136,4	duplicate(^FF6600Convert Sage^000000)	^FF6600Convert Sage^000000 Rachel#prt	501
-umbala,85,167,4	duplicate(^FF6600Convert Sage^000000)	^FF6600Convert Sage^000000 Umbala#prt	501
-veins,202,133,4	duplicate(^FF6600Convert Sage^000000)	^FF6600Convert Sage^000000 Veins#prt	501
-xmas,138,135,4	duplicate(^FF6600Convert Sage^000000)	^FF6600Convert Sage^000000 Xmas#prt	501
-yuno,141,187,4	duplicate(^FF6600Convert Sage^000000)	^FF6600Convert Sage^000000 Yuno#prt	501
+prontera,143,84,5	duplicate(Convert Sage)	Convert Sage Prontera#prt	501
+izlude,122,150,4	duplicate(Convert Sage)	Convert Sage Izlude#prt	501
+alberta,105,65,4	duplicate(Convert Sage)	Convert Sage Alberta#prt	501
+aldebaran,146,112,4	duplicate(Convert Sage)	Convert Sage Aldebaran#prt	501
+amatsu,105,137,4	duplicate(Convert Sage)	Convert Sage Amatsu#prt	501
+ayothaya,212,178,4	duplicate(Convert Sage)	Convert Sage Ayothaya#prt	501
+brasilis,119,231,4	duplicate(Convert Sage)	Convert Sage Brasilis#prt	501
+comodo,202,145,4	duplicate(Convert Sage)	Convert Sage Comodo#prt	501
+dewata,210,184,4	duplicate(Convert Sage)	Convert Sage Dewata#prt	501
+einbroch,244,209,4	duplicate(Convert Sage)	Convert Sage Einbroch#prt	501
+geffen,126,63,4	duplicate(Convert Sage)	Convert Sage Geffen#prt	501
+gonryun,153,131,4	duplicate(Convert Sage)	Convert Sage Gonryun#prt	501
+hugel,81,168,4	duplicate(Convert Sage)	Convert Sage Hugel#prt	501
+lighthalzen,154,110,4	duplicate(Convert Sage)	Convert Sage Lighthalzen#prt	501
+louyang,224,116,4	duplicate(Convert Sage)	Convert Sage Louyang#prt	501
+malangdo,194,135,4	duplicate(Convert Sage)	Convert Sage Malangdo#prt	501
+malaya,228,195,4	duplicate(Convert Sage)	Convert Sage Malaya#prt	501
+mora,38,131,4	duplicate(Convert Sage)	Convert Sage Mora#prt	501
+morocc,154,80,4	duplicate(Convert Sage)	Convert Sage Morocc#prt	501
+moscovia,217,191,4	duplicate(Convert Sage)	Convert Sage Moscovia#prt	501
+payon,180,117,4	duplicate(Convert Sage)	Convert Sage Payon#prt	501
+rachel,100,136,4	duplicate(Convert Sage)	Convert Sage Rachel#prt	501
+umbala,85,167,4	duplicate(Convert Sage)	Convert Sage Umbala#prt	501
+veins,202,133,4	duplicate(Convert Sage)	Convert Sage Veins#prt	501
+xmas,138,135,4	duplicate(Convert Sage)	Convert Sage Xmas#prt	501
+yuno,141,187,4	duplicate(Convert Sage)	Convert Sage Yuno#prt	501

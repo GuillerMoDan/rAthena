@@ -337,25 +337,8 @@ que_ng,30,65,3	script	Kuuga Gai#nq	730,{
 			set NINJ_Q,5;
 			delitem 7053,5; // Cyfar
 			delitem 1010,1; // Phracon
-			getitem 13010,1; // Asura
+			getitem 13010,1;	// Asura
 			completequest 6018;
-			next;
-			mes "So, Which Town do you want to start at?";
-			next;
-			mes "Do you want to me to warp you to izlude ?";
-			next;
-			set .@select, select("Warp me to izlude.:No i'm fine here.");
-			mes "[Kuuga Gai]";
-			mes "I see.";
-			mes "Go ahead and grow stronger! Look toward a brighter future ahead of you.";
-			close2;
-			switch(.@select) {
-			case 1: // Old coordinates: (94,103)
-				savepoint "izlude",128,98,1,1;
-				warp "izlude",128,98;
-				break;
-			case 2: close;
-			}				
 			close;
 		}
 		else {
