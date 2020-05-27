@@ -1,0 +1,347 @@
+//===== rAthena Script =======================================
+//= Vicious Mind Weapon Random Option Enchanter
+//===== By ===================================================
+//= llchrisll
+//===== Version ==============================================
+//= 1.0 - Initial Version
+//===== Tested With ==========================================
+//= rAthena 03/26/2018 Revision
+//= GIT Hash: 333f0dddc8353663eacba0423751988c9bc38e34
+//===== Description ==========================================
+//= This script handles the random options for the Vicious Mind Weapons
+//  until rAthena changes the way the Random Option Database is handled.
+//= Instead of defining every possible random option for each option slot
+//  this enchanter will be used.
+//===== Comments =============================================
+//= ...
+//===== Credits ==============================================
+//= NovaRo for their Information regarding the possible Options.
+//============================================================
+prontera,158,179,4	script	Vicious Mind Enchanter	101,{
+
+mes .n$;
+mes "Hello, "+strcharinfo(0)+"!";
+mes "What can I do for you?";
+if(select("- Enchant Dropped Armory:- Nevermind") - 1) close;
+next;
+mes .n$;
+mes "To apply an random properity to an Vicious Weapon, you need to have it equipped in your right hand.";
+mes "Also be warned, that what you get and with which value is completely random!";
+next;
+mes .n$;
+mes "First, let's see what you have equipped...:";
+next;
+set .@part,EQI_HAND_R; // Save equip location
+mes .n$;
+if(!getequipid(.@part)) {
+	mes "You don't have anything equipped!";
+	close;
+}
+switch(getequipid(.@part)) {
+	case 1290: // 
+	case 1478: // 
+	case 1191: // 
+	case 1232:
+	case 1175:
+	case 1302:
+	case 28101:
+	case 1235:
+	case 1155:
+	case 1352:
+	case 1485:
+	case 1421:
+	case 1375:
+	case 1814:
+	case 13061:
+	case 1108:
+	case 1271:
+	case 1363:
+	case 16017:
+	case 1182:
+	case 1265:
+	case 1385:
+	case 1470:
+	case 1162:
+	case 1415:
+	case 1358:
+	case 13158:
+	case 13159:
+	case 1140:
+	case 1435:
+	case 1484:
+	case 16003:
+	case 1520:
+	case 1285:
+	case 13431:
+	case 1196:
+	case 1246:
+	case 1163:
+	case 1305:
+	case 1502:
+	case 1228:
+	case 1822:
+	case 13004:
+	case 1466:
+	case 1476:
+	case 
+	case 
+	case
+	case 
+	case 
+	case 
+	case 
+	case 
+	case 
+	case 
+	case
+	case 
+	case 
+	case 
+	case 
+	case 
+	case 
+	case 
+	case
+	set .@Type$,"P";
+	break;
+	
+	
+	case 1715:
+	case 1722:
+	case 1919:
+	case 1920:
+	case 1969:
+	case 1990:
+	case 1702:
+	case 18123:
+	case 1730:
+	case 1914:
+	case 1974:
+	case 1925:
+	case 1964:
+	case 1705:
+	case 1934:
+	case 18111:
+	case 
+	case 
+	case 
+	case 
+	case
+	set .@Type$,"R";
+	break;
+	
+	
+	case 1611:
+	case 1231:
+	case 1553:
+	case 1568:
+	case 1570:
+	case 1556:
+	case 1571:
+	case 1554:
+	case 1569:
+	case 1557:
+	case 1555:
+	case 
+	case 
+	case 
+	case 
+	case 
+	case 
+	case 
+	case 
+	case 
+	case 
+	
+	set .@Type$,"M";
+	break;
+	
+	case 13062:
+	case 13069:
+	case 13011:
+	case 1551:
+	case 1573:
+	case 1550:
+	case 1584:
+	case 28604:
+	case 
+	case 
+	case 
+	case 
+	case 
+	case 
+	case 
+	case 
+	case 
+	case 
+	case 
+	case 
+	case 
+	case 
+	set .@Type$,"H";
+	break;	
+	
+	default:
+	mes "This is not an Vicious Weapon, please be sure to equip one and come back again.";
+	close;
+}
+mes "Equipped Weapon: "+getitemname(getequipid(.@part));
+set .@ropt1,getequiprandomoption(.@part,0,ROA_ID);
+set .@ropt2,getequiprandomoption(.@part,1,ROA_ID);
+set .@ropt3,getequiprandomoption(.@part,2,ROA_ID);
+if(.@ropt1 || .@ropt2 || .@ropt2) {
+	mes " ";
+	mes "I'm sorry, but this weapon already has bonus properities applied.";
+	mes "Please choose a different one.";
+	close;
+}
+next;
+// Randomize each Option Slot:
+// Random Option 1
+set .@Opt1,rand(getarraysize(getd(".RandOpt1_"+.@Type$)));
+if(getd(".RandOpt1_"+.@Type$+"_MinV["+.@Opt1+"]") != getd(".RandOpt1_"+.@Type$+"_MaxV["+.@Opt1+"]"))
+	set .@Opt1_V,rand(getd(".RandOpt1_"+.@Type$+"_MinV["+.@Opt1+"]"),getd(".RandOpt1_"+.@Type$+"_MaxV["+.@Opt1+"]"));
+else 
+	set .@Opt1_V,getd(".RandOpt1_"+.@Type$+"_MaxV["+.@Opt1+"]");
+	
+// Random Option 2
+set .@Opt2,rand(getarraysize(getd(".RandOpt2_"+.@Type$)));
+if(getd(".RandOpt2_"+.@Type$+"_MinV["+.@Opt2+"]") != getd(".RandOpt2_"+.@Type$+"_MaxV["+.@Opt2+"]"))
+	set .@Opt2_V,rand(getd(".RandOpt2_"+.@Type$+"_MinV["+.@Opt2+"]"),getd(".RandOpt2_"+.@Type$+"_MaxV["+.@Opt2+"]"));
+else 
+	set .@Opt2_V,getd(".RandOpt2_"+.@Type$+"_MaxV["+.@Opt2+"]");
+	
+// Random Option 3
+set .@Opt3,rand(getarraysize(getd(".RandOpt3_"+.@Type$)));
+if(getd(".RandOpt3_"+.@Type$+"_MinV["+.@Opt3+"]") != getd(".RandOpt3_"+.@Type$+"_MaxV["+.@Opt3+"]"))
+	set .@Opt3_V,rand(getd(".RandOpt3_"+.@Type$+"_MinV["+.@Opt3+"]"),getd(".RandOpt3_"+.@Type$+"_MaxV["+.@Opt3+"]"));
+else 
+	set .@Opt3_V,getd(".RandOpt3_"+.@Type$+"_MaxV["+.@Opt3+"]");
+
+// Apply options to equipped weapon
+setrandomoption(.@part,0,getd(".RandOpt1_"+.@Type$+"["+.@Opt1+"]"),.@Opt1_V,0);
+setrandomoption(.@part,1,getd(".RandOpt2_"+.@Type$+"["+.@Opt2+"]"),.@Opt2_V,0);
+setrandomoption(.@part,2,getd(".RandOpt3_"+.@Type$+"["+.@Opt3+"]"),.@Opt3_V,0);
+mes .n$;
+mes "Random bonus properties have been applied on your \""+getitemname(getequipid(.@part))+"\" successfully.";
+end;
+
+OnInit:
+set .n$,"[Vicious Enchanter]";
+// ========= Random Option Slot 1 ========= 
+// - Physical
+setarray .RandOpt1_P[0],
+					    RDMOPT_VAR_STRAMOUNT,	 					// Str
+					    RDMOPT_VAR_AGIAMOUNT,	 					// Agi
+					    RDMOPT_VAR_VITAMOUNT,		 				// Vit
+					    RDMOPT_VAR_DEXAMOUNT,	 					// Dex
+					    RDMOPT_VAR_LUKAMOUNT,		 				// Luk
+					    RDMOPT_VAR_MAXHPAMOUNT,	 					// HP
+					    RDMOPT_VAR_MAXSPAMOUNT,						// SP
+						RDMOPT_VAR_ATTPOWER,						// Attack
+					    RDMOPT_VAR_ATKPERCENT,	 					// Atk%
+					    RDMOPT_VAR_PLUSASPD,						// ASPD
+					    RDMOPT_VAR_PLUSASPDPERCENT,					// ASPD %
+					    RDMOPT_VAR_HITSUCCESSVALUE,					// HIT
+					    RDMOPT_VAR_AVOIDSUCCESSVALUE,				// FLEE
+					    RDMOPT_VAR_CRITICALSUCCESSVALUE,			// CRIT RATE
+						RDMOPT_DAMAGE_CRI_TARGET,					// CRIT DAMAGE	
+						RDMOPT_HEAL_MODIFY_PERCENT,					// RESTORATION
+						RDMOPT_DAMAGE_SIZE_SMALL_TARGET,			// DMG SMALL
+						RDMOPT_DAMAGE_SIZE_MIDIUM_TARGET,			// DMG MEDIUM
+						RDMOPT_DAMAGE_SIZE_LARGE_TARGET;			// DMG LARGE
+					    // ToDo: // Recover 1000 of Damage lost from size penalties
+						
+
+// - Values
+// Note: When MinV and MaxV are the same, rand() will not be used!
+setarray .RandOpt1_P_MinV[0],1,1,1,1,1,100,20,20,5,1,7,10,10,5,10,10,10,10,10,10;
+setarray .RandOpt1_P_MaxV[0],5,5,5,5,5,300,60,50,10,2,15,30,30,10,20,20,20,20,20,20;
+						
+// - RANGE
+setarray .RandOpt1_R[0],
+					    RDMOPT_VAR_AGIAMOUNT,	 					// Agi
+					    RDMOPT_VAR_VITAMOUNT,		 				// Vit
+					    RDMOPT_VAR_DEXAMOUNT,	 					// Dex
+					    RDMOPT_VAR_LUKAMOUNT,		 				// Luk
+					    RDMOPT_VAR_MAXHPAMOUNT,	 					// HP
+					    RDMOPT_VAR_MAXSPAMOUNT,						// SP
+						RDMOPT_VAR_ATTPOWER,						// Attack
+					    RDMOPT_VAR_ATKPERCENT,	 					// Atk%
+					    RDMOPT_VAR_PLUSASPD,						// ASPD
+					    RDMOPT_VAR_PLUSASPDPERCENT,					// ASPD %
+					    RDMOPT_VAR_HITSUCCESSVALUE,					// HIT
+					    RDMOPT_VAR_AVOIDSUCCESSVALUE,				// FLEE
+					    RDMOPT_VAR_CRITICALSUCCESSVALUE,			// CRIT RATE
+						RDMOPT_DAMAGE_CRI_TARGET,					// CRIT DAMAGE
+						RDMOPT_RANGE_ATTACK_DAMAGE_TARGET,			// LONG RANGE
+						RDMOPT_HEAL_MODIFY_PERCENT,					// RESTORATION	
+						RDMOPT_DAMAGE_SIZE_SMALL_TARGET,			// DMG SMALL
+						RDMOPT_DAMAGE_SIZE_MIDIUM_TARGET,			// DMG MEDIUM
+						RDMOPT_DAMAGE_SIZE_LARGE_TARGET;			// DMG LARGE
+					    // ToDo: // Recover 1000 of Damage lost from size penalties
+						
+
+// - Values
+// Note: When MinV and MaxV are the same, rand() will not be used!
+setarray .RandOpt1_R_MinV[0],1,1,1,1,100,20,20,5,1,7,10,10,5,10,10,3,10,10,10,10;
+setarray .RandOpt1_R_MaxV[0],5,5,5,5,300,60,50,10,2,15,30,30,10,20,20,10,20,20,20,20;
+					  
+// - Magic
+setarray .RandOpt1_M[0],
+					    RDMOPT_VAR_AGIAMOUNT,	 					// Agi
+					    RDMOPT_VAR_VITAMOUNT,		 				// Vit
+						RDMOPT_VAR_INTAMOUNT,						// INT
+					    RDMOPT_VAR_DEXAMOUNT,	 					// Dex
+					    RDMOPT_VAR_LUKAMOUNT,		 				// Luk
+					    RDMOPT_VAR_MAXHPAMOUNT,	 					// HP
+					    RDMOPT_VAR_MAXSPAMOUNT,						// SP
+						RDMOPT_VAR_ATTMPOWER,						// MATK
+					    RDMOPT_VAR_MAGICATKPERCENT,	 				// MATK%
+					    RDMOPT_VAR_AVOIDSUCCESSVALUE,				// FLEE
+						RDMOPT_HEAL_VALUE,							// HEAL AMOUNT				
+						RDMOPT_HEAL_MODIFY_PERCENT,					// RESTORATION
+						RDMOPT_DEC_SPELL_CAST_TIME,					// VARIABLE CT
+						RDMOPT_MDAMAGE_SIZE_SMALL_TARGET,			// MDMG SMALL
+						RDMOPT_MDAMAGE_SIZE_MIDIUM_TARGET,			// MDMG MEDIUM
+						RDMOPT_MDAMAGE_SIZE_LARGE_TARGET;			// MDMG LARGE
+					    // ToDo: // Recover 1000 of Damage lost from size penalties
+						
+
+// - Values
+// Note: When MinV and MaxV are the same, rand() will not be used!
+setarray .RandOpt1_M_MinV[0],1,1,1,1,1,100,20,20,5,10,10,10,5,10,10,10;
+setarray .RandOpt1_M_MaxV[0],5,5,5,5,5,300,60,50,10,30,20,20,10,20,20,20;
+
+// - Hybrid
+setarray .RandOpt1_H[0],
+					    RDMOPT_VAR_STRAMOUNT,	 					// Str
+					    RDMOPT_VAR_AGIAMOUNT,	 					// Agi
+					    RDMOPT_VAR_INTAMOUNT,		 				// INT
+					    RDMOPT_VAR_DEXAMOUNT,	 					// Dex
+					    RDMOPT_VAR_LUKAMOUNT,		 				// Luk
+					    RDMOPT_VAR_MAXHPAMOUNT,	 					// HP
+					    RDMOPT_VAR_MAXSPAMOUNT,						// SP
+						RDMOPT_VAR_ATTPOWER,						// Attack
+					    RDMOPT_VAR_ATKPERCENT,	 					// Atk%
+						RDMOPT_VAR_ATTMPOWER,						// MATK
+					    RDMOPT_VAR_MAGICATKPERCENT,	 				// MATK%
+					    RDMOPT_VAR_PLUSASPD,						// ASPD
+					    RDMOPT_VAR_PLUSASPDPERCENT,					// ASPD %
+					    RDMOPT_VAR_HITSUCCESSVALUE,					// HIT
+					    RDMOPT_VAR_AVOIDSUCCESSVALUE,				// FLEE
+					    RDMOPT_VAR_CRITICALSUCCESSVALUE,			// CRIT RATE
+						RDMOPT_DAMAGE_CRI_TARGET,					// CRIT DAMAGE	
+						RDMOPT_HEAL_MODIFY_PERCENT,					// RESTORATION
+						RDMOPT_DAMAGE_SIZE_SMALL_TARGET,			// DMG SMALL
+						RDMOPT_DAMAGE_SIZE_MIDIUM_TARGET,			// DMG MEDIUM
+						RDMOPT_DAMAGE_SIZE_LARGE_TARGET;			// DMG LARGE
+					    // ToDo: // Recover 1000 of Damage lost from size penalties
+						
+
+// - Values
+// Note: When MinV and MaxV are the same, rand() will not be used!
+setarray .RandOpt1_H_MinV[0],1,1,1,1,1,100,20,20,5,20,5,1,7,10,10,5,10,10,10,10,10,10;
+setarray .RandOpt1_H_MaxV[0],5,5,5,5,5,300,60,50,10,50,10,2,15,30,30,10,20,20,20,20,20,20;
+end;
+}
