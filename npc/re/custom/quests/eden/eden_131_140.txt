@@ -540,7 +540,6 @@ S_Quest:
 	setquest getarg(1);
 	if (getarg(2,0))
 		getexp getarg(2),getarg(3);
-	zeny = zeny + 110000;
 	return;
 S_Erasequest:
 	.@total = getargcount();
@@ -570,17 +569,14 @@ S_Erasequest:
 			case 1:
 				mes "Did you hear the story of "+ getarg(.@i+2) +"? Thanks you. I promise to make a good song.";
 				getexp 1100000,300000;
-				zeny = zeny + 110000;
 				break;
 			case 2:
 				mes "Is Morocc's story good enough for songs? You did a good job.";
 				getexp 1100000,200000;
-				zeny = zeny + 110000;
 				break;
 			case 3:
 				mes "How was your adventure? Was it fun? Please let me hear your adventure story someday.";
 				getexp 1100000,200000;
-				zeny = zeny + 110000;
 				break;
 			}
 		}

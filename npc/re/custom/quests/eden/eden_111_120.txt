@@ -1096,7 +1096,6 @@ S_Quest:
 	setquest getarg(1);
 	if (getarg(2,0))
 		getexp getarg(2),getarg(3);
-	zeny = zeny + 90000;
 	return;
 S_Hunting:
 	.@total = getargcount();
@@ -1110,7 +1109,6 @@ S_Hunting:
 		case 2:
 			mes "[Mingmin]";
 			mes "You finished researching about "+ getarg(.@i+2) +". Thank you.";
-			zeny = zeny + 90000;
 			getexp 700000,getarg(.@i+1);
 			break;
 		case 0:
@@ -1137,8 +1135,7 @@ S_Gathering:
 			if (getarg(5,0))
 				delitem getarg(5),getarg(6);
 			getexp 700000,getarg(1);
-			zeny = zeny + 90000;
-			}
+		}
 		else {
 			if (getarg(5,0))
 				mes "I will delete "+  getitemname(getarg(3)) +" and "+ getitemname(getarg(5)) +" research from request list.";

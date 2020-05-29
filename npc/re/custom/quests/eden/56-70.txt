@@ -93,7 +93,6 @@ L_Quest:
 			if (.@items)
 				delitem getarg(5),getarg(6);
 			getexp getarg(1),getarg(2);
-			zeny = zeny + 40000;
 			erasequest .@quest_id;
 			mes "You have completed the mission. Get rewards.";
 		}
@@ -140,7 +139,6 @@ L_HuntingQuest:
 				delitem getarg(3),getarg(4);
 			getexp getarg(1),getarg(2);
 			erasequest .@quest_id;
-			zeny = zeny + 40000;
 			mes "You have completed the mission. Get rewards.";
 		}
 		close;

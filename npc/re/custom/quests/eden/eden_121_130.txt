@@ -527,7 +527,6 @@ S_Quest:
 	setquest getarg(1);
 	if (getarg(2,0))
 		getexp 900000,200000;
-		zeny = zeny + 100000;
 	return;
 S_Erasequest:
 	.@total = getargcount();
@@ -547,7 +546,6 @@ S_Erasequest:
 			mes "[Melody-Jack]";
 			mes getarg(.@i+1) +" is cleared. A deal is a deal. I need to get paid.";
 			getexp 900000,200000;
-			zeny = zeny + 100000;
 			break;
 		}
 		erasequest .@quest_id;
@@ -736,7 +734,6 @@ S_Quest:
 	setquest getarg(1);
 	if (getarg(2,0))
 		getexp getarg(2),getarg(3);
-	zeny = zeny + 100000;
 	return;
 S_Erasequest:
 	.@total = getargcount();
@@ -758,7 +755,6 @@ S_Erasequest2:
 			mes "Oh, you've already finished "+ getarg(.@i+1) +" Adventure. Thank you for helping me out with this task!.";
 			erasequest getarg(.@i);
 			getexp getarg(.@i+2),getarg(.@i+3);
-			zeny = zeny + 100000;
 		}
 	}
 	return;

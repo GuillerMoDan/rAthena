@@ -840,7 +840,6 @@ moc_para01,37,95,5	script	Gelkah#1	4_F_GELKA,{
 										.@jexp = 106000;
 									getexp .@exp,.@jexp;
 									delitem 6549,10;
-									zeny = zeny + 80000;
 									para_100lv02 += 1;
 								}
 								break;
@@ -877,7 +876,6 @@ moc_para01,37,95,5	script	Gelkah#1	4_F_GELKA,{
 										.@jexp = 206000;
 									getexp .@exp, .@jexp;
 									delitem 6549,20;
-									zeny = zeny + 80000;
 									para_100lv02 += 1;
 								}
 								break;
@@ -896,7 +894,6 @@ moc_para01,37,95,5	script	Gelkah#1	4_F_GELKA,{
 										mes "[Gelkah]";
 										mes "I don't think he ever saw that guild master again after that day.";
 										getexp 650000,488000;
-										zeny = zeny + 80000;
 									}
 									else {
 										cutin "gelca03",2;
@@ -906,7 +903,6 @@ moc_para01,37,95,5	script	Gelkah#1	4_F_GELKA,{
 										mes "[Gelkah]";
 										mes "But he was also regarded as a troublemaker because of his competitive nature so he left.";
 										getexp 700000,430000;
-										zeny = zeny + 80000;
 									}
 									delitem 6549,30;
 									para_100lv02 += 1;
@@ -957,11 +953,10 @@ moc_para01,37,95,5	script	Gelkah#1	4_F_GELKA,{
 	end;
 S_Quest:
 	if (getarg(2,0)) {
-		zeny = zeny + 80000;
 		getitem 6549,1;// Courtesy_Ticket
 		para_100lv02 += 1;
 		if (JobLevel < 6)
-			getexp 550000,getarg(1); 
+			getexp 550000,getarg(1);
 		else
 			getexp 550000,getarg(2);
 	}
@@ -994,7 +989,6 @@ S_Hunting:
 		mes "^FF0000"+ getarg(3) +" Hunting^000000.";
 		mes "I will mark you down as having completed this request.";
 		para_100lv02 += 1;
-		zeny = zeny + 80000;
 		if (JobLevel < 6)
 			getexp 550000,getarg(1);
 		else
@@ -1113,7 +1107,6 @@ moc_para01,41,95,5	script	Rohtert#12	4_M_ROTERT,{
 					erasequest 13048;// Tendrilion Request
 					setquest 13049;// Tendrilion Request Timer
 					getexp 352000,253000;
-					zeny = zeny + 80000;
 				}
 				else {
 					cutin "rote02",2;
@@ -1144,8 +1137,7 @@ moc_para01,41,95,5	script	Rohtert#12	4_M_ROTERT,{
 				completequest 13046;// Tendrilion Request
 				setquest 13047;// Tendrilion Request Timer
 				getexp 352000,253000;
-				zeny = zeny + 80000;
-				}
+			}
 			else {
 				cutin "rote04",2;
 				mes "Do you mind doing a simple errand?";

@@ -172,12 +172,7 @@ if( countitem( 989 )) >=1 {
 							close;
 							}
 						case 2:
-						if( countitem( 998 ) < 5 && countitem(1003) < 1 ) {
-						mes "[^FF6600Zekken^000000]";
-						mes "Bring me 5 Iron and 1 Coal.";
-						mes "I'll be waiting.";
-						close;
-						}
+						if (countitem( 998 ) >= 5 && countitem( 1003 ) >= 1 ) {
 						mes "[^FF6600Zekken^000000]";
 						mes "This will cost you 5 Iron and 1 Coal";
 						mes "With ^FF0000" + .SteelChance + "^000000% chance.";
@@ -206,6 +201,11 @@ if( countitem( 989 )) >=1 {
 							mes "Oh, Come back here if you've changed your mind";
 							close;
 							}
+						}
+						mes "[^FF6600Zekken^000000]";
+						mes "Bring me 5 Iron and 1 Coal.";
+						mes "I'll be waiting.";
+						close;						
 						case 3:	
 						mes "[^FF6600Zekken^000000]";
 						mes "Forging Stone eh ?";

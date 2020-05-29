@@ -161,7 +161,6 @@ L_Quest:
 		erasequest .@quest_id;
 		setquest .@quest_id+10;
 		getexp getarg(2),0;
-		zeny = zeny + 10000;
 		close;
 	}
 }

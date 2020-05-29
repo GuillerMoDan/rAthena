@@ -80,7 +80,6 @@ OnBuyItem:
 	if (!.@q[1]) { message strcharinfo(0),"An error has occurred."; end; }
 	mes "[^FF6600Sakata^000000]";
 	mes "Your Choice: ^0055FF"+((.@q[1]>1)?.@q[1]+"x ":"")+Slot(.@q[0])+"^000000";
-	mes	"Estimated chance: ^FF660020%^000000 ";
 	mes "Requirements:";
 	if (.@q[2]) mes " > "+Chk(Zeny,.@q[2])+.@q[2]+" Zeny^000000";
 	if (.@q[3]) mes " > "+Chk(getd(.Points$[0]),.@q[3])+.@q[3]+" "+.Points$[1]+" ("+getd(.Points$[0])+"/"+.@q[3]+")^000000";
@@ -104,7 +103,7 @@ OnBuyItem:
 				if (.@q[3]) setd .Points$[0], getd(.Points$[0])-.@q[3];
 				if (.@q[4]) for(set .@i,4; .@i<getarraysize(.@q); set .@i,.@i+2)
 					delitem .@q[.@i],.@q[.@i+1];
-			if (rand(1,5) == 1) {
+			if (rand(1,1) == 1) {
 				if (.Announce) announce strcharinfo(0)+" has created "+A_An(getitemname(.@q[0]))+"!",0;
 				getitem .@q[0],.@q[1];
 				specialeffect2 699;
