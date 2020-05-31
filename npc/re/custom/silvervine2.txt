@@ -1,0 +1,307 @@
+prontera,164,164,3	script	Silvervine Trader#C	10242,{
+		mes "[^FF6600Silvervine Trader^000000]";
+		mes "Hello there !";
+		mes "I can trade mvp dropped items for silvervines.";
+		next;
+		mes "[^FF6600Silvervine Trader^000000]";
+		mes "So, do you have anything to trade?";
+		next;
+		switch(select("Piece of queen's wing.:Mother's Nightmare.:Ba Gua.:Young Twig.:Baphomet Doll.:Osiris Doll.:Darked Scale Piece.:Broken Crown.:Gemstone.:Broken Pharaoh Emblem . Masque of tutankhamen.:Fragment of Rossata Stone.:Tiger's Footskin . Tiger Skin.:Ice Scale.:Will of Red Darkness.:Cancel.")) {
+	case 1:
+				mes "[^FF6600Silvervine Trader^000000]";
+				mes "I'll trade 2 Piece of queen's wing for 100 Silvervines";
+				next;
+				switch(select("Trade.:Cancel.")) {
+				case 1:
+					if (countitem(6326) < 2) {
+						mes "[^FF6600Silvervine Trader^000000]";
+						mes "You don't have the items!";
+						close;
+					}
+						mes "Wonderful, come again !";
+						delitem 6326,2; // piece of queen's wing
+						getitem 6417,100; // silvervine
+						close;
+					
+				case 2:
+				mes "[^FF6600Silvervine Trader^000000]";
+				mes "Okay, see you again soon";
+				close;
+			}
+	case 2:
+				mes "[^FF6600Silvervine Trader^000000]";
+				mes "I'll trade 3 Mother's Nightmare for 100 Silvervines";
+				next;
+				switch(select("Trade.:Cancel.")) {
+				case 1:
+					if (countitem(7020) < 3) {
+						mes "[^FF6600Silvervine Trader^000000]";
+						mes "You don't have the items!";
+						close;
+					}
+						mes "Wonderful, come again !";
+						delitem 7020,3; // mother
+						getitem 6417,100; // silvervine
+						close;
+					
+				case 2:
+				mes "[^FF6600Silvervine Trader^000000]";
+				mes "Okay, see you again soon";
+				close;			
+			}
+	case 3:
+				mes "[^FF6600Silvervine Trader^000000]";
+				mes "I'll trade 3 Ba Gua for 100 Silvervines";
+				next;
+				switch(select("Trade.:Cancel.")) {
+				case 1:
+					if (countitem(7169) < 3) {
+						mes "[^FF6600Silvervine Trader^000000]";
+						mes "You don't have the items!";
+						close;
+					}
+						mes "Wonderful, come again !";
+						delitem 7169,3; // ba gua
+						getitem 6417,100; // silvervine
+						close;
+					
+				case 2:
+				mes "[^FF6600Silvervine Trader^000000]";
+				mes "Okay, see you again soon";
+				close;			
+			}		
+	case 4:
+				mes "[^FF6600Silvervine Trader^000000]";
+				mes "I'll trade 3 Young Twig for 100 Silvervines";
+				next;
+				switch(select("Trade.:Cancel.")) {
+				case 1:
+					if (countitem(7018) < 3) {
+						mes "[^FF6600Silvervine Trader^000000]";
+						mes "You don't have the items!";
+						close;
+					}
+						mes "Wonderful, come again !";
+						delitem 7018,3; // young twig
+						getitem 6417,100; // silvervine
+						close;
+					
+				case 2:
+				mes "[^FF6600Silvervine Trader^000000]";
+				mes "Okay, see you again soon";
+				close;			
+			}			
+	case 5:
+				mes "[^FF6600Silvervine Trader^000000]";
+				mes "I'll trade 3 Baphomet Doll for 100 Silvervines";
+				next;
+				switch(select("Trade.:Cancel.")) {
+				case 1:
+					if (countitem(750) < 3) {
+						mes "[^FF6600Silvervine Trader^000000]";
+						mes "You don't have the items!";
+						close;
+					}
+						mes "Wonderful, come again !";
+						delitem 750,3; // baphomet doll
+						getitem 6417,100; // silvervine
+						close;
+					
+				case 2:
+				mes "[^FF6600Silvervine Trader^000000]";
+				mes "Okay, see you again soon";
+				close;			
+			}		
+	case 6:
+				mes "[^FF6600Silvervine Trader^000000]";
+				mes "I'll trade 3 Osiris Doll for 100 Silvervines";
+				next;
+				switch(select("Trade.:Cancel.")) {
+				case 1:
+					if (countitem(751) < 3) {
+						mes "[^FF6600Silvervine Trader^000000]";
+						mes "You don't have the items!";
+						close;
+					}
+						mes "Wonderful, come again !";
+						delitem 751,3; // osiris doll
+						getitem 6417,100; // silvervine
+						close;
+				case 2:
+				mes "[^FF6600Silvervine Trader^000000]";
+				mes "Okay, see you again soon";
+				close;			
+			}
+	case 7:
+				mes "[^FF6600Silvervine Trader^000000]";
+				mes "I'll trade 1 Darked Scale Piece for 100 Silvervines";
+				next;
+				switch(select("Trade.:Cancel.")) {
+				case 1:
+					if (countitem(6091) < 1) {
+						mes "[^FF6600Silvervine Trader^000000]";
+						mes "You don't have the items!";
+						close;
+					}
+						mes "Wonderful, come again !";
+						delitem 6091,1; // dsp
+						getitem 6417,100; // silvervine
+						close;
+				case 2:
+				mes "[^FF6600Silvervine Trader^000000]";
+				mes "Okay, see you again soon";
+				close;			
+			}
+			
+	case 8:
+				mes "[^FF6600Silvervine Trader^000000]";
+				mes "I'll trade 2 Broken Crown for 100 Silvervines";
+				next;
+				switch(select("Trade.:Cancel.")) {
+				case 1:
+					if (countitem(7754) < 2) {
+						mes "[^FF6600Silvervine Trader^000000]";
+						mes "You don't have the items!";
+						close;
+					}
+						mes "Wonderful, come again !";
+						delitem 7754,2; // broken crown
+						getitem 6417,100; // silvervine
+						close;
+				case 2:
+				mes "[^FF6600Silvervine Trader^000000]";
+				mes "Okay, see you again soon";
+				close;			
+			}
+	case 9:
+				mes "[^FF6600Silvervine Trader^000000]";
+				mes "I'll trade 5 Gemstones for 100 Silvervines";
+				next;
+				switch(select("Trade.:Cancel.")) {
+				case 1:
+					if (countitem(7300) < 5) {
+						mes "[^FF6600Silvervine Trader^000000]";
+						mes "You don't have the items!";
+						close;
+					}
+						mes "Wonderful, come again !";
+						delitem 7300,5; // broken crown
+						getitem 6417,100; // silvervine
+						close;
+				case 2:
+				mes "[^FF6600Silvervine Trader^000000]";
+				mes "Okay, see you again soon";
+				close;			
+			}			
+	case 10:
+				mes "[^FF6600Silvervine Trader^000000]";
+				mes "I'll trade 3 Broken pharaoh emblem and Masque of tutankhamen for 100 Silvervines";
+				next;
+				switch(select("Trade.:Cancel.")) {
+				case 1:
+				if (countitem(7113) < 3 && countitem (7114) < 3 ) {
+						mes "[^FF6600Silvervine Trader^000000]";
+						mes "You don't have the items!";
+						close;
+						}
+				
+						mes "Wonderful, come again !";
+						delitem 7113,3; // Broken pharaoh
+						delitem 7114,3; // Masque
+						getitem 6417,100; // silvervine
+						close;
+				case 2:
+				mes "[^FF6600Silvervine Trader^000000]";
+				mes "Okay, see you again soon";
+				close;			
+			}
+	case 11:
+				mes "[^FF6600Silvervine Trader^000000]";
+				mes "I'll trade 5 Fragment of Rossata Stone for 100 Silvervines";
+				next;
+				switch(select("Trade.:Cancel.")) {
+				case 1:
+					if (countitem(7211) < 5) {
+						mes "[^FF6600Silvervine Trader^000000]";
+						mes "You don't have the items!";
+						close;
+					
+						mes "Wonderful, come again !";
+						delitem 7211,5; // Rosseta Stone
+						getitem 6417,100; // silvervine
+						close;
+						}
+				case 2:
+				mes "[^FF6600Silvervine Trader^000000]";
+				mes "Okay, see you again soon";
+				close;			
+			}
+	case 12:
+				mes "[^FF6600Silvervine Trader^000000]";
+				mes "I'll trade 1 Tiger's Footskin and 5 Tiger Skin for 100 Silvervines";
+				next;
+				switch(select("Trade.:Cancel.")) {
+				case 1:
+					if (countitem(1030) < 1 && countitem (1029) < 5) {
+						mes "[^FF6600Silvervine Trader^000000]";
+						mes "You don't have the items!";
+						close;
+						}
+						mes "Wonderful, come again !";
+						delitem 1030,1; // Tiger footskin
+						delitem 1029,5; // Tiger skin
+						getitem 6417,100; // silvervine
+						close;
+				case 2:
+				mes "[^FF6600Silvervine Trader^000000]";
+				mes "Okay, see you again soon";
+				close;			
+			}	
+	case 13:
+				mes "[^FF6600Silvervine Trader^000000]";
+				mes "I'll trade 1 Ice scale 100 Silvervines";
+				next;
+				switch(select("Trade.:Cancel.")) {
+				case 1:
+						if (countitem(7562) < 1) {
+						mes "[^FF6600Silvervine Trader^000000]";
+						mes "You don't have the items!";
+						close;
+						}
+						mes "Wonderful, come again !";
+						delitem 7562,1; // Ice Scale
+						getitem 6417,100; // silvervine
+						close;
+				case 2:
+				mes "[^FF6600Silvervine Trader^000000]";
+				mes "Okay, see you again soon";
+				close;			
+			}
+	case 14:
+				mes "[^FF6600Silvervine Trader^000000]";
+				mes "I'll trade 2 Will of Red Darkness 100 Silvervines";
+				next;
+				switch(select("Trade.:Cancel.")) {
+				case 1:
+				if (countitem(7566) < 2) {
+						mes "[^FF6600Silvervine Trader^000000]";
+						mes "You don't have the items!";
+						close;	
+					}
+						mes "Wonderful, come again !";
+						delitem 7566,2; // Will of Red Darkness
+						getitem 6417,100; // silvervine
+						close;
+				case 2:
+				mes "[^FF6600Silvervine Trader^000000]";
+				mes "Okay, see you again soon";
+				close;			
+			}			
+	case 15:
+				mes "[^FF6600Silvervine Trader^000000]";
+				mes "Okay, see you again soon";
+				close;	
+			}
+		}	
+				
+		

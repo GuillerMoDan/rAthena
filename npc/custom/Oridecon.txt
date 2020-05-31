@@ -1,4 +1,4 @@
-prontera,173,183,6	script	^FF6600Christopher^000000#C	731,{
+prontera,173,183,6	script	Christopher#C	731,{
 	mes "[^FF6600Christopher^000000]";
 	mes "Welcome to ^FF6600Christopher^000000's Workshop. Ye can get all yer stuff for refining here. What business";
 	mes "brings ye to me?";
