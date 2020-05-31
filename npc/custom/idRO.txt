@@ -56,29 +56,51 @@ prontera,147,169,5	script	Hugel Cat	10242,{
 	mes "[^FF6600Hugel Cat^000000]";
 	mes "Welcome to ^000088Hugel Mall^000000.";
 	mes "Hello there ^FF0000" + strcharinfo(0) + "^000000.";
-	mes	"I'm selling many Weaponry and stuffs from hugel mini games !";
+	mes	"I'm selling many good stuffs like weapon and consumables !";
 	mes "Please select what you want.";
 	next;
-	switch(select("Armor:Dagger:1H-Sword:2H-Sword:Spear:Axe:Mace:Staff:Book:Katar:Knuckle:Bow:Whip:Instrument:Exit")) {
-	case 1: callshop "MArmor", 1; end;
-	case 2: callshop "MDagger", 1; end;
-	case 3: callshop "M1H-Sword", 1; end;
-	case 4: callshop "M2H-Sword", 1; end;
-	case 5: callshop "MSpear", 1; end;
-	case 6: callshop "MAxe", 1; end;
-	case 7: callshop "MMace", 1; end;
-	case 8: callshop "MStaff", 1; end;
-	case 9: callshop "MBook", 1; end;
-	case 10: callshop "MKatar", 1; end;
-	case 11: callshop "MKnuckle", 1; end;
-	case 12: callshop "MBow", 1; end;
-	case 13: callshop "MWhip", 1; end;
-	case 14: callshop "MInstrument", 1; end;
-	case 15: end;
-	}
+	switch(select("Consumables.:Weaponry.:Exit")) {
+		case 1:
+			mes "[^FF6600Hugel Cat^000000]";
+			mes "Which one ?";
+			switch(select("Consumable list 1:Consumable list 2:Exit")) {
+			case 1: callshop "idRO_conz",	1;	end;
+			case 2:	callshop "idRO_conz2",	1;	end;
+			case 3: end;
+			}
+	case 2:
+		mes "[^FF6600Hugel Cat^000000]";
+		mes "Which one ?";	
+		switch(select("Armor:Dagger:1H-Sword:2H-Sword:Spear:Axe:Mace:Staff:Book:Katar:Knuckle:Bow:Whip:Instrument:Exit")) {
+			case 1: callshop "MArmor", 1; end;
+			case 2: callshop "MDagger", 1; end;
+			case 3: callshop "M1H-Sword", 1; end;
+			case 4: callshop "M2H-Sword", 1; end;
+			case 5: callshop "MSpear", 1; end;
+			case 6: callshop "MAxe", 1; end;
+			case 7: callshop "MMace", 1; end;
+			case 8: callshop "MStaff", 1; end;
+			case 9: callshop "MBook", 1; end;
+			case 10: callshop "MKatar", 1; end;
+			case 11: callshop "MKnuckle", 1; end;
+			case 12: callshop "MBow", 1; end;
+			case 13: callshop "MWhip", 1; end;
+			case 14: callshop "MInstrument", 1; end;
+			case 15: end;
+			}
+	case 3:
+	mes "[^FF6600Hugel Cat^000000]";
+	mes "Okay, See you later";
+	close;
 
+	}
 }
-//shops
+
+// Consumable
+-	shop	idROCO::idRO_conz	-1,505:10000,12217:20000,12218:20000,7621:50000,12350:75000,7776:100000,13532:100000,13535:100000,12375:200000,14616:200000,14617:200000,14618:200000,14619:200000,14620:200000,14621:200000,12208:200000,12210:200000
+-	shop	idROCO::idRO_conz2	-1,13536:150000,12909:200000,14614:200000,12646:200000,12214:200000,13533:200000,12883:400000,14545:500000,12412:500000,13857:500000,13534:500000,13858:500000,14538:500000,13718:500000,13720:500000,17126:500000,13710:750000
+
+// Weaponry
 -	shop	MArmor	-1,2319:5000000,2349:10000000,2351:10000000,2345:10000000,2347:10000000
 -	shop	MDagger	-1,1232:15000000,1235:15000000,1231:15000000,1228:15000000,1241:15000000,1242:15000000,13001:15000000,1233:15000000,1223:15000000,13002:15000000,1237:15000000,1230:15000000,1229:15000000,1225:15000000,1234:15000000,1236:15000000,1224:15000000,1227:15000000
 -	shop	M1H-Sword	-1,1140:15000000,1134:15000000,1135:15000000,1132:15000000,1137:15000000,1133:15000000,1131:15000000,1141:15000000,1138:15000000,1130:15000000,1136:15000000,1148:15000000,1139:15000000
@@ -94,24 +116,26 @@ prontera,147,169,5	script	Hugel Cat	10242,{
 -	shop	MWhip	-1,1969:15000000,1964:15000000,1962:15000000,1970:15000000,1963:15000000
 -	shop	MInstrument	-1,1913:15000000
 
+
+
 //============================================================
 
-prontera,147,166,5	script	Consumable Cat	10242,{
-	mes "[^FF6600Consumable Cat^000000]";
-	mes "Welcome to ^000088Consumable Mall^000000.";
-	mes "Hello there ^FF0000" + strcharinfo(0) + "^000000.";
-	mes	"I'm selling consumable and utility items !";
-	mes "Please select what you want.";
-	next;
-	switch(select("Consumable list 1:Consumable list 2:Exit")) {
-	case 1: callshop "idRO_conz",	1;	end;
-	case 2:	callshop "idRO_conz2",	1;	end;
-	case 3: end;
-	}
-
-}
--	shop	idROCO::idRO_conz	-1,505:10000,12217:20000,12218:20000,7621:50000,12350:75000,7776:100000,13532:100000,13535:100000,12375:200000,14616:200000,14617:200000,14618:200000,14619:200000,14620:200000,14621:200000,12208:200000,12210:200000
--	shop	idROCO::idRO_conz2	-1,13536:150000,12909:200000,14614:200000,12646:200000,12214:200000,13533:200000,12883:400000,14545:500000,12412:500000,13857:500000,13534:500000,13858:500000,14538:500000,13718:500000,13720:500000,17126:500000,13710:750000
+//prontera,147,166,5	script	Consumable Cat	10242,{
+//	mes "[^FF6600Consumable Cat^000000]";
+//	mes "Welcome to ^000088Consumable Mall^000000.";
+//	mes "Hello there ^FF0000" + strcharinfo(0) + "^000000.";
+//	mes	"I'm selling consumable and utility items !";
+//	mes "Please select what you want.";
+//	next;
+//	switch(select("Consumable list 1:Consumable list 2:Exit")) {
+//	case 1: callshop "idRO_conz",	1;	end;
+//	case 2:	callshop "idRO_conz2",	1;	end;
+//	case 3: end;
+//	}
+//
+//}
+//-	shop	idROCO::idRO_conz	-1,505:10000,12217:20000,12218:20000,7621:50000,12350:75000,7776:100000,13532:100000,13535:100000,12375:200000,14616:200000,14617:200000,14618:200000,14619:200000,14620:200000,14621:200000,12208:200000,12210:200000
+//-	shop	idROCO::idRO_conz2	-1,13536:150000,12909:200000,14614:200000,12646:200000,12214:200000,13533:200000,12883:400000,14545:500000,12412:500000,13857:500000,13534:500000,13858:500000,14538:500000,13718:500000,13720:500000,17126:500000,13710:750000
 
 //============================================================
 
