@@ -15,12 +15,12 @@
 
 -	script	Healer	-1,{
 
-	.@Price = 2000;	// Zeny required for heal
+	.@Price = 0;	// Zeny required for heal
 	.@Buffs = 1;	// Also buff players? (1: yes / 0: no)
 	.@Delay = 0;	// Heal delay, in seconds
 
 	mes "[^FF6600Healer^000000]";
-	mes "Hello! I cast heal and basic buffs for living just for 2000 Zeny!";
+	mes "Hello! I cast heal and basic buffs for free!";
 	mes "And uh, i sell buff scrolls at cheap price too !";
 	next;
 	switch(select("Heal Buff:Scroll Shop:Cancel")) {

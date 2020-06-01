@@ -23,16 +23,143 @@ if (checkweight(21016,1) == 0) {
 	}
 	mes "[^FF6600Saladin^000000]";
 	mes "Psst, kid.";
-	mes "Do you want me to forge you an UPG weaponry/armory.?";
+	mes "Do you want me to forge you an UPG armory ?";
 	next;
-	switch( select( "Yes.:No." ) ) {
+	switch( select( "Craft UPG Armory.:Enchant UPG Armory.:Cancel." ) ) {
 case 1: 		
 	mes "[^FF6600Saladin^000000]";
 	mes "Remember, i only use slotted equipment as material.";
-	break; 
-case 2: 	
+	break;
+case 2:
+disable_items;
 	mes "[^FF6600Saladin^000000]";
-    mes "K dude.";
+	if (Zeny >= 400000) {
+		mes "I've been studying ways to enhance an armor to maximize its capability.";
+		next;
+		mes "[^FF6600Saladin^000000]";
+		mes "Enchanting is an awesome skill that infuses a mysterious status powers into the armor's hidden socket.";
+		next;
+		mes "[^FF6600Saladin^000000]";
+		mes "However, you have to keep in mind that if there are two armors of the same kind in your possession, the Enchantment will be applied in the order they are placed in your inventory.";
+		next;
+		mes "[^FF6600Saladin^000000]";
+		mes "In that case, the Enchantment may be applied to an item which you didn't mean to Enchant. So just bring ^5555ffONE Armor^000000 you want enchanted to be safe...";
+		next;
+		mes "[^FF6600Saladin^000000]";
+		mes "I'm not responsible for what would happen if you have more than one of the same kind in your inventory.";
+		next;
+		switch(select("Enchant UPG Armor.:Maybe next time.")) {
+		case 1:
+			setarray .@Items[0],2459,2460,2461,2561,2562,2563;
+			set .@j,36;
+			break;
+
+		case 2:
+			mes "[^FF6600Saladin^000000]";
+			mes "Please come back when you have any interest in enchanting your armor.";
+			close;
+		}
+		set .@menu$,"";
+		for(set .@i,0; .@i<getarraysize(.@Items); set .@i,.@i+1)
+			set .@menu$, .@menu$+getitemname(.@Items[.@i])+((.@k)?" [1]":"")+":";
+		callsub S_EnchantArmor, .@Items[select(.@menu$)-1], .@j;
+		end;
+	}
+	mes "I am in charge of Enchanting Armors. Simply put, I've been studying ways to power-up armor.";
+	next;
+	mes "[^FF6600Saladin^000000]";
+	mes "If by any chance, you would want to enchant your armor, bring me 400,000 zeny and the armor you want to enchant and you are all set to go.";
+	close;
+
+S_EnchantArmor:
+	set .@itemid,getarg(0);
+	set .@failrate,getarg(1);
+	mes "[^FF6600Saladin^000000]";
+	if (countitem(.@itemid) == 1) {
+		mes "Socket enchant will cost you 400,000 zeny. And there will be a random option enchanted.";
+		next;
+		mes "[^FF6600Saladin^000000]";
+		mes "First and most importantly.";
+		mes "^ff5555Existing Refine Level of the Armor";
+		mes "and Cards will be GONE.^000000";
+		mes "Do you still want to try an Enchant?";
+		next;
+		if(select("Hmm... Let me think it over.:Go ahead.") == 1) {
+			mes "[^FF6600Saladin^000000]";
+			mes "Well, I can't blame you. Safety first, eh?";
+			mes "Now you have a nice day.";
+			close;
+		}
+		mes "[^FF6600Saladin^000000]";
+		mes "Okay, here we go.";
+		close2;
+		specialeffect2 EF_MAPPILLAR;
+		if (Zeny < 400000) {
+			mes "[^FF6600Saladin^000000]";
+			mes "Sorry, but you don't have enough zeny.";
+			close;
+		}
+		progressbar "ffff00",4;
+		set Zeny, Zeny-400000;
+		delitem .@itemid,1;
+		switch (rand(1,.@failrate)) {
+			case 1: set .@addpart,4702;break;
+			case 2: set .@addpart,4712;break;
+			case 3: set .@addpart,4722;break;
+			case 4: set .@addpart,4732;break;
+			case 5: set .@addpart,4742;break;
+			case 6: set .@addpart,4752;break;
+			case 7:
+			case 8: set .@addpart,4701;break;
+			case 9:
+			case 10: set .@addpart,4711;break;
+			case 11:
+			case 12: set .@addpart,4721;break;
+			case 13:
+			case 14: set .@addpart,4731;break;
+			case 15:
+			case 16: set .@addpart,4741;break;
+			case 17:
+			case 18: set .@addpart,4751;break;
+			case 19:
+			case 20:
+			case 21: set .@addpart,4700;break;
+			case 22:
+			case 23:
+			case 24: set .@addpart,4710;break;
+			case 25:
+			case 26:
+			case 27: set .@addpart,4720;break;
+			case 28:
+			case 29:
+			case 30: set .@addpart,4730;break;
+			case 31:
+			case 32:
+			case 33: set .@addpart,4740;break;
+			case 34:
+			case 35:
+			case 36: set .@addpart,4750;break;
+			default:
+				specialeffect2 EF_PHARMACY_FAIL;
+				mes "[^FF6600Saladin^000000]";
+				mes "Well that's too bad.";
+				mes "The requested equipment has failed to enchant.";
+				close;
+		}
+		getitem2 .@itemid, 1, 1, 0, 0, 0, 0, 0, .@addpart;
+	mes "[^FF6600Saladin^000000]";
+    mes "That's easy , here's your item.";
+   	close;		
+	}
+	else {
+		mes "Hmm? There's nothing to be enchanted!";
+		mes "Please come back with just ONE equipment to be enchanted.";
+		close;
+	}
+	
+case 3: 	
+	mes "[^FF6600Saladin^000000]";
+    mes "Uh, Okay i guess ?";
    	close;
 }
 	if(.Shops$ != "") set .@i,1;
