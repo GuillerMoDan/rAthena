@@ -8,7 +8,7 @@ prontera,139,286,4	script	Great Sage	742,{
 	mes "[Great Sage]","Greetings! Do you want your weapon to be endowed?";
 	if(@End_Ele) .@Last_Ele$ = "Last Element - "+.Element$[@End_Ele]+":"; else .@Last_Ele$ = ":";
 	select(.@Last_Ele$+.Element$[1]+":"+.Element$[2]+":"+.Element$[3]+":"+.Element$[4]+":No thanks");
-	if(@menu == 6) {mes "[Great Sage]","Okay then"; end; }
+	if(@menu == 6) {mes "Okay then"; end; }
 	if(@menu != 1) .@Choice = @menu-1; else .@Choice = @End_Ele;
 	if(.ReqType) .@Req_Item$ = " and a ^0055FF" + getitemname(.StoneReq[.@Choice]) + "^000000";
 	clear;

@@ -14,7 +14,7 @@
 //= Item Preview script by ToastOfDoom.
 //============================================================
 					
-prontera,139,225,5	script	Costumemaker	757,{
+prontera,143,229,5	script	Costumemaker	757,{
 function Add; function Chk; function Slot; function A_An;
 if (checkweight(21016,1) == 0) {
 	mes "[^FF6600Aria^000000]";

@@ -16,28 +16,21 @@
 					
 prontera,147,172,5	script	Silvervine Cat	10242,{
 function Add; function Chk; function Slot; function A_An;
-if (checkweight(21016,1) == 0) {
-	mes "[^FF6600Silvervine Cat^000000]";
-    mes "You're carrying too much stuffs , make some space and come back to me later";
-        close;	
-	}
 	mes "[^FF6600Silvervine Cat^000000]";
 	mes "Hello, I am Silvervine Cat.";
 	mes "I sell and buy anything that related with Silvervines !.";
 	mes "What can i do for you ?";
 	next;
-	switch( select( "Store.:Information.:MVP drops to Silvervine.:Silvervine to Zeny.:Cancel." ) ) {
-case 1: 		
-	mes "[^FF6600Silvervine Cat^000000]";
-	mes "Which one ?";
-	break;
-case 2: 	
+	switch( select( "Information.:MVP drops to Silvervine.:Silvervine to Zeny.:Cancel." ) ) {
+case 1: 	
 	mes "[^FF6600Silvervine Cat^000000]";
     mes "Silvervines is love, silvervines is life !";
 	mes "We cats from malangdo really love silvervines !";
 	next;
 	mes "[^FF6600Silvervine Cat^000000]";
-	mes "Some mini bosses have 0.1% chance to drop silvervines.";
+	mes "MVP has 100% chance to drop 1 silvervine.";
+	mes " ";
+	mes "Some mini bosses have 1% chance to drop silvervines.";
 	mes "These are the bosses.";
 	next;
 	mes "[^FF6600Silvervine Cat^000000]";
@@ -47,7 +40,8 @@ case 2:
 	mes "You can also trade certain MVP items with silvervine !";
 	mes "and yeah, that's all !";
 	close;	
-case 3:
+	
+case 2:
 		mes "[^FF6600Silvervine Cat^000000]";
 		mes "I can trade mvp dropped items for silvervines.";
 		next;
@@ -57,7 +51,7 @@ case 3:
 		switch(select("Piece of queen's wing.:Mother's Nightmare.:Ba Gua.:Young Twig.:Baphomet Doll.:Osiris Doll.:Darked Scale Piece.:Broken Crown.:Gemstone.:Broken Pharaoh Emblem . Masque of tutankhamen.:Fragment of Rossata Stone.:Tiger's Footskin . Tiger Skin.:Ice Scale.:Will of Red Darkness.:Cancel.")) {
 	case 1:
 				mes "[^FF6600Silvervine Cat^000000]";
-				mes "I'll trade 2 Piece of queen's wing for 1 Silvervines";
+				mes "I'll trade 2 Piece of queen's wing for 1 Silvervine";
 				next;
 				switch(select("Trade.:Cancel.")) {
 				case 1:
@@ -78,7 +72,7 @@ case 3:
 			}
 	case 2:
 				mes "[^FF6600Silvervine Cat^000000]";
-				mes "I'll trade 3 Mother's Nightmare for 1 Silvervines";
+				mes "I'll trade 3 Mother's Nightmare for 1 silvervine";
 				next;
 				switch(select("Trade.:Cancel.")) {
 				case 1:
@@ -99,7 +93,7 @@ case 3:
 			}
 	case 3:
 				mes "[^FF6600Silvervine Cat^000000]";
-				mes "I'll trade 3 Ba Gua for 1 Silvervines";
+				mes "I'll trade 3 Ba Gua for 1 silvervine";
 				next;
 				switch(select("Trade.:Cancel.")) {
 				case 1:
@@ -120,7 +114,7 @@ case 3:
 			}		
 	case 4:
 				mes "[^FF6600Silvervine Cat^000000]";
-				mes "I'll trade 3 Young Twig for 1 Silvervines";
+				mes "I'll trade 3 Young Twig for 1 silvervine";
 				next;
 				switch(select("Trade.:Cancel.")) {
 				case 1:
@@ -141,7 +135,7 @@ case 3:
 			}			
 	case 5:
 				mes "[^FF6600Silvervine Cat^000000]";
-				mes "I'll trade 3 Baphomet Doll for 1 Silvervines";
+				mes "I'll trade 3 Baphomet Doll for 1 silvervine";
 				next;
 				switch(select("Trade.:Cancel.")) {
 				case 1:
@@ -162,7 +156,7 @@ case 3:
 			}		
 	case 6:
 				mes "[^FF6600Silvervine Cat^000000]";
-				mes "I'll trade 3 Osiris Doll for 1 Silvervines";
+				mes "I'll trade 3 Osiris Doll for 1 silvervine";
 				next;
 				switch(select("Trade.:Cancel.")) {
 				case 1:
@@ -182,7 +176,7 @@ case 3:
 			}
 	case 7:
 				mes "[^FF6600Silvervine Cat^000000]";
-				mes "I'll trade 1 Darked Scale Piece for 1 Silvervines";
+				mes "I'll trade 1 Darked Scale Piece for 1 silvervine";
 				next;
 				switch(select("Trade.:Cancel.")) {
 				case 1:
@@ -203,7 +197,7 @@ case 3:
 			
 	case 8:
 				mes "[^FF6600Silvervine Cat^000000]";
-				mes "I'll trade 2 Broken Crown for 1 Silvervines";
+				mes "I'll trade 2 Broken Crown for 1 silvervine";
 				next;
 				switch(select("Trade.:Cancel.")) {
 				case 1:
@@ -223,7 +217,7 @@ case 3:
 			}
 	case 9:
 				mes "[^FF6600Silvervine Cat^000000]";
-				mes "I'll trade 5 Gemstones for 1 Silvervines";
+				mes "I'll trade 5 Gemstones for 1 silvervine";
 				next;
 				switch(select("Trade.:Cancel.")) {
 				case 1:
@@ -243,7 +237,7 @@ case 3:
 			}			
 	case 10:
 				mes "[^FF6600Silvervine Cat^000000]";
-				mes "I'll trade 3 Broken pharaoh emblem and Masque of tutankhamen for 1 Silvervines";
+				mes "I'll trade 3 Broken pharaoh emblem and Masque of tutankhamen for 1 silvervine";
 				next;
 				switch(select("Trade.:Cancel.")) {
 				case 1:
@@ -265,7 +259,7 @@ case 3:
 			}
 	case 11:
 				mes "[^FF6600Silvervine Cat^000000]";
-				mes "I'll trade 5 Fragment of Rossata Stone for 1 Silvervines";
+				mes "I'll trade 5 Fragment of Rossata Stone for 1 silvervine";
 				next;
 				switch(select("Trade.:Cancel.")) {
 				case 1:
@@ -286,7 +280,7 @@ case 3:
 			}
 	case 12:
 				mes "[^FF6600Silvervine Cat^000000]";
-				mes "I'll trade 1 Tiger's Footskin and 5 Tiger Skin for 1 Silvervines";
+				mes "I'll trade 1 Tiger's Footskin and 5 Tiger Skin for 1 silvervine";
 				next;
 				switch(select("Trade.:Cancel.")) {
 				case 1:
@@ -307,7 +301,7 @@ case 3:
 			}	
 	case 13:
 				mes "[^FF6600Silvervine Cat^000000]";
-				mes "I'll trade 1 Ice scale For 1 Silvervines";
+				mes "I'll trade 1 Ice scale For 1 silvervine";
 				next;
 				switch(select("Trade.:Cancel.")) {
 				case 1:
@@ -327,7 +321,7 @@ case 3:
 			}
 	case 14:
 				mes "[^FF6600Silvervine Cat^000000]";
-				mes "I'll trade 2 Will of Red Darkness For 1 Silvervines";
+				mes "I'll trade 2 Will of Red Darkness For 1 silvervine";
 				next;
 				switch(select("Trade.:Cancel.")) {
 				case 1:
@@ -350,7 +344,7 @@ case 3:
 				mes "Okay, see you again soon.";
 				close;	
 			}
-case 4:
+case 3:
 				mes "[^FF6600Silvervine Cat^000000]";
 				mes "I can trade 1 of your silvervine, for 100.000 Zeny.";
 				mes "So, how many do you wish to trade ? If you've changed your mind, just input '0.'";
@@ -388,7 +382,7 @@ case 4:
 				mes "[^FF6600Silvervine Cat^000000]";
 				mes "Thank you ! Here's your money.";
 				close;			
-case 5: 	
+case 4: 	
 	mes "[^FF6600Silvervine Cat^000000]";
     mes "Okay, see you again.";
    	close;

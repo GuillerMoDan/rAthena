@@ -34,16 +34,8 @@ case 2:
 disable_items;
 	mes "[^FF6600Saladin^000000]";
 	if (Zeny >= 400000) {
-		mes "I've been studying ways to enhance an armor to maximize its capability.";
-		next;
 		mes "[^FF6600Saladin^000000]";
-		mes "Enchanting is an awesome skill that infuses a mysterious status powers into the armor's hidden socket.";
-		next;
-		mes "[^FF6600Saladin^000000]";
-		mes "However, you have to keep in mind that if there are two armors of the same kind in your possession, the Enchantment will be applied in the order they are placed in your inventory.";
-		next;
-		mes "[^FF6600Saladin^000000]";
-		mes "In that case, the Enchantment may be applied to an item which you didn't mean to Enchant. So just bring ^5555ffONE Armor^000000 you want enchanted to be safe...";
+		mes "The Enchantment may be applied to an item which you didn't mean to Enchant. So just bring ^5555ffONE UPG Armor^000000 you want enchanted to be safe...";
 		next;
 		mes "[^FF6600Saladin^000000]";
 		mes "I'm not responsible for what would happen if you have more than one of the same kind in your inventory.";
@@ -68,7 +60,7 @@ disable_items;
 	mes "I am in charge of Enchanting Armors. Simply put, I've been studying ways to power-up armor.";
 	next;
 	mes "[^FF6600Saladin^000000]";
-	mes "If by any chance, you would want to enchant your armor, bring me 400,000 zeny and the armor you want to enchant and you are all set to go.";
+	mes "If by any chance, you would want to enchant your armor, bring me 400,000 zeny and the UPG armor you want to enchant and you are all set to go.";
 	close;
 
 S_EnchantArmor:
